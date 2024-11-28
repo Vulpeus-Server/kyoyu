@@ -14,16 +14,16 @@
     "issues": "${issue}"
   },
 
-  "icon": "assets/unitemplate/icon.png",
+  "icon": "assets/kyoyu/icon.png",
 
   "environment": "*",
   "entrypoints": {
     "main": [
-      "com.topi_banana.unitemplate.UniTemplateMod"
+      "com.vulpeus.kyoyu.Kyoyu"
     ]
   },
   "mixins": [
-    "unitemplate.mixins.json"
+    "kyoyu.mixins.json"
   ],
 
   "depends": {

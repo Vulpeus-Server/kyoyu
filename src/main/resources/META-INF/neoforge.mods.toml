@@ -22,4 +22,4 @@ ordering = "NONE"
 side="BOTH"
 
 [[mixins]]
-config = "unitemplate.mixins.json"
+config = "kyoyu.mixins.json"

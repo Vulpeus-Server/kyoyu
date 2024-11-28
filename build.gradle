@@ -50,9 +50,9 @@ Number convertVersion(String version) {
 
 def mcVersion = convertVersion(project.minecraft_version);
 
-String MOD_ICON_PATH = 'assets/unitemplate/icon.png'
-String MIXIN_CONFIG_PATH = 'unitemplate.mixins.json'
-String LANG_DIR = 'assets/unitemplate/lang'
+String MOD_ICON_PATH = 'assets/kyoyu/icon.png'
+String MIXIN_CONFIG_PATH = 'kyoyu.mixins.json'
+String LANG_DIR = 'assets/kyoyu/lang'
 JavaVersion JAVA_COMPATIBILITY
 if (mcVersion >= 12005) {
     JAVA_COMPATIBILITY = JavaVersion.VERSION_21

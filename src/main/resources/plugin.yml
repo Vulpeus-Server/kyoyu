@@ -1,6 +1,6 @@
 name: ${name}
 version: ${version}
-main: com.topi_banana.unitemplate.UniTemplateMod
+main: com.vulpeus.kyoyu.Kyoyu
 description: ${description}
 author: ${authors}
 website: ${homepage}

@@ -1,4 +1,4 @@
-package com.topi_banana.unitemplate;
+package com.vulpeus.kyoyu;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -11,8 +11,8 @@ import org.apache.logging.log4j.Logger;
 
 
 //? if FORGE || NEOFORGE
-/* @Mod("unitemplate") */
-public class UniTemplateMod
+/* @Mod("kyoyu") */
+public class Kyoyu
         //? if FABRIC
         implements net.fabricmc.api.ModInitializer
 
@@ -25,7 +25,7 @@ public class UniTemplateMod
     @Override public void onInitialize()
 
     //? if FORGE || NEOFORGE
-    /* public UniTemplateMod() */
+    /* public Kyoyu() */
     //? if PAPER
     /* @Override public void onEnable() */
     {
