@@ -23,3 +23,5 @@ side="BOTH"
 
 [[mixins]]
 config = "kyoyu.mixins.json"
+[[mixins]]
+config = "kyoyu.client.mixins.json"

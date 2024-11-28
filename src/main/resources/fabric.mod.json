@@ -23,7 +23,11 @@
     ]
   },
   "mixins": [
-    "kyoyu.mixins.json"
+    "kyoyu.mixins.json",
+    {
+      "config": "kyoyu.client.mixins.json",
+      "environment": "client"
+    }
   ],
 
   "depends": {

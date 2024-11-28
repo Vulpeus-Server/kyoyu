@@ -19,6 +19,9 @@ public class Kyoyu
         //? if PAPER
         /* extends org.bukkit.plugin.java.JavaPlugin */
 {
+    public static final String MOD_ID = "kyoyu";
+    public static final String MOD_VERSION = /*$ mod_version*/ "unknown";
+
     public static final Logger LOGGER = LogManager.getLogger();
 
     //? if FABRIC
@@ -30,5 +33,6 @@ public class Kyoyu
     /* @Override public void onEnable() */
     {
         LOGGER.info("Hello, World!");
+        LOGGER.info("Kyoyu Version : {}", MOD_VERSION);
     }
 }

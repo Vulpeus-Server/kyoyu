@@ -1,9 +1,10 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "com.vulpeus.kyoyu.mixins",
+  "package": "com.vulpeus.kyoyu.client.mixins",
   "compatibilityLevel": "${java_compatibility_level}",
-  "mixins": [
+  "client": [
+    "litematica.GuiMainMenuMixin"
   ],
   "injectors": {
     "defaultRequire": 1
