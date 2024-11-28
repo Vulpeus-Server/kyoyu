@@ -1,0 +1,31 @@
+{
+  "versions": [
+    "fabric-1.14.4",
+    "fabric-1.15.2",
+    "fabric-1.16.5",
+    "fabric-1.17.1",
+    "fabric-1.18.2",
+    "fabric-1.19.4",
+    "fabric-1.20.4",
+    "fabric-1.20.6",
+    "fabric-1.21.3",
+
+    "forge-1.14.4",
+    "forge-1.15.2",
+    "forge-1.16.5",
+    "forge-1.17.1",
+    "forge-1.18.2",
+    "forge-1.19.4",
+    "forge-1.20.4",
+    "forge-1.20.6",
+    "forge-1.21.3",
+
+    "neoforge-1.20.6",
+    "neoforge-1.21.3",
+
+    "paper-1.19.4",
+    "paper-1.20.4",
+    "paper-1.20.6",
+    "paper-1.21.3"
+  ]
+}

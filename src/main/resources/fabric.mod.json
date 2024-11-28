@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "id": "${id}",
+  "version": "${version}",
+
+  "name": "${name}",
+  "description": "${description}",
+  "authors": [
+    "${authors}"
+  ],
+  "contact": {
+    "homepage": "${homepage}",
+    "sources": "${sources}",
+    "issues": "${issue}"
+  },
+
+  "icon": "assets/unitemplate/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.topi_banana.unitemplate.UniTemplateMod"
+    ]
+  },
+  "mixins": [
+    "unitemplate.mixins.json"
+  ],
+
+  "depends": {
+    "minecraft": "${minecraft_dependency}"
+  }
+}

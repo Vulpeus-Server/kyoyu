@@ -1,0 +1,17 @@
+plugins {
+    id "dev.kikugie.stonecutter"
+}
+stonecutter.active "fabric-1.21.3"
+
+stonecutter.registerChiseled tasks.register("build-all", stonecutter.chiseled) {
+    setGroup "project"
+    ofTask "build"
+}
+
+for (ver in stonecutter.versions) {
+    stonecutter.registerChiseled tasks.register("build-${ver.project}", stonecutter.chiseled) {
+        versions = [ ver ]
+        setGroup("project")
+        ofTask("build")
+    }
+}
