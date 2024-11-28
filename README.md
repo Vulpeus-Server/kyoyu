@@ -1,9 +1,12 @@
 # Kyoyu
 
+A Minecraft mod inspired by syncmatica.
+Share litematics with other players on the server.
+
 [![License](https://img.shields.io/github/license/Vulpeus-Server/kyoyu.svg)](http://www.gnu.org/licenses/lgpl-3.0.html)
-[![Issues](https://img.shields.io/github/issues/Vulpeus-Server/kyoyu.svg)](https://github.com/Vulpeus-Server/litematic-syncer/issues)
-[![workflow](https://github.com/Vulpeus-Server/kyoyu/actions/workflows/gradle.yml/badge.svg)](https://github.com/Vulpeus-Server/litematic-syncer/actions/workflows/gradle.yml)
-[![Modrinth](https://img.shields.io/modrinth/dt/VozTPxB4?label=Modrinth%20Downloads)](https://modrinth.com/mod/litematic-syncer)
+[![Issues](https://img.shields.io/github/issues/Vulpeus-Server/kyoyu.svg)](https://github.com/Vulpeus-Server/kyoyu/issues)
+[![workflow](https://github.com/Vulpeus-Server/kyoyu/actions/workflows/gradle.yml/badge.svg)](https://github.com/Vulpeus-Server/kyoyu/actions/workflows/gradle.yml)
+[![Modrinth](https://img.shields.io/modrinth/dt/VozTPxB4?label=Modrinth%20Downloads)](https://modrinth.com/mod/VozTPxB4)
 
 ## Versions
 
