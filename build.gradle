@@ -103,9 +103,6 @@ stonecutter.const('PAPER', project.platform == 'paper')
 stonecutter.const('client', project.hasProperty('litematica_version') && project.hasProperty('malilib_version'))
 stonecutter.swap("mod_version", "\"${fullArtifactVersion}\";")
 
-println project.name + ' ' + project.hasProperty('litematica_version') && project.hasProperty('malilib_version')
-
-
 if (use_architectury_loom) {
     configurations {
         modRuntimeOnly.exclude group: 'net.fabricmc', module: 'fabric-loader'

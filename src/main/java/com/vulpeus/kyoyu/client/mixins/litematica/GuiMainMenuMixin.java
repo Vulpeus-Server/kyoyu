@@ -1,7 +1,7 @@
 package com.vulpeus.kyoyu.client.mixins.litematica;
 
 //? if client {
-import com.vulpeus.kyoyu.client.gui.ButtonActionListener_OpenExplorer;
+import com.vulpeus.kyoyu.client.gui.LoadExplorer_ButtonActionListener;
 import fi.dy.masa.litematica.gui.GuiMainMenu;
 import fi.dy.masa.malilib.gui.GuiBase;
 import fi.dy.masa.malilib.gui.button.ButtonGeneric;
@@ -28,7 +28,7 @@ public class GuiMainMenuMixin extends GuiBase {
         // TODO
         //  Disable when connecting server is not compatible
         //  button.setEnabled();
-        addButton(button, new ButtonActionListener_OpenExplorer(this));
+        addButton(button, new LoadExplorer_ButtonActionListener(this));
     }
 }
 //?}

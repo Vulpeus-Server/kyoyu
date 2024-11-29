@@ -3,19 +3,18 @@ package com.vulpeus.kyoyu.client.gui;
 //? if client {
 import com.vulpeus.kyoyu.Kyoyu;
 import fi.dy.masa.malilib.gui.GuiBase;
-import fi.dy.masa.malilib.util.GuiUtils;
 import fi.dy.masa.malilib.util.StringUtils;
 
-//? if >=1.20
+//? if >=1.20 {
 import net.minecraft.client.gui.DrawContext;
-//? elif >=1.16
+//?} elif >=1.16 {
 /* import net.minecraft.client.util.math.MatrixStack; */
+//?}
 
-public class Gui_LoadingExplorer extends GuiBase {
+public class LoadingExplorer_Gui extends GuiBase {
 
     @Override
     public void init() {
-        this.setParent(GuiUtils.getCurrentScreen());
         this.setTitle(StringUtils.translate("kyoyu.gui.title.title", Kyoyu.MOD_VERSION));
     }
 

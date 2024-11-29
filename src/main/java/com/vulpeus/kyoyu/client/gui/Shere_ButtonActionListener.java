@@ -7,12 +7,12 @@ import fi.dy.masa.malilib.gui.Message;
 import fi.dy.masa.malilib.gui.button.ButtonBase;
 import fi.dy.masa.malilib.gui.button.IButtonActionListener;
 
-public class ButtonActionListener_Shere implements IButtonActionListener {
+public class Shere_ButtonActionListener implements IButtonActionListener {
 
     private final SchematicPlacement schematicPlacement;
     private final GuiBase messageDisplay;
 
-    public ButtonActionListener_Shere(SchematicPlacement placement, GuiBase messageDisplay) {
+    public Shere_ButtonActionListener(SchematicPlacement placement, GuiBase messageDisplay) {
         schematicPlacement = placement;
         this.messageDisplay = messageDisplay;
     }

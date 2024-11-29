@@ -6,23 +6,24 @@ import fi.dy.masa.malilib.gui.button.ButtonBase;
 import fi.dy.masa.malilib.gui.button.IButtonActionListener;
 import net.minecraft.client.gui.screen.Screen;
 
-public class ButtonActionListener_OpenExplorer implements IButtonActionListener {
+public class LoadExplorer_ButtonActionListener implements IButtonActionListener {
 
     private final Screen parent;
 
-    public ButtonActionListener_OpenExplorer(Screen parent) {
+    public LoadExplorer_ButtonActionListener(Screen parent) {
         this.parent = parent;
     }
 
     @Override
     public void actionPerformedWithButton(ButtonBase buttonBase, int i) {
 
-        GuiBase loading_gui = new Gui_LoadingExplorer();
+        GuiBase loading_gui = new LoadingExplorer_Gui();
         loading_gui.setParent(parent);
         GuiBase.openGui(loading_gui);
 
         // TODO
         //  Packet Process on OpenExplorer
+        //  REQUEST LIST PACKET
     }
 }
 //?}

@@ -1,7 +1,7 @@
 package com.vulpeus.kyoyu.client.mixins.litematica;
 
 //? if client {
-import com.vulpeus.kyoyu.client.gui.ButtonActionListener_Shere;
+import com.vulpeus.kyoyu.client.gui.Shere_ButtonActionListener;
 import fi.dy.masa.litematica.gui.widgets.WidgetListSchematicPlacements;
 import fi.dy.masa.litematica.gui.widgets.WidgetSchematicPlacement;
 import fi.dy.masa.litematica.schematic.placement.SchematicPlacement;
@@ -36,7 +36,7 @@ public abstract class WidgetSchematicPlacementMixin extends WidgetListEntryBase<
         // TODO
         //  Disable when connecting server is not compatible
         //  shareButton.setEnabled();
-        addButton(shareButton, new ButtonActionListener_Shere(placement, parent.getParentGui()));
+        addButton(shareButton, new Shere_ButtonActionListener(placement, parent.getParentGui()));
         buttonsStartX = shareButton.getX() - 1;
     }
 }
