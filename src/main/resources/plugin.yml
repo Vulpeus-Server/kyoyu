@@ -1,6 +1,6 @@
 name: ${name}
 version: ${version}
-main: com.vulpeus.kyoyu.Kyoyu
+main: com.vulpeus.kyoyu.KyoyuMod
 description: ${description}
 author: ${authors}
 website: ${homepage}

@@ -19,7 +19,7 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "com.vulpeus.kyoyu.Kyoyu"
+      "com.vulpeus.kyoyu.KyoyuMod"
     ]
   },
   "mixins": [

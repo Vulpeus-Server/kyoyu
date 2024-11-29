@@ -1,6 +1,7 @@
 package com.vulpeus.kyoyu.client.gui;
 
 //? if client {
+import com.vulpeus.kyoyu.Kyoyu;
 import fi.dy.masa.malilib.gui.GuiBase;
 import fi.dy.masa.malilib.util.GuiUtils;
 import fi.dy.masa.malilib.util.StringUtils;
@@ -10,14 +11,12 @@ import net.minecraft.client.gui.DrawContext;
 //? elif >=1.16
 /* import net.minecraft.client.util.math.MatrixStack; */
 
-import static com.vulpeus.kyoyu.Kyoyu.MOD_VERSION;
-
 public class Gui_LoadingExplorer extends GuiBase {
 
     @Override
     public void init() {
         this.setParent(GuiUtils.getCurrentScreen());
-        this.title = StringUtils.translate("kyoyu.gui.title.title", MOD_VERSION);
+        this.setTitle(StringUtils.translate("kyoyu.gui.title.title", Kyoyu.MOD_VERSION));
     }
 
     @Override
