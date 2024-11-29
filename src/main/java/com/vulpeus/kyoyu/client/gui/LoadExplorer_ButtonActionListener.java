@@ -4,7 +4,7 @@ package com.vulpeus.kyoyu.client.gui;
 import fi.dy.masa.malilib.gui.GuiBase;
 import fi.dy.masa.malilib.gui.button.ButtonBase;
 import fi.dy.masa.malilib.gui.button.IButtonActionListener;
-import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.gui.screens.Screen;
 
 public class LoadExplorer_ButtonActionListener implements IButtonActionListener {
 

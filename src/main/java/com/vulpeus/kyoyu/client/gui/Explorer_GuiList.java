@@ -5,7 +5,7 @@ import com.vulpeus.kyoyu.Kyoyu;
 import com.vulpeus.kyoyu.placement.KyoyuPlacement;
 import fi.dy.masa.malilib.gui.GuiListBase;
 import fi.dy.masa.malilib.util.StringUtils;
-import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.gui.screens.Screen;
 
 import java.util.List;
 

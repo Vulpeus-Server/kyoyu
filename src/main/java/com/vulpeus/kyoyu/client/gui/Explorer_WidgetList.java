@@ -9,9 +9,9 @@ import fi.dy.masa.malilib.gui.widgets.WidgetListBase;
 import fi.dy.masa.malilib.render.RenderUtils;
 
 //? if >=1.20 {
-import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.gui.GuiGraphics;
 //?} elif >=1.16 {
-/* import net.minecraft.client.util.math.MatrixStack; */
+/* import com.mojang.blaze3d.vertex.PoseStack; */
 //?}
 
 import java.util.Collection;
@@ -51,9 +51,9 @@ public class Explorer_WidgetList extends WidgetListBase<KyoyuPlacement, Explorer
 
     @Override
     //? if >=1.20 {
-    public void drawContents(DrawContext drawContext, int mouseX, int mouseY, float partialTicks) {
+    public void drawContents(GuiGraphics drawContext, int mouseX, int mouseY, float partialTicks) {
     //?} elif >=1.16 {
-    /* public void drawContents(MatrixStack drawContext, int mouseX, int mouseY, float partialTicks) { */
+    /* public void drawContents(PoseStack drawContext, int mouseX, int mouseY, float partialTicks) { */
     //?} else {
     /* public void drawContents(int mouseX, int mouseY, float partialTicks) { */
     //?}

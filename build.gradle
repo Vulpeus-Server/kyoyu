@@ -113,14 +113,15 @@ dependencies {
     // loom
     if (use_architectury_loom) {
         minecraft "com.mojang:minecraft:${project.minecraft_version}"
-        mappings loom.layered {
-            mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
-
-            // https://github.com/architectury/architectury-loom/issues/214
-            if (project.platform == 'neoforge' && project.hasProperty('yarn_mappings_patch')) {
-                it.mappings("dev.architectury:yarn-mappings-patch-neoforge:${project.yarn_mappings_patch}")
-            }
-        }
+        mappings loom.officialMojangMappings()
+//        mappings loom.layered {
+//            mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
+//
+//            // https://github.com/architectury/architectury-loom/issues/214
+//            if (project.platform == 'neoforge' && project.hasProperty('yarn_mappings_patch')) {
+//                it.mappings("dev.architectury:yarn-mappings-patch-neoforge:${project.yarn_mappings_patch}")
+//            }
+//        }
     }
     if (use_paperweight) {
         paperweight.paperDevBundle("${project.minecraft_version}-R0.1-SNAPSHOT")

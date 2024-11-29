@@ -1,17 +1,17 @@
 package com.vulpeus.kyoyu.placement;
 
-import com.vulpeus.kyoyu.utils.compatible.BlockMirror;
-import com.vulpeus.kyoyu.utils.compatible.BlockPos;
-import com.vulpeus.kyoyu.utils.compatible.BlockRotation;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.block.Mirror;
+import net.minecraft.world.level.block.Rotation;
 
 public class KyoyuRegion {
 
     private final BlockPos pos;
-    private final BlockMirror mirror;
-    private final BlockRotation rotation;
+    private final Mirror mirror;
+    private final Rotation rotation;
     private final String name;
 
-    public KyoyuRegion(BlockPos pos, BlockMirror mirror, BlockRotation rotation, String name) {
+    public KyoyuRegion(BlockPos pos, Mirror mirror, Rotation rotation, String name) {
         this.pos = pos;
         this.mirror = mirror;
         this.rotation = rotation;
@@ -22,11 +22,11 @@ public class KyoyuRegion {
         return pos;
     }
 
-    public BlockMirror getMirror() {
+    public Mirror getMirror() {
         return mirror;
     }
 
-    public BlockRotation getRotation() {
+    public Rotation getRotation() {
         return rotation;
     }
 

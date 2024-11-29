@@ -18,14 +18,14 @@ import fi.dy.masa.malilib.gui.widgets.WidgetListEntryBase;
 import fi.dy.masa.malilib.render.RenderUtils;
 import fi.dy.masa.malilib.util.GuiUtils;
 import fi.dy.masa.malilib.util.StringUtils;
-import net.minecraft.util.BlockMirror;
-import net.minecraft.util.BlockRotation;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.block.Mirror;
+import net.minecraft.world.level.block.Rotation;
 
 //? if >=1.20 {
-import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.gui.GuiGraphics;
 //?} elif >=1.16 {
-/* import net.minecraft.client.util.math.MatrixStack; */
+/* import com.mojang.blaze3d.vertex.PoseStack; */
 //?}
 
 import java.util.Set;
@@ -93,9 +93,9 @@ public class Explorer_WidgetListEntry extends WidgetListEntryBase<KyoyuPlacement
 
     @Override
     //? if >=1.20 {
-    public void render(int mouseX, int mouseY, boolean selected, DrawContext drawContext) {
+    public void render(int mouseX, int mouseY, boolean selected, GuiGraphics drawContext) {
     //?} elif >=1.16 {
-    /* public void render(int mouseX, int mouseY, boolean selected, MatrixStack drawContext) { */
+    /* public void render(int mouseX, int mouseY, boolean selected, PoseStack drawContext) { */
     //?} else {
     /* public void render(int mouseX, int mouseY, boolean selected) { */
     //?}
@@ -164,8 +164,8 @@ public class Explorer_WidgetListEntry extends WidgetListEntryBase<KyoyuPlacement
                 void onAction(Explorer_WidgetListEntry entry) {
                     String name = entry.kyoyuPlacement.getName();
                     BlockPos pos = entry.kyoyuPlacement.getRegion().getPos();
-                    BlockMirror mirror = entry.kyoyuPlacement.getRegion().getMirror().get();
-                    BlockRotation rotation = entry.kyoyuPlacement.getRegion().getRotation().get();
+                    Mirror mirror = entry.kyoyuPlacement.getRegion().getMirror();
+                    Rotation rotation = entry.kyoyuPlacement.getRegion().getRotation();
 
                     LitematicaSchematic schematic = SchematicHolder.getInstance().getOrLoad(entry.kyoyuPlacement.getFile());
                     SchematicPlacement placement = SchematicPlacement.createFor(schematic, pos, name, true, true);
@@ -180,8 +180,8 @@ public class Explorer_WidgetListEntry extends WidgetListEntryBase<KyoyuPlacement
                         String subRegionName = subRegion.getName();
 
                         placement.moveSubRegionTo(subRegionName, subRegion.getPos(), null);
-                        placement.setSubRegionMirror(subRegionName, subRegion.getMirror().get(), null);
-                        placement.setSubRegionRotation(subRegionName, subRegion.getRotation().get(), null);
+                        placement.setSubRegionMirror(subRegionName, subRegion.getMirror(), null);
+                        placement.setSubRegionRotation(subRegionName, subRegion.getRotation(), null);
                     }
                     placement.toggleLocked();
 
