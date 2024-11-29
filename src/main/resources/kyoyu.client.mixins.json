@@ -4,7 +4,8 @@
   "package": "com.vulpeus.kyoyu.client.mixins",
   "compatibilityLevel": "${java_compatibility_level}",
   "client": [
-    "litematica.GuiMainMenuMixin"
+    "litematica.GuiMainMenuMixin",
+    "litematica.WidgetSchematicPlacementMixin"
   ],
   "injectors": {
     "defaultRequire": 1
