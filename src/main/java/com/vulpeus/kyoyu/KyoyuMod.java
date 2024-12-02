@@ -44,6 +44,6 @@ public class KyoyuMod
         //? if FABRIC
         KyoyuPacketPayload.register();
         //? if NEOFORGE
-        /* net.neoforged.neoforge.common.NeoForge.EVENT_BUS.register(KyoyuPacketPayload.class); */
+         /* modBus.addListener(KyoyuPacketPayload::register); */
     }
 }

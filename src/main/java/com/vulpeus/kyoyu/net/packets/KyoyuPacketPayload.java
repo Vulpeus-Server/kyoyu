@@ -108,7 +108,6 @@ public class KyoyuPacketPayload
     }
     //?} elif NEOFORGE {
     /*
-    @SubscribeEvent
     public static void register(final RegisterPayloadHandlersEvent event) {
         final PayloadRegistrar registrar = event.registrar("1");
         registrar.playBidirectional(
