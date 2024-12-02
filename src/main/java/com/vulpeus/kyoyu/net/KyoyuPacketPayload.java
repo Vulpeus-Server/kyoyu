@@ -1,4 +1,4 @@
-package com.vulpeus.kyoyu.net.packets;
+package com.vulpeus.kyoyu.net;
 
 import com.vulpeus.kyoyu.CompatibleUtils;
 import com.vulpeus.kyoyu.Kyoyu;
@@ -42,6 +42,7 @@ import net.neoforged.neoforge.network.handling.IPayloadContext;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 */
 //?}
+import net.minecraft.server.level.ServerPlayer;
 import org.jetbrains.annotations.NotNull;
 
 public class KyoyuPacketPayload
@@ -137,6 +138,21 @@ public class KyoyuPacketPayload
         /* PacketDistributor.sendToServer(this); */
         //?}
     }
+    public void sendS2C(ServerPlayer player) {
+        //? FABRIC {
+            //? >=1.20.6 {
+            ServerPlayNetworking.send(player, this);
+            //?} else {
+            /*
+            FriendlyByteBuf packetbb = new FriendlyByteBuf(Unpooled.buffer());
+            packetbb.writeByteArray(this.content);
+            ServerPlayNetworking.send(player, identifier, packetbb);
+            */
+        //?}
+        //?} elif NEOFORGE {
+        /* PacketDistributor.sendToServer(this); */
+        //?}
+    }
 
     public void onPacketServer(
             //? FABRIC {
@@ -155,6 +171,17 @@ public class KyoyuPacketPayload
         /* Kyoyu.LOGGER.info("onPacketServer {} {} {} {}", server, player, handler, sender); */
         //?} else {
         Kyoyu.LOGGER.info("onPacketServer {}", context);
+        //?}
+
+        //? if FABRIC {
+        KyoyuPacketManager.handleC2S(
+                this.content,
+                //? if FABRIC && <=1.20.4 {
+                    /* player */
+                //?} else {
+                    context.player()
+                //?}
+        );
         //?}
     }
 
@@ -176,5 +203,7 @@ public class KyoyuPacketPayload
         //?} else {
         Kyoyu.LOGGER.info("onPacketClient {}", context);
         //?}
+
+        KyoyuPacketManager.handleS2C(this.content);
     }
 }

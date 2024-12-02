@@ -1,6 +1,6 @@
 package com.vulpeus.kyoyu;
 
-import com.vulpeus.kyoyu.net.packets.KyoyuPacketPayload;
+import com.vulpeus.kyoyu.net.KyoyuPacketPayload;
 
 //? if FORGE
 /* import net.minecraftforge.fml.common.Mod; */
