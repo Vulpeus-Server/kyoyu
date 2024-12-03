@@ -2,7 +2,8 @@ package com.vulpeus.kyoyu.net.packets;
 
 import com.vulpeus.kyoyu.Kyoyu;
 import com.vulpeus.kyoyu.net.IKyoyuPacket;
-import net.minecraft.world.entity.player.Player;
+import com.vulpeus.kyoyu.net.KyoyuPacketManager;
+import net.minecraft.server.level.ServerPlayer;
 
 import java.nio.charset.StandardCharsets;
 
@@ -26,12 +27,11 @@ public class HandshakePacket extends IKyoyuPacket {
     }
 
     @Override
-    public void onServer(Player player) {
+    public void onServer(ServerPlayer player) {
         Kyoyu.LOGGER.info("Login `{}` with compatible client version `{}`", version, player.getName().getString());
 
-        // TODO
-        //  packet = new HandshakePacket(Kyoyu.MOD_VERSION);
-        //  packet.send(player);
+        HandshakePacket handshakePacket = new HandshakePacket(Kyoyu.MOD_VERSION);
+        KyoyuPacketManager.sendS2C(handshakePacket, player);
     }
 
     @Override

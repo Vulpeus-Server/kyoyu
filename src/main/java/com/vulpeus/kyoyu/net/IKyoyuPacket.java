@@ -1,6 +1,6 @@
 package com.vulpeus.kyoyu.net;
 
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.server.level.ServerPlayer;
 
 public abstract class IKyoyuPacket {
 
@@ -8,7 +8,7 @@ public abstract class IKyoyuPacket {
 
     public abstract byte[] encode();
 
-    public abstract void onServer(Player player);
+    public abstract void onServer(ServerPlayer player);
 
     public abstract void onClient();
 
