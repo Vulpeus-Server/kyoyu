@@ -9,13 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LoadExplorerPacket extends IKyoyuPacket {
-
-    public LoadExplorerPacket() {}
-    public LoadExplorerPacket(byte[] data) {}
-
-    @Override
-    public byte[] encode() { return new byte[0]; }
-
     @Override
     public void onServer(ServerPlayer player) {
 
@@ -25,7 +18,4 @@ public class LoadExplorerPacket extends IKyoyuPacket {
         PlacementMetaPacket placementMetaPacket = new PlacementMetaPacket(list);
         KyoyuPacketManager.sendS2C(placementMetaPacket, player);
     }
-
-    @Override
-    public void onClient() {}
 }

@@ -7,63 +7,70 @@ import com.vulpeus.kyoyu.net.packets.PlacementMetaPacket;
 import net.minecraft.server.level.ServerPlayer;
 
 import java.io.*;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 public class KyoyuPacketManager {
-    private static final Map<String, Class<? extends IKyoyuPacket>> packetRegistry = new HashMap<>();
+    private static final List<Packet> packetRegistry = new ArrayList<>();
+
+    private static class Packet {
+        private final String key;
+        private final Class<? extends IKyoyuPacket> clazz;
+
+        Packet(String key, Class<? extends IKyoyuPacket> clazz) {
+            this.key = key;
+            this.clazz = clazz;
+        }
+    }
 
     static {
-        packetRegistry.put("handshake", HandshakePacket.class);
-        packetRegistry.put("load_explorer", LoadExplorerPacket.class);
-        packetRegistry.put("placement_meta", PlacementMetaPacket.class);
+        packetRegistry.add(new Packet("handshake", HandshakePacket.class));
+        packetRegistry.add(new Packet("load_explorer", LoadExplorerPacket.class));
+        packetRegistry.add(new Packet("placement_meta", PlacementMetaPacket.class));
     }
 
     private static IKyoyuPacket decode(byte[] raw) {
-        IKyoyuPacket res = null;
         try (ByteArrayInputStream bais = new ByteArrayInputStream(raw); DataInputStream dis = new DataInputStream(bais)) {
             String key = dis.readUTF();
             int len = dis.readInt();
-            byte[] data = new byte[len];
-            dis.readFully(data);
-            Kyoyu.LOGGER.info("KyoyuPacketManager decode {}", key);
-            Class<? extends IKyoyuPacket> packetClass = packetRegistry.get(key);
-            if (packetClass != null) {
+            Kyoyu.LOGGER.info("data lenght {}", len);
+            byte[] data = new byte[len]; dis.readFully(data);
+
+            for (Packet packet: packetRegistry) if (key.equals(packet.key)) {
                 try {
-                    res = packetClass.getDeclaredConstructor(byte[].class).newInstance((Object) data);
+                    return packet.clazz.getConstructor(byte[].class).newInstance(data);
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    Kyoyu.LOGGER.error("Failed to create packet {}", key);
+                    Kyoyu.LOGGER.error(e);
+                    return null;
                 }
-            } else {
-                Kyoyu.LOGGER.info("Unknow Packet {}", data);
             }
+            Kyoyu.LOGGER.error("Unknow Packet {}", key);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            Kyoyu.LOGGER.error("Shiranai Error");
+            Kyoyu.LOGGER.error(e);
         }
 
-        return res;
+        return null;
     }
 
-    private static byte[] encode(IKyoyuPacket packet) {
-        byte[] res = null;
+    private static byte[] encode(IKyoyuPacket kyoyuPacket) {
         try (ByteArrayOutputStream baos = new ByteArrayOutputStream(); DataOutputStream dos = new DataOutputStream(baos)) {
             String key = null;
-            for (Map.Entry<String, Class<? extends IKyoyuPacket>> entry: packetRegistry.entrySet()) {
-                if (entry.getValue() == packet.getClass()) {
-                    key = entry.getKey();
-                    break;
-                }
+            for (Packet packet: packetRegistry) if (kyoyuPacket.getClass() == packet.clazz) {
+                key = packet.key; break;
             }
             if (key == null) return null;
-            byte[] data = packet.encode();
+
+            byte[] data = kyoyuPacket.encode();
             dos.writeUTF(key);
             dos.writeInt(data.length);
             dos.write(data);
-            res = baos.toByteArray();
+            return baos.toByteArray();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            Kyoyu.LOGGER.error(e);
+            return null;
         }
-        return res;
     }
 
     public static void handleC2S(byte[] data, ServerPlayer player) {

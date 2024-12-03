@@ -4,12 +4,15 @@ import net.minecraft.server.level.ServerPlayer;
 
 public abstract class IKyoyuPacket {
 
-    public IKyoyuPacket() {}
+    public byte[] encode() {
+        return new byte[0];
+    }
 
-    public abstract byte[] encode();
+    public void onServer(ServerPlayer player) {
+        // nothing to do
+    }
 
-    public abstract void onServer(ServerPlayer player);
-
-    public abstract void onClient();
-
+    public void onClient() {
+        // nothing to do
+    }
 }
