@@ -69,8 +69,8 @@ public class Shere_ButtonActionListener implements IButtonActionListener {
                 placementFile
         );
 
-        PlacementMetaPacket handshakePacket = new PlacementMetaPacket(Collections.singletonList(kyoyuPlacement));
-        KyoyuPacketManager.sendC2S(handshakePacket);
+        PlacementMetaPacket placementMetaPacket = new PlacementMetaPacket(Collections.singletonList(kyoyuPlacement));
+        KyoyuPacketManager.sendC2S(placementMetaPacket);
     }
 }
 //?}

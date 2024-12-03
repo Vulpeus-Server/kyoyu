@@ -1,6 +1,8 @@
 package com.vulpeus.kyoyu.client.gui;
 
 //? if client {
+import com.vulpeus.kyoyu.net.KyoyuPacketManager;
+import com.vulpeus.kyoyu.net.packets.LoadExplorerPacket;
 import fi.dy.masa.malilib.gui.GuiBase;
 import fi.dy.masa.malilib.gui.button.ButtonBase;
 import fi.dy.masa.malilib.gui.button.IButtonActionListener;
@@ -21,9 +23,8 @@ public class LoadExplorer_ButtonActionListener implements IButtonActionListener 
         loading_gui.setParent(parent);
         GuiBase.openGui(loading_gui);
 
-        // TODO
-        //  Packet Process on OpenExplorer
-        //  REQUEST LIST PACKET
+        LoadExplorerPacket loadExplorerPacket = new LoadExplorerPacket();
+        KyoyuPacketManager.sendC2S(loadExplorerPacket);
     }
 }
 //?}

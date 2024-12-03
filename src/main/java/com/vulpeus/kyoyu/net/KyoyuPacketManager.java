@@ -2,6 +2,7 @@ package com.vulpeus.kyoyu.net;
 
 import com.vulpeus.kyoyu.Kyoyu;
 import com.vulpeus.kyoyu.net.packets.HandshakePacket;
+import com.vulpeus.kyoyu.net.packets.LoadExplorerPacket;
 import com.vulpeus.kyoyu.net.packets.PlacementMetaPacket;
 import net.minecraft.server.level.ServerPlayer;
 
@@ -14,6 +15,7 @@ public class KyoyuPacketManager {
 
     static {
         packetRegistry.put("handshake", HandshakePacket.class);
+        packetRegistry.put("load_explorer", LoadExplorerPacket.class);
         packetRegistry.put("placement_meta", PlacementMetaPacket.class);
     }
 

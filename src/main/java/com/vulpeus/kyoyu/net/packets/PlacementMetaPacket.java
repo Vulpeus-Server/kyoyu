@@ -13,12 +13,10 @@ public class PlacementMetaPacket extends IKyoyuPacket {
     private final List<KyoyuPlacement> kyoyuPlacementList;
 
     public PlacementMetaPacket(List<KyoyuPlacement> kyoyuPlacementList) {
-        super();
         this.kyoyuPlacementList = kyoyuPlacementList;
     }
 
     public PlacementMetaPacket(byte[] bytes) {
-        super();
         String json = new String(bytes, StandardCharsets.UTF_8);
         this.kyoyuPlacementList = KyoyuPlacement.fromJson(json);
     }
