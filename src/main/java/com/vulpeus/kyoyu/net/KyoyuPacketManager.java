@@ -16,6 +16,7 @@ public class KyoyuPacketManager {
     }
 
     private static IKyoyuPacket decode(byte[] raw) {
+        IKyoyuPacket res = null;
         try (ByteArrayInputStream bais = new ByteArrayInputStream(raw); DataInputStream dis = new DataInputStream(bais)) {
             String key = dis.readUTF();
             int len = dis.readInt();
@@ -25,7 +26,7 @@ public class KyoyuPacketManager {
             Class<? extends IKyoyuPacket> packetClass = packetRegistry.get(key);
             if (packetClass != null) {
                 try {
-                    IKyoyuPacket packet = packetClass.getDeclaredConstructor(byte[].class).newInstance((Object) data);
+                    res = packetClass.getDeclaredConstructor(byte[].class).newInstance((Object) data);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -36,7 +37,7 @@ public class KyoyuPacketManager {
             throw new RuntimeException(e);
         }
 
-        return null;
+        return res;
     }
 
     private static byte[] encode(IKyoyuPacket packet) {
