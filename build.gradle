@@ -43,7 +43,7 @@ if (use_paperweight) {
     apply plugin: 'xyz.jpenilla.run-paper'
 }
 
-Number convertVersion(String version) {
+static Number convertVersion(String version) {
     def parts = version.split('\\.')*.toInteger()
     def major = parts[0] * 10000
     def minor = parts[1] * 100
@@ -51,7 +51,7 @@ Number convertVersion(String version) {
     return major + minor + patch
 }
 
-def mcVersion = convertVersion(project.minecraft_version);
+def mcVersion = convertVersion(project.minecraft_version)
 
 String MOD_ICON_PATH = 'assets/kyoyu/icon.png'
 String LANG_DIR = 'assets/kyoyu/lang'
@@ -149,6 +149,8 @@ dependencies {
             include(modImplementation(fabricApi.module("fabric-resource-loader-v0", project.fabric_api_version)))
         }
     }
+
+    implementation("com.google.code.gson:gson:${project.gson_version}")
 }
 
 if (use_architectury_loom) {

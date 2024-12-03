@@ -4,7 +4,7 @@ import net.minecraft.server.level.ServerPlayer;
 
 public abstract class IKyoyuPacket {
 
-    public IKyoyuPacket(byte[] bytes) {}
+    public IKyoyuPacket() {}
 
     public abstract byte[] encode();
 

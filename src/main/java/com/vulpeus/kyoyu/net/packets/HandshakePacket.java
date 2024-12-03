@@ -12,12 +12,12 @@ public class HandshakePacket extends IKyoyuPacket {
     private final String version;
 
     public HandshakePacket(String version) {
-        super(version.getBytes(StandardCharsets.UTF_8));
+        super();
         this.version = version;
     }
 
     public HandshakePacket(byte[] bytes) {
-        super(bytes);
+        super();
         this.version = new String(bytes, StandardCharsets.UTF_8);
     }
 

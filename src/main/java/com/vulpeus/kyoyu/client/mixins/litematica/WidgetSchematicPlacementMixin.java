@@ -35,7 +35,7 @@ public abstract class WidgetSchematicPlacementMixin extends WidgetListEntryBase<
 
         ButtonGeneric shareButton = new ButtonGeneric(buttonsStartX, y + 1, -1, true, "kyoyu.gui.button.share_litematic");
         shareButton.setEnabled(Kyoyu.getClient().isPresent());
-        addButton(shareButton, new Shere_ButtonActionListener(placement, parent.getParentGui()));
+        addButton(shareButton, new Shere_ButtonActionListener(placement));
         buttonsStartX = shareButton.getX() - 1;
     }
 }

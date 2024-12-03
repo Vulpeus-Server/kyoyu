@@ -1,0 +1,51 @@
+package com.vulpeus.kyoyu.net.packets;
+
+import com.vulpeus.kyoyu.Kyoyu;
+import com.vulpeus.kyoyu.net.IKyoyuPacket;
+import com.vulpeus.kyoyu.placement.KyoyuPlacement;
+import net.minecraft.server.level.ServerPlayer;
+
+import java.nio.charset.StandardCharsets;
+import java.util.List;
+
+public class PlacementMetaPacket extends IKyoyuPacket {
+
+    private final List<KyoyuPlacement> kyoyuPlacementList;
+
+    public PlacementMetaPacket(List<KyoyuPlacement> kyoyuPlacementList) {
+        super();
+        this.kyoyuPlacementList = kyoyuPlacementList;
+    }
+
+    public PlacementMetaPacket(byte[] bytes) {
+        super();
+        String json = new String(bytes, StandardCharsets.UTF_8);
+        this.kyoyuPlacementList = KyoyuPlacement.fromJson(json);
+    }
+
+    @Override
+    public byte[] encode() {
+        String json = KyoyuPlacement.toJson(kyoyuPlacementList);
+        return json.getBytes(StandardCharsets.UTF_8);
+    }
+
+    @Override
+    public void onServer(ServerPlayer player) {
+        Kyoyu.LOGGER.info("Share placement from {} :", player.getName().getString());
+        for (KyoyuPlacement kyoyuPlacement: kyoyuPlacementList) {
+            Kyoyu.LOGGER.info(" > `{}`", kyoyuPlacement.getName());
+        }
+
+        // TODO: save to file
+    }
+
+    @Override
+    public void onClient() {
+        Kyoyu.LOGGER.info("Share placement from server");
+        for (KyoyuPlacement kyoyuPlacement: kyoyuPlacementList) {
+            Kyoyu.LOGGER.info(" > `{}`", kyoyuPlacement.getName());
+        }
+
+        // TODO: Temporary Placement List in KyoyuClient
+    }
+}
