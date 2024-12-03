@@ -23,7 +23,7 @@ public class KyoyuMod
     //? if NEOFORGE
     /* public KyoyuMod(net.neoforged.bus.api.IEventBus modBus) */
     //? if FORGE
-    /* public KyoyuMod(net.minecraftforge.eventbus.api.IEventBus modBus) */
+    /* public KyoyuMod() */
     //? if PAPER
     /* @Override public void onEnable() */
     {
@@ -45,5 +45,6 @@ public class KyoyuMod
         KyoyuPacketPayload.register();
         //? if NEOFORGE
          /* modBus.addListener(KyoyuPacketPayload::register); */
+        // TODO: Forge Packet Register
     }
 }
