@@ -1,5 +1,6 @@
 package com.vulpeus.kyoyu.client.mixins;
 
+//? if client {
 import com.vulpeus.kyoyu.Kyoyu;
 import io.netty.channel.ChannelHandlerContext;
 import net.minecraft.network.Connection;
@@ -16,3 +17,4 @@ public class ConnectionMixin {
         Kyoyu.deinitClient();
     }
 }
+//?}
