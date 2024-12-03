@@ -110,15 +110,17 @@ public class KyoyuPacketPayload
     //?} elif NEOFORGE {
     /*
     public static void register(final RegisterPayloadHandlersEvent event) {
-        final PayloadRegistrar registrar = event.registrar("1");
-        registrar.playBidirectional(
-                KyoyuPacketPayload.TYPE,
-                KyoyuPacketPayload.CODEC,
-                new DirectionalPayloadHandler<>(
-                        KyoyuPacketPayload::onPacketServer,
-                        KyoyuPacketPayload::onPacketClient
-                )
-        );
+        event.registrar(Kyoyu.MOD_ID)
+                .versioned("1")
+                .optional()
+                .playBidirectional(
+                        KyoyuPacketPayload.TYPE,
+                        KyoyuPacketPayload.CODEC,
+                        new DirectionalPayloadHandler<>(
+                                KyoyuPacketPayload::onPacketClient,
+                                KyoyuPacketPayload::onPacketServer
+                        )
+                );
     }
     */
     //?}
