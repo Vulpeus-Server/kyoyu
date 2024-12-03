@@ -5,6 +5,7 @@
   "compatibilityLevel": "${java_compatibility_level}",
   "client": [
     "ClientPacketListenerMixin",
+    "ConnectionMixin",
     "litematica.GuiMainMenuMixin",
     "litematica.SchematicPlacementMixin",
     "litematica.WidgetSchematicPlacementMixin"
