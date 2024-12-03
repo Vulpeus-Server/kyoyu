@@ -44,17 +44,7 @@ public class PlacementMetaPacket extends IKyoyuPacket {
             Kyoyu.LOGGER.info(" > `{}`", kyoyuPlacement.getName());
         }
 
-        //? if client {
+        //? if client
         com.vulpeus.kyoyu.client.NetworkHelper.openExplorer(kyoyuPlacementList);
-        //?}
-
-//        if (Kyoyu.isClient() && Kyoyu.getClient().isPresent()) {
-//            fi.dy.masa.malilib.gui.GuiBase.openGui(
-//                    new com.vulpeus.kyoyu.client.gui.Explorer_GuiList(
-//                            fi.dy.masa.malilib.util.GuiUtils.getCurrentScreen(),
-//                            kyoyuPlacementList
-//                    )
-//            );
-//        }
     }
 }
