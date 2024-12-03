@@ -1,6 +1,7 @@
 package com.vulpeus.kyoyu.client.mixins.litematica;
 
 //? if client {
+import com.vulpeus.kyoyu.Kyoyu;
 import com.vulpeus.kyoyu.client.gui.Shere_ButtonActionListener;
 import fi.dy.masa.litematica.gui.widgets.WidgetListSchematicPlacements;
 import fi.dy.masa.litematica.gui.widgets.WidgetSchematicPlacement;
@@ -33,9 +34,7 @@ public abstract class WidgetSchematicPlacementMixin extends WidgetListEntryBase<
     public void init(int x, int y, int width, int height, boolean isOdd, SchematicPlacement placement, int listIndex, WidgetListSchematicPlacements parent, CallbackInfo ci) {
 
         ButtonGeneric shareButton = new ButtonGeneric(buttonsStartX, y + 1, -1, true, "kyoyu.gui.button.share_litematic");
-        // TODO
-        //  Disable when connecting server is not compatible
-        //  shareButton.setEnabled();
+        shareButton.setEnabled(Kyoyu.getClient().isPresent());
         addButton(shareButton, new Shere_ButtonActionListener(placement, parent.getParentGui()));
         buttonsStartX = shareButton.getX() - 1;
     }
