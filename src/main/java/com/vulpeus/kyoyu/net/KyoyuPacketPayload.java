@@ -152,7 +152,7 @@ public class KyoyuPacketPayload
             */
         //?}
         //?} elif NEOFORGE {
-        /* PacketDistributor.sendToServer(this); */
+        /* PacketDistributor.sendToPlayer(player, this); */
         //?}
     }
 
@@ -169,19 +169,19 @@ public class KyoyuPacketPayload
             /* Object context */
             //?}
     ) {
+        //? if FABRIC || NEOFORGE {
         //? if FABRIC && <=1.20.4 {
         /* Kyoyu.LOGGER.info("onPacketServer {} {} {} {}", server, player, handler, sender); */
         //?} else {
         Kyoyu.LOGGER.info("onPacketServer {}", context);
         //?}
 
-        //? if FABRIC {
         KyoyuPacketManager.handleC2S(
                 this.content,
                 //? if FABRIC && <=1.20.4 {
                     /* player */
                 //?} else {
-                    context.player()
+                    (ServerPlayer) context.player()
                 //?}
         );
         //?}

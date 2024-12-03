@@ -37,7 +37,6 @@ public class HandshakePacket extends IKyoyuPacket {
     @Override
     public void onClient() {
         Kyoyu.LOGGER.info("Login to compatible server version `{}`", version);
-        // TODO
-        //  initClient(version);
+        Kyoyu.initClient(version);
     }
 }
