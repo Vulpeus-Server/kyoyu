@@ -38,6 +38,11 @@ public class Kyoyu {
         kyoyuClient = Optional.of(new KyoyuClient(serverVersion));
     }
 
+    public static void deinitClient() {
+        LOGGER.info("Kyoyu client deinit");
+        kyoyuClient = Optional.empty();
+    }
+
     public static class KyoyuClient {
 
         private final String serverVersion;

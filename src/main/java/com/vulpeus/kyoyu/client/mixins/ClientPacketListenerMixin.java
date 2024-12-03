@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(ClientPacketListener.class)
 public class ClientPacketListenerMixin {
     @Inject(method = "handleLogin", at = @At("RETURN"))
-    private void onGameJoin(ClientboundLoginPacket clientboundLoginPacket, CallbackInfo ci) {
+    private void onJoin(ClientboundLoginPacket clientboundLoginPacket, CallbackInfo ci) {
         Kyoyu.LOGGER.info("Login to Server");
         KyoyuPacketManager.sendC2S(new HandshakePacket(Kyoyu.MOD_VERSION));
     }
