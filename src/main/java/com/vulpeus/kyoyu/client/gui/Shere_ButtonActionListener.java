@@ -15,7 +15,6 @@ import fi.dy.masa.malilib.util.InfoUtils;
 import net.minecraft.client.Minecraft;
 
 import java.io.File;
-import java.util.Collections;
 import java.util.stream.Collectors;
 
 public class Shere_ButtonActionListener implements IButtonActionListener {
@@ -69,7 +68,7 @@ public class Shere_ButtonActionListener implements IButtonActionListener {
                 placementFile
         );
 
-        PlacementMetaPacket placementMetaPacket = new PlacementMetaPacket(Collections.singletonList(kyoyuPlacement));
+        PlacementMetaPacket placementMetaPacket = new PlacementMetaPacket(kyoyuPlacement);
         KyoyuPacketManager.sendC2S(placementMetaPacket);
     }
 }

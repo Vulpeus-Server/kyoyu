@@ -37,12 +37,16 @@ public class KyoyuPlacement {
         return region;
     }
 
+    public String getUpdaterName() {
+        return updaterName;
+    }
+
     public File getFile() {
         return file;
     }
 
     private static final Type listType = new TypeToken<List<KyoyuPlacement>>() {}.getType();
-    public static List<KyoyuPlacement> fromJson(String json) {
+    public static List<KyoyuPlacement> fromJsonList(String json) {
         Gson gson = new Gson();
         List<KyoyuPlacement> kyoyuPlacementList = gson.fromJson(json, listType);
         for (KyoyuPlacement kyoyuPlacement: kyoyuPlacementList) {
@@ -52,9 +56,19 @@ public class KyoyuPlacement {
         return kyoyuPlacementList;
     }
 
-    public static String toJson(List<KyoyuPlacement> kyoyuPlacementList) {
+    public static String toJsonList(List<KyoyuPlacement> kyoyuPlacementList) {
         List<KyoyuPlacement> target = new LinkedList<KyoyuPlacement>(kyoyuPlacementList);
         Gson gson = new Gson();
         return gson.toJson(target, listType);
+    }
+
+    public static KyoyuPlacement fromJson(String json) {
+        Gson gson = new Gson();
+        return gson.fromJson(json, KyoyuPlacement.class);
+    }
+
+    public String toJson() {
+        Gson gson = new Gson();
+        return gson.toJson(this);
     }
 }

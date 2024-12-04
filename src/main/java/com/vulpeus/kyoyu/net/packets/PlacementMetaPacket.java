@@ -10,41 +10,32 @@ import java.util.List;
 
 public class PlacementMetaPacket extends IKyoyuPacket {
 
-    private final List<KyoyuPlacement> kyoyuPlacementList;
+    private final KyoyuPlacement kyoyuPlacement;
 
-    public PlacementMetaPacket(List<KyoyuPlacement> kyoyuPlacementList) {
-        this.kyoyuPlacementList = kyoyuPlacementList;
+    public PlacementMetaPacket(KyoyuPlacement kyoyuPlacement) {
+        this.kyoyuPlacement = kyoyuPlacement;
     }
 
     public PlacementMetaPacket(byte[] bytes) {
         String json = new String(bytes, StandardCharsets.UTF_8);
-        this.kyoyuPlacementList = KyoyuPlacement.fromJson(json);
+        this.kyoyuPlacement = KyoyuPlacement.fromJson(json);
     }
 
     @Override
     public byte[] encode() {
-        String json = KyoyuPlacement.toJson(kyoyuPlacementList);
+        String json = kyoyuPlacement.toJson();
         return json.getBytes(StandardCharsets.UTF_8);
     }
 
     @Override
     public void onServer(ServerPlayer player) {
-        Kyoyu.LOGGER.info("Share placement from {} :", player.getName().getString());
-        for (KyoyuPlacement kyoyuPlacement: kyoyuPlacementList) {
-            Kyoyu.LOGGER.info(" > `{}`", kyoyuPlacement.getName());
-        }
-
-        // TODO: save to file
+        Kyoyu.LOGGER.info("New placement by {}", player.getName());
+        // TODO: new or modify
     }
 
     @Override
     public void onClient() {
-        Kyoyu.LOGGER.info("Share placement from server");
-        for (KyoyuPlacement kyoyuPlacement: kyoyuPlacementList) {
-            Kyoyu.LOGGER.info(" > `{}`", kyoyuPlacement.getName());
-        }
-
-        //? if client
-        com.vulpeus.kyoyu.client.NetworkHelper.openExplorer(kyoyuPlacementList);
+        Kyoyu.LOGGER.info("Modify placement by {}", kyoyuPlacement.getUpdaterName());
+        // TODO: modify
     }
 }
