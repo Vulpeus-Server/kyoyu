@@ -9,6 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LoadExplorerPacket extends IKyoyuPacket {
+
+    public LoadExplorerPacket() {}
+    public LoadExplorerPacket(byte[] data) {}
+
     @Override
     public void onServer(ServerPlayer player) {
 

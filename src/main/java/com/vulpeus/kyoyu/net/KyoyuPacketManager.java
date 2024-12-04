@@ -33,14 +33,13 @@ public class KyoyuPacketManager {
         try (ByteArrayInputStream bais = new ByteArrayInputStream(raw); DataInputStream dis = new DataInputStream(bais)) {
             String key = dis.readUTF();
             int len = dis.readInt();
-            Kyoyu.LOGGER.info("data lenght {}", len);
             byte[] data = new byte[len]; dis.readFully(data);
 
             for (Packet packet: packetRegistry) if (key.equals(packet.key)) {
                 try {
-                    return packet.clazz.getConstructor(byte[].class).newInstance(data);
+                    return packet.clazz.getConstructor(byte[].class).newInstance((Object) data);
                 } catch (Exception e) {
-                    Kyoyu.LOGGER.error("Failed to create packet {}", key);
+                    Kyoyu.LOGGER.error("Failed to decode packet {}", key);
                     Kyoyu.LOGGER.error(e);
                     return null;
                 }
