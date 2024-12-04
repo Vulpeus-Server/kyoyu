@@ -6,7 +6,6 @@ import com.vulpeus.kyoyu.placement.KyoyuPlacement;
 import net.minecraft.server.level.ServerPlayer;
 
 import java.nio.charset.StandardCharsets;
-import java.util.List;
 
 public class PlacementMetaPacket extends IKyoyuPacket {
 
