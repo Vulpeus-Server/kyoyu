@@ -56,23 +56,21 @@ public class Explorer_WidgetListEntry extends WidgetListEntryBase<KyoyuPlacement
 
 
         // DOWNLOAD
-        text = StringUtils.translate("kyoyu.gui.button.download_litematic");
+        text = StringUtils.translate("kyoyu.gui.button.download");
         textWidth = getStringWidth(text) + 10;
         endX -= textWidth + 2;
         button = new ButtonGeneric(endX, buttonY, textWidth, buttonHeight, text);
-        // TODO
-        //  button.setEnabled(!kyoyuPlacement.existFile());
+        button.setEnabled(!kyoyuPlacement.existFile());
         listener = new ButtonListener(ButtonListener.Type.DOWNLOAD, this);
         addButton(button, listener);
 
 
         // LOAD
-        text = StringUtils.translate("kyoyu.gui.button.load_litematic");
+        text = StringUtils.translate("kyoyu.gui.button.load");
         textWidth = getStringWidth(text) + 10;
         endX -= textWidth + 2;
         button = new ButtonGeneric(endX, buttonY, textWidth, buttonHeight, text);
-        // TODO
-        //  button.setEnabled(kyoyuPlacement.existFile() && !getClient().isLoadedKyoyuPlacement(kyoyuPlacement));
+        button.setEnabled(kyoyuPlacement.existFile() && Kyoyu.findPlacement(kyoyuPlacement.getUuid()) == null);
         listener = new ButtonListener(ButtonListener.Type.LOAD, this);
         addButton(button, listener);
 
@@ -82,8 +80,7 @@ public class Explorer_WidgetListEntry extends WidgetListEntryBase<KyoyuPlacement
         textWidth = getStringWidth(text) + 10;
         endX -= textWidth + 2;
         button = new ButtonGeneric(endX, buttonY, textWidth, buttonHeight, text);
-        // TODO
-        //  button.setEnabled(kyoyuPlacement.existFile());
+        button.setEnabled(kyoyuPlacement.existFile());
         listener = new ButtonListener(ButtonListener.Type.MATERIAL_LIST, this);
         addButton(button, listener);
     }

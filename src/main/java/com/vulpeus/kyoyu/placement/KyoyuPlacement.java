@@ -2,6 +2,7 @@ package com.vulpeus.kyoyu.placement;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.vulpeus.kyoyu.Kyoyu;
 
 import java.io.File;
 import java.lang.reflect.Type;
@@ -16,8 +17,8 @@ public class KyoyuPlacement {
     private final List<KyoyuRegion> subRegions;
     private final String ownerName;
     private String updaterName;
-//    private final String hash;
-    private transient File file;
+    private final String filename;
+    private transient File file = null;
 
     public KyoyuPlacement(KyoyuRegion region, List<KyoyuRegion> subRegions, String ownerName, String updaterName, File file) {
         this(UUID.randomUUID(), region, subRegions, ownerName, updaterName, file);
@@ -29,6 +30,7 @@ public class KyoyuPlacement {
         this.subRegions = subRegions;
         this.ownerName = ownerName;
         this.updaterName = updaterName;
+        this.filename = file.getName();
         this.file = file;
     }
 
@@ -56,13 +58,16 @@ public class KyoyuPlacement {
         return file;
     }
 
+    public boolean existFile() {
+        return file != null && file.exists();
+    }
+
     private static final Type listType = new TypeToken<List<KyoyuPlacement>>() {}.getType();
     public static List<KyoyuPlacement> fromJsonList(String json) {
         Gson gson = new Gson();
         List<KyoyuPlacement> kyoyuPlacementList = gson.fromJson(json, listType);
         for (KyoyuPlacement kyoyuPlacement: kyoyuPlacementList) {
-            // TODO
-            //  some process for kyoyuPlacement
+            kyoyuPlacement.file = Kyoyu.getSaveSchemeDir().resolve(kyoyuPlacement.filename).toFile();
         }
         return kyoyuPlacementList;
     }
@@ -75,7 +80,9 @@ public class KyoyuPlacement {
 
     public static KyoyuPlacement fromJson(String json) {
         Gson gson = new Gson();
-        return gson.fromJson(json, KyoyuPlacement.class);
+        KyoyuPlacement kyoyuPlacement = gson.fromJson(json, KyoyuPlacement.class);
+        kyoyuPlacement.file = Kyoyu.getSaveSchemeDir().resolve(kyoyuPlacement.filename).toFile();
+        return kyoyuPlacement;
     }
 
     public String toJson() {

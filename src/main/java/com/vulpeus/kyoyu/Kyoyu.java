@@ -66,7 +66,14 @@ public class Kyoyu {
         }
     }
 
-    private static final Path configsDir = Paths.get("kyoyu");
+    public static Path getConfigDir() {
+        return Paths.get("kyoyu");
+    }
+
+    public static Path getSaveSchemeDir() {
+        if (isClient()) return Paths.get("schematics/kyoyu");
+        else return Paths.get("kyoyu");
+    }
 
     private static KyoyuPlacement readPlacement(Path configPath) {
         try {
@@ -83,14 +90,14 @@ public class Kyoyu {
 
         if (uuid == null) return null;
 
-        Path configPath = configsDir.resolve(uuid.toString() + ".json");
+        Path configPath = getConfigDir().resolve(uuid.toString() + ".json");
         if (!configPath.toFile().exists()) return null;
 
         return readPlacement(configPath);
     }
 
     public static List<KyoyuPlacement> getAllPlacement() {
-        File[] files = configsDir.toFile().listFiles();
+        File[] files = getConfigDir().toFile().listFiles();
         if (files != null) {
             return Arrays.stream(files).map(file -> readPlacement(file.toPath())).collect(Collectors.toList());
         }
@@ -98,7 +105,7 @@ public class Kyoyu {
     }
 
     public static void savePlacement(KyoyuPlacement kyoyuPlacement) {
-        Path configPath = configsDir.resolve(kyoyuPlacement.getUuid().toString() + ".json");
+        Path configPath = getConfigDir().resolve(kyoyuPlacement.getUuid().toString() + ".json");
         try {
             Files.write(configPath, Collections.singletonList(kyoyuPlacement.toJson()), StandardCharsets.UTF_8);
         } catch (IOException e) {
