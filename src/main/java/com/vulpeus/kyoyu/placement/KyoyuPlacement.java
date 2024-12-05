@@ -3,9 +3,14 @@ package com.vulpeus.kyoyu.placement;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.vulpeus.kyoyu.Kyoyu;
+import org.apache.commons.io.IOUtils;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.lang.reflect.Type;
+import java.security.MessageDigest;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
@@ -30,7 +35,13 @@ public class KyoyuPlacement {
         this.subRegions = subRegions;
         this.ownerName = ownerName;
         this.updaterName = updaterName;
-        this.filename = file.getName();
+        try {
+            String rawFilename = file.getName();
+            byte[] data = this.readFromFile();
+            this.filename = getFileHash(data) + rawFilename.substring(rawFilename.lastIndexOf('.'));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         this.file = file;
     }
 
@@ -53,6 +64,8 @@ public class KyoyuPlacement {
     public String getUpdaterName() {
         return updaterName;
     }
+
+    public String getFilename() { return filename; }
 
     public File getFile() {
         return file;
@@ -88,5 +101,30 @@ public class KyoyuPlacement {
     public String toJson() {
         Gson gson = new Gson();
         return gson.toJson(this);
+    }
+
+    public byte[] readFromFile() throws IOException {
+        FileInputStream inputStream = new FileInputStream(file);
+        return IOUtils.toByteArray(inputStream);
+    }
+
+    public void writeToFile(byte[] byteArray) {
+        try (FileOutputStream outputStream = new FileOutputStream(file)) {
+            outputStream.write(byteArray);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private static String getFileHash(byte[] data) {
+        StringBuilder sb = new StringBuilder();
+        try {
+            MessageDigest md2 = MessageDigest.getInstance("MD2");
+            byte[] hash = md2.digest(data);
+            for (byte b : hash) {
+                sb.append(String.format("%02x", b));
+            }
+        } catch (Exception ignore) {}
+        return sb.toString();
     }
 }

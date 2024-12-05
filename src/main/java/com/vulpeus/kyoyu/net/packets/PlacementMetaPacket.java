@@ -2,6 +2,7 @@ package com.vulpeus.kyoyu.net.packets;
 
 import com.vulpeus.kyoyu.Kyoyu;
 import com.vulpeus.kyoyu.net.IKyoyuPacket;
+import com.vulpeus.kyoyu.net.KyoyuPacketManager;
 import com.vulpeus.kyoyu.placement.KyoyuPlacement;
 import net.minecraft.server.level.ServerPlayer;
 
@@ -32,8 +33,8 @@ public class PlacementMetaPacket extends IKyoyuPacket {
         KyoyuPlacement preKyoyuPlacement = Kyoyu.findPlacement(kyoyuPlacement.getUuid());
         if (preKyoyuPlacement == null) {
             Kyoyu.savePlacement(kyoyuPlacement);
-            // TODO: New
-            //  if i don't have file, request file download.
+            FileRequestPacket fileRequestPacket = new FileRequestPacket(kyoyuPlacement.getFilename());
+            KyoyuPacketManager.sendS2C(fileRequestPacket, player);
         } else {
             // TODO: Modify
             //  check diff and update `updater` field
