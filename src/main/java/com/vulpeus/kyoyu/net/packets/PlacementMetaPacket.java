@@ -29,7 +29,15 @@ public class PlacementMetaPacket extends IKyoyuPacket {
     @Override
     public void onServer(ServerPlayer player) {
         Kyoyu.LOGGER.info("New placement by {}", player.getName());
-        // TODO: new or modify
+        KyoyuPlacement preKyoyuPlacement = Kyoyu.findPlacement(kyoyuPlacement.getUuid());
+        if (preKyoyuPlacement == null) {
+            Kyoyu.savePlacement(kyoyuPlacement);
+            // TODO: New
+            //  if i don't have file, request file download.
+        } else {
+            // TODO: Modify
+            //  check diff and update `updater` field
+        }
     }
 
     @Override

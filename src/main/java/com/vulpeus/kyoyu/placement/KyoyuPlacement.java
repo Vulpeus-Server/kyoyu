@@ -7,9 +7,11 @@ import java.io.File;
 import java.lang.reflect.Type;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.UUID;
 
 public class KyoyuPlacement {
 
+    private final UUID uuid;
     private final KyoyuRegion region;
     private final List<KyoyuRegion> subRegions;
     private final String ownerName;
@@ -18,11 +20,20 @@ public class KyoyuPlacement {
     private transient File file;
 
     public KyoyuPlacement(KyoyuRegion region, List<KyoyuRegion> subRegions, String ownerName, String updaterName, File file) {
+        this(UUID.randomUUID(), region, subRegions, ownerName, updaterName, file);
+    }
+
+    public KyoyuPlacement(UUID uuid, KyoyuRegion region, List<KyoyuRegion> subRegions, String ownerName, String updaterName, File file) {
+        this.uuid = uuid;
         this.region = region;
         this.subRegions = subRegions;
         this.ownerName = ownerName;
         this.updaterName = updaterName;
         this.file = file;
+    }
+
+    public UUID getUuid() {
+        return uuid;
     }
 
     public String getName() {

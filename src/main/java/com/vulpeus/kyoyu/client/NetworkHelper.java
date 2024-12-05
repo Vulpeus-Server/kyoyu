@@ -11,7 +11,7 @@ import java.util.List;
 
 public class NetworkHelper {
     public static void openExplorer(List<KyoyuPlacement> kyoyuPlacementList){
-        if (Kyoyu.isClient() && Kyoyu.getClient().isPresent() && GuiUtils.getCurrentScreen() instanceof GuiBase) {
+        if (Kyoyu.isClient() && Kyoyu.getClient() != null && GuiUtils.getCurrentScreen() instanceof GuiBase) {
             GuiBase currentGui = (GuiBase) GuiUtils.getCurrentScreen();
             GuiBase.openGui(new Explorer_GuiList(currentGui.getParent(), kyoyuPlacementList));
         }

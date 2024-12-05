@@ -26,7 +26,7 @@ public class GuiMainMenuMixin extends GuiBase {
         int y = this.height - 26;
 
         ButtonGeneric button = new ButtonGeneric(x, y, width, 20, text);
-        button.setEnabled(Kyoyu.getClient().isPresent());
+        button.setEnabled(Kyoyu.getClient() != null);
         addButton(button, new LoadExplorer_ButtonActionListener(this));
     }
 }

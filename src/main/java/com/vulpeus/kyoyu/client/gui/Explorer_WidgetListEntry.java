@@ -2,8 +2,8 @@ package com.vulpeus.kyoyu.client.gui;
 
 //? if client {
 import com.vulpeus.kyoyu.Kyoyu;
+import com.vulpeus.kyoyu.client.LitematicHelper;
 import com.vulpeus.kyoyu.placement.KyoyuPlacement;
-import com.vulpeus.kyoyu.placement.KyoyuRegion;
 import fi.dy.masa.litematica.data.DataManager;
 import fi.dy.masa.litematica.data.SchematicHolder;
 import fi.dy.masa.litematica.gui.GuiMaterialList;
@@ -18,9 +18,6 @@ import fi.dy.masa.malilib.gui.widgets.WidgetListEntryBase;
 import fi.dy.masa.malilib.render.RenderUtils;
 import fi.dy.masa.malilib.util.GuiUtils;
 import fi.dy.masa.malilib.util.StringUtils;
-import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.block.Mirror;
-import net.minecraft.world.level.block.Rotation;
 
 //? if >=1.20 {
 import net.minecraft.client.gui.GuiGraphics;
@@ -162,32 +159,18 @@ public class Explorer_WidgetListEntry extends WidgetListEntryBase<KyoyuPlacement
             LOAD() {
                 @Override
                 void onAction(Explorer_WidgetListEntry entry) {
-                    String name = entry.kyoyuPlacement.getName();
-                    BlockPos pos = entry.kyoyuPlacement.getRegion().getPos();
-                    Mirror mirror = entry.kyoyuPlacement.getRegion().getMirror();
-                    Rotation rotation = entry.kyoyuPlacement.getRegion().getRotation();
 
-                    LitematicaSchematic schematic = SchematicHolder.getInstance().getOrLoad(entry.kyoyuPlacement.getFile());
-                    SchematicPlacement placement = SchematicPlacement.createFor(schematic, pos, name, true, true);
+                    SchematicPlacement placement = SchematicPlacement.createFor(
+                            SchematicHolder.getInstance().getOrLoad(entry.kyoyuPlacement.getFile()),
+                            entry.kyoyuPlacement.getRegion().getPos(),
+                            entry.kyoyuPlacement.getName(),
+                            true,
+                            true
+                    );
+                    LitematicHelper.newSchematicPlacementFromKyoyuPlacement(placement, entry.kyoyuPlacement);
 
-                    if (placement.isLocked()) {
-                        placement.toggleLocked();
-                    }
+                    Kyoyu.savePlacement(entry.kyoyuPlacement);
 
-                    placement.setMirror(mirror, null);
-                    placement.setRotation(rotation, null);
-                    for (KyoyuRegion subRegion: entry.kyoyuPlacement.getSubRegions()) {
-                        String subRegionName = subRegion.getName();
-
-                        placement.moveSubRegionTo(subRegionName, subRegion.getPos(), null);
-                        placement.setSubRegionMirror(subRegionName, subRegion.getMirror(), null);
-                        placement.setSubRegionRotation(subRegionName, subRegion.getRotation(), null);
-                    }
-                    placement.toggleLocked();
-
-                    DataManager.getSchematicPlacementManager().addSchematicPlacement(placement, true);
-                    // TODO
-                    //  getClient().add(entry.kyoyuPlacement, placement);
                 }
             },
             DOWNLOAD() {

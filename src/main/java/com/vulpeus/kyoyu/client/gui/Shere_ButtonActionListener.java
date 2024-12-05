@@ -2,6 +2,7 @@ package com.vulpeus.kyoyu.client.gui;
 
 //? if client {
 import com.vulpeus.kyoyu.Kyoyu;
+import com.vulpeus.kyoyu.client.ISchematicPlacement;
 import com.vulpeus.kyoyu.net.KyoyuPacketManager;
 import com.vulpeus.kyoyu.net.packets.PlacementMetaPacket;
 import com.vulpeus.kyoyu.placement.KyoyuPlacement;
@@ -34,9 +35,6 @@ public class Shere_ButtonActionListener implements IButtonActionListener {
 
         buttonBase.setEnabled(false);
 
-        // TODO
-        //  `schematicPlacement` add to client registry
-
         File placementFile = schematicPlacement.getSchematicFile();
         if (placementFile == null) {
             // TODO: in memory placement
@@ -67,6 +65,9 @@ public class Shere_ButtonActionListener implements IButtonActionListener {
                 Minecraft.getInstance().name(),
                 placementFile
         );
+
+        Kyoyu.savePlacement(kyoyuPlacement);
+        ((ISchematicPlacement) schematicPlacement).kyoyu$setKyoyuId(kyoyuPlacement.getUuid());
 
         PlacementMetaPacket placementMetaPacket = new PlacementMetaPacket(kyoyuPlacement);
         KyoyuPacketManager.sendC2S(placementMetaPacket);

@@ -7,7 +7,6 @@ import com.vulpeus.kyoyu.placement.KyoyuPlacement;
 import net.minecraft.server.level.ServerPlayer;
 
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
 import java.util.List;
 
 public class LoadExplorerPacket extends IKyoyuPacket {
@@ -42,8 +41,7 @@ public class LoadExplorerPacket extends IKyoyuPacket {
     @Override
     public void onServer(ServerPlayer player) {
 
-        // TODO: Get Kyoyu Placements
-        List<KyoyuPlacement> list = new ArrayList<>();
+        List<KyoyuPlacement> list = Kyoyu.getAllPlacement();
 
         LoadExplorerPacket loadExplorerPacket = new LoadExplorerPacket(list);
         KyoyuPacketManager.sendS2C(loadExplorerPacket, player);
