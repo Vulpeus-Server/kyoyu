@@ -35,10 +35,10 @@ public class FileRequestPacket extends IKyoyuPacket {
         Kyoyu.LOGGER.info("file request from {}", player.getName().getString());
 
         try {
-            FileResponsePacket fileResponsePacket = new FileResponsePacket(Kyoyu.findPlacement(uuid).readFromFile());
+            FileResponsePacket fileResponsePacket = new FileResponsePacket(uuid, Kyoyu.findPlacement(uuid).readFromFile());
             KyoyuPacketManager.sendS2C(fileResponsePacket, player);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            Kyoyu.LOGGER.error(e);
         }
     }
 
@@ -48,10 +48,10 @@ public class FileRequestPacket extends IKyoyuPacket {
         Kyoyu.LOGGER.info("file request from server");
 
         try {
-            FileResponsePacket fileResponsePacket = new FileResponsePacket(Kyoyu.findPlacement(uuid).readFromFile());
+            FileResponsePacket fileResponsePacket = new FileResponsePacket(uuid, Kyoyu.findPlacement(uuid).readFromFile());
             KyoyuPacketManager.sendC2S(fileResponsePacket);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            Kyoyu.LOGGER.error(e);
         }
 
     }
