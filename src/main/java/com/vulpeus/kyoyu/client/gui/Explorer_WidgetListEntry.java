@@ -3,6 +3,8 @@ package com.vulpeus.kyoyu.client.gui;
 //? if client {
 import com.vulpeus.kyoyu.Kyoyu;
 import com.vulpeus.kyoyu.client.LitematicHelper;
+import com.vulpeus.kyoyu.net.KyoyuPacketManager;
+import com.vulpeus.kyoyu.net.packets.FileRequestPacket;
 import com.vulpeus.kyoyu.placement.KyoyuPlacement;
 import fi.dy.masa.litematica.data.DataManager;
 import fi.dy.masa.litematica.data.SchematicHolder;
@@ -173,9 +175,8 @@ public class Explorer_WidgetListEntry extends WidgetListEntryBase<KyoyuPlacement
             DOWNLOAD() {
                 @Override
                 void onAction(Explorer_WidgetListEntry entry) {
-                    // TODO
-                    //  Packet Process on Download
-                    //  REQUEST Download File
+                    FileRequestPacket fileRequestPacket = new FileRequestPacket(entry.kyoyuPlacement.getUuid());
+                    KyoyuPacketManager.sendC2S(fileRequestPacket);
                 }
             },
             REMOVE() {

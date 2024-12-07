@@ -33,7 +33,7 @@ public class PlacementMetaPacket extends IKyoyuPacket {
         KyoyuPlacement preKyoyuPlacement = Kyoyu.findPlacement(kyoyuPlacement.getUuid());
         if (preKyoyuPlacement == null) {
             Kyoyu.savePlacement(kyoyuPlacement);
-            FileRequestPacket fileRequestPacket = new FileRequestPacket(kyoyuPlacement.getFilename());
+            FileRequestPacket fileRequestPacket = new FileRequestPacket(kyoyuPlacement.getUuid());
             KyoyuPacketManager.sendS2C(fileRequestPacket, player);
         } else {
             // TODO: Modify
@@ -43,7 +43,7 @@ public class PlacementMetaPacket extends IKyoyuPacket {
 
     @Override
     public void onClient() {
-        Kyoyu.LOGGER.info("Modify placement by {}", kyoyuPlacement.getUpdaterName());
+        Kyoyu.LOGGER.info("Modify placement by {}", kyoyuPlacement.getUuid());
         // TODO: modify
     }
 }

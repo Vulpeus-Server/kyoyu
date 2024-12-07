@@ -5,22 +5,28 @@ import com.vulpeus.kyoyu.net.IKyoyuPacket;
 import com.vulpeus.kyoyu.net.KyoyuPacketManager;
 import net.minecraft.server.level.ServerPlayer;
 
-import java.nio.charset.StandardCharsets;
+import java.io.IOException;
+import java.nio.ByteBuffer;
+import java.util.UUID;
 
 public class FileRequestPacket extends IKyoyuPacket {
 
-    private final String filename;
+    private final UUID uuid;
 
     public FileRequestPacket(byte[] bytes) {
-        this.filename = new String(bytes, StandardCharsets.UTF_8);
+        ByteBuffer bb = ByteBuffer.wrap(bytes);
+        this.uuid = new UUID(bb.getLong(), bb.getLong());
     }
-    public FileRequestPacket(String filename) {
-        this.filename = filename;
+    public FileRequestPacket(UUID uuid) {
+        this.uuid = uuid;
     }
 
     @Override
     public byte[] encode() {
-        return filename.getBytes(StandardCharsets.UTF_8);
+        ByteBuffer bb = ByteBuffer.allocate(16);
+        bb.putLong(uuid.getMostSignificantBits());
+        bb.putLong(uuid.getLeastSignificantBits());
+        return bb.array();
     }
 
     @Override
@@ -28,11 +34,12 @@ public class FileRequestPacket extends IKyoyuPacket {
 
         Kyoyu.LOGGER.info("file request from {}", player.getName().getString());
 
-        // TODO FileResponcePacket
-        /*
-        FileResponcePacket fileResponcePacket = new FileResponcePacket();
-        KyoyuPacketManager.sendS2C(fileResponcePacket, player);
-         */
+        try {
+            FileResponsePacket fileResponsePacket = new FileResponsePacket(Kyoyu.findPlacement(uuid).readFromFile());
+            KyoyuPacketManager.sendS2C(fileResponsePacket, player);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
@@ -40,10 +47,12 @@ public class FileRequestPacket extends IKyoyuPacket {
 
         Kyoyu.LOGGER.info("file request from server");
 
-        // TODO FileResponcePacket
-        /*
-        FileResponcePacket fileResponcePacket = new FileResponcePacket();
-        KyoyuPacketManager.sendC2S(fileResponcePacket);
-         */
+        try {
+            FileResponsePacket fileResponsePacket = new FileResponsePacket(Kyoyu.findPlacement(uuid).readFromFile());
+            KyoyuPacketManager.sendC2S(fileResponsePacket);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 }

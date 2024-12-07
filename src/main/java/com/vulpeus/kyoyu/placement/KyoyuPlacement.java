@@ -35,14 +35,18 @@ public class KyoyuPlacement {
         this.subRegions = subRegions;
         this.ownerName = ownerName;
         this.updaterName = updaterName;
+        this.file = file;
+        String filename = null;
         try {
             String rawFilename = file.getName();
             byte[] data = this.readFromFile();
-            this.filename = getFileHash(data) + rawFilename.substring(rawFilename.lastIndexOf('.'));
+            filename = getFileHash(data) + rawFilename.substring(rawFilename.lastIndexOf('.'));
+            this.file = getFileFromFilename(filename);
+            writeToFile(data);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            Kyoyu.LOGGER.error(e);
         }
-        this.file = file;
+        this.filename = filename;
     }
 
     public UUID getUuid() {
@@ -80,7 +84,7 @@ public class KyoyuPlacement {
         Gson gson = new Gson();
         List<KyoyuPlacement> kyoyuPlacementList = gson.fromJson(json, listType);
         for (KyoyuPlacement kyoyuPlacement: kyoyuPlacementList) {
-            kyoyuPlacement.file = Kyoyu.getSaveSchemeDir().resolve(kyoyuPlacement.filename).toFile();
+            kyoyuPlacement.file = getFileFromFilename(kyoyuPlacement.getFilename());
         }
         return kyoyuPlacementList;
     }
@@ -94,13 +98,17 @@ public class KyoyuPlacement {
     public static KyoyuPlacement fromJson(String json) {
         Gson gson = new Gson();
         KyoyuPlacement kyoyuPlacement = gson.fromJson(json, KyoyuPlacement.class);
-        kyoyuPlacement.file = Kyoyu.getSaveSchemeDir().resolve(kyoyuPlacement.filename).toFile();
+        kyoyuPlacement.file = getFileFromFilename(kyoyuPlacement.getFilename());
         return kyoyuPlacement;
     }
 
     public String toJson() {
         Gson gson = new Gson();
         return gson.toJson(this);
+    }
+
+    private static File getFileFromFilename(String filename) {
+        return Kyoyu.getSaveSchemeDir().resolve(filename).toFile();
     }
 
     public byte[] readFromFile() throws IOException {

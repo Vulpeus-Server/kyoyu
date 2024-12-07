@@ -1,9 +1,7 @@
 package com.vulpeus.kyoyu.net;
 
 import com.vulpeus.kyoyu.Kyoyu;
-import com.vulpeus.kyoyu.net.packets.HandshakePacket;
-import com.vulpeus.kyoyu.net.packets.LoadExplorerPacket;
-import com.vulpeus.kyoyu.net.packets.PlacementMetaPacket;
+import com.vulpeus.kyoyu.net.packets.*;
 import net.minecraft.server.level.ServerPlayer;
 
 import java.io.*;
@@ -27,6 +25,8 @@ public class KyoyuPacketManager {
         packetRegistry.add(new Packet("handshake", HandshakePacket.class));
         packetRegistry.add(new Packet("load_explorer", LoadExplorerPacket.class));
         packetRegistry.add(new Packet("placement_meta", PlacementMetaPacket.class));
+        packetRegistry.add(new Packet("file_request", FileRequestPacket.class));
+        packetRegistry.add(new Packet("file_response", FileResponsePacket.class));
     }
 
     private static IKyoyuPacket decode(byte[] raw) {
