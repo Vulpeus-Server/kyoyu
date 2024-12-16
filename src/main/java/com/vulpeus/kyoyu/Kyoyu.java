@@ -23,7 +23,6 @@ public class Kyoyu {
     public static final Logger LOGGER = LogManager.getLogger(MOD_ID);
 
     private static boolean isClient = false;
-    private static KyoyuClient kyoyuClient = null;
 
     public static void setEnv(boolean isClient) {
         Kyoyu.isClient = isClient;
@@ -36,43 +35,13 @@ public class Kyoyu {
         return !isClient;
     }
 
-    public static KyoyuClient getClient() {
-        return kyoyuClient;
-    }
-
-    public static void initClient(String serverVersion) {
-        if (kyoyuClient != null) {
-            LOGGER.error("Duplicate client init");
-            return;
-        }
-        LOGGER.info("Kyoyu client init");
-        kyoyuClient = new KyoyuClient(serverVersion);
-    }
-
-    public static void deinitClient() {
-        LOGGER.info("Kyoyu client deinit");
-        kyoyuClient = null;
-    }
-
-    public static class KyoyuClient {
-
-        private final String serverVersion;
-
-        public KyoyuClient(String serverVersion) {
-            this.serverVersion = serverVersion;
-        }
-        private String serverVersion() {
-            return serverVersion;
-        }
-    }
 
     public static Path getConfigDir() {
         return Paths.get("kyoyu");
     }
 
     public static Path getSaveSchemeDir() {
-        if (isClient()) return Paths.get("schematics/kyoyu");
-        else return Paths.get("kyoyu");
+        return Paths.get("kyoyu");
     }
 
     private static KyoyuPlacement readPlacement(Path configPath) {

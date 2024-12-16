@@ -31,14 +31,14 @@ public class KyoyuMod
         Kyoyu.LOGGER.info("KyoyuMod Version : {}", Kyoyu.MOD_VERSION);
 
         Kyoyu.setEnv(
-            //? if FABRIC
-            net.fabricmc.loader.api.FabricLoader.getInstance().getEnvironmentType() == net.fabricmc.api.EnvType.CLIENT
-            //? if NEOFORGE
-            /* net.neoforged.fml.loading.FMLEnvironment.dist == net.neoforged.api.distmarker.Dist.CLIENT */
-            //? if FORGE
-            /* net.minecraftforge.fml.loading.FMLEnvironment.dist == net.minecraftforge.api.distmarker.Dist.CLIENT */
-            //? if PAPER
-            /* false */
+                //? if FABRIC
+                net.fabricmc.loader.api.FabricLoader.getInstance().getEnvironmentType() == net.fabricmc.api.EnvType.CLIENT
+                //? if NEOFORGE
+                /* net.neoforged.fml.loading.FMLEnvironment.dist == net.neoforged.api.distmarker.Dist.CLIENT */
+                //? if FORGE
+                /* net.minecraftforge.fml.loading.FMLEnvironment.dist == net.minecraftforge.api.distmarker.Dist.CLIENT */
+                //? if PAPER
+                /* false */
         );
 
         //? if FABRIC

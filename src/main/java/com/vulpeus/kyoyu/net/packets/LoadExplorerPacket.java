@@ -1,6 +1,7 @@
 package com.vulpeus.kyoyu.net.packets;
 
 import com.vulpeus.kyoyu.Kyoyu;
+import com.vulpeus.kyoyu.client.KyoyuClient;
 import com.vulpeus.kyoyu.net.IKyoyuPacket;
 import com.vulpeus.kyoyu.net.KyoyuPacketManager;
 import com.vulpeus.kyoyu.placement.KyoyuPlacement;
@@ -50,9 +51,10 @@ public class LoadExplorerPacket extends IKyoyuPacket {
     //? if client {
     @Override
     public void onClient() {
-        if (kyoyuPlacementList != null) {
+        KyoyuClient kyoyuClient = KyoyuClient.getInstance();
+        if (kyoyuPlacementList != null && kyoyuClient != null) {
             Kyoyu.LOGGER.info("KyoyuPlacement list from server");
-            com.vulpeus.kyoyu.client.NetworkHelper.openExplorer(kyoyuPlacementList);
+            kyoyuClient.openExplorer(kyoyuPlacementList);
         } else {
             Kyoyu.LOGGER.info("KyoyuPlacement list is empty!");
         }

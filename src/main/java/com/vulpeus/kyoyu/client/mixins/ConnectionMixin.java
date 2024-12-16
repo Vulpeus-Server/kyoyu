@@ -2,6 +2,7 @@ package com.vulpeus.kyoyu.client.mixins;
 
 //? if client {
 import com.vulpeus.kyoyu.Kyoyu;
+import com.vulpeus.kyoyu.client.KyoyuClient;
 import io.netty.channel.ChannelHandlerContext;
 import net.minecraft.network.Connection;
 import org.spongepowered.asm.mixin.Mixin;
@@ -14,7 +15,7 @@ public class ConnectionMixin {
     @Inject(method = "channelInactive", at = @At("HEAD"))
     private void onLeave(ChannelHandlerContext channelHandlerContext, CallbackInfo ci) {
         Kyoyu.LOGGER.info("Leave from Server");
-        Kyoyu.deinitClient();
+        KyoyuClient.deinitClient();
     }
 }
 //?}

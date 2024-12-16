@@ -1,6 +1,7 @@
 package com.vulpeus.kyoyu.net.packets;
 
 import com.vulpeus.kyoyu.Kyoyu;
+import com.vulpeus.kyoyu.client.KyoyuClient;
 import com.vulpeus.kyoyu.net.IKyoyuPacket;
 import com.vulpeus.kyoyu.net.KyoyuPacketManager;
 import net.minecraft.server.level.ServerPlayer;
@@ -35,6 +36,6 @@ public class HandshakePacket extends IKyoyuPacket {
     @Override
     public void onClient() {
         Kyoyu.LOGGER.info("Login to compatible server version `{}`", version);
-        Kyoyu.initClient(version);
+        KyoyuClient.init(version);
     }
 }
