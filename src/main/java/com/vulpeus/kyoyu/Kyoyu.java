@@ -41,7 +41,7 @@ public class Kyoyu {
     }
 
     public static Path getSaveSchemeDir() {
-        return Paths.get("kyoyu");
+        return Paths.get("kyoyu/files");
     }
 
     private static KyoyuPlacement readPlacement(Path configPath) {
@@ -68,7 +68,9 @@ public class Kyoyu {
     public static List<KyoyuPlacement> getAllPlacement() {
         File[] files = getConfigDir().toFile().listFiles();
         if (files != null) {
-            return Arrays.stream(files).map(file -> readPlacement(file.toPath())).collect(Collectors.toList());
+            return Arrays.stream(files)
+                    .filter(file -> file.getName().endsWith(".json"))
+                    .map(file -> readPlacement(file.toPath())).collect(Collectors.toList());
         }
         return null;
     }

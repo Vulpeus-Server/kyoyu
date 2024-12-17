@@ -175,6 +175,7 @@ public class Explorer_WidgetListEntry extends WidgetListEntryBase<KyoyuPlacement
             DOWNLOAD() {
                 @Override
                 void onAction(Explorer_WidgetListEntry entry) {
+                    Kyoyu.savePlacement(entry.kyoyuPlacement);
                     FileRequestPacket fileRequestPacket = new FileRequestPacket(entry.kyoyuPlacement.getUuid());
                     KyoyuPacketManager.sendC2S(fileRequestPacket);
                 }
