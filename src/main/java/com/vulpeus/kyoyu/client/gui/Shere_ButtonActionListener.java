@@ -13,6 +13,8 @@ import fi.dy.masa.malilib.gui.button.ButtonBase;
 import fi.dy.masa.malilib.gui.button.IButtonActionListener;
 import fi.dy.masa.malilib.util.InfoUtils;
 
+import java.util.UUID;
+
 public class Shere_ButtonActionListener implements IButtonActionListener {
 
     private final SchematicPlacement schematicPlacement;
@@ -37,11 +39,12 @@ public class Shere_ButtonActionListener implements IButtonActionListener {
             return;
         }
 
+        ((ISchematicPlacement) schematicPlacement).kyoyu$setKyoyuId(UUID.randomUUID());
         KyoyuPlacement kyoyuPlacement = ((ISchematicPlacement) schematicPlacement).kyoyu$toKyoyuPlacement();
-        ((ISchematicPlacement) schematicPlacement).kyoyu$setKyoyuId(kyoyuPlacement.getUuid());
-
-        PlacementMetaPacket placementMetaPacket = new PlacementMetaPacket(kyoyuPlacement);
-        KyoyuPacketManager.sendC2S(placementMetaPacket);
+        if (kyoyuPlacement != null) {
+            PlacementMetaPacket placementMetaPacket = new PlacementMetaPacket(kyoyuPlacement);
+            KyoyuPacketManager.sendC2S(placementMetaPacket);
+        }
     }
 }
 //?}

@@ -41,6 +41,7 @@ public class Kyoyu {
     }
 
     public static Path getSaveSchemeDir() {
+        if (isClient()) return Paths.get("schematics/kyoyu");
         return Paths.get("kyoyu/files");
     }
 

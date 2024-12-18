@@ -39,20 +39,24 @@ public class SchematicPlacementMixin implements ISchematicPlacement {
     @Override
     public KyoyuPlacement kyoyu$toKyoyuPlacement() {
         SchematicPlacement self = (SchematicPlacement) (Object) this;
-        return new KyoyuPlacement(
-                new KyoyuRegion(
-                        self.getOrigin(),
-                        self.getMirror(),
-                        self.getRotation(),
-                        self.getName()
-                ),
-                self.getAllSubRegionsPlacements().stream().map(x ->
-                        new KyoyuRegion(x.getPos(), x.getMirror(), x.getRotation(), x.getName())
-                ).collect(Collectors.toList()),
-                Minecraft.getInstance().name(),
-                Minecraft.getInstance().name(),
-                self.getSchematicFile()
-        );
+        if (kyoyu_id != null) {
+            return new KyoyuPlacement(
+                    kyoyu_id,
+                    new KyoyuRegion(
+                            self.getOrigin(),
+                            self.getMirror(),
+                            self.getRotation(),
+                            self.getName()
+                    ),
+                    self.getAllSubRegionsPlacements().stream().map(x ->
+                            new KyoyuRegion(x.getPos(), x.getMirror(), x.getRotation(), x.getName())
+                    ).collect(Collectors.toList()),
+                    Minecraft.getInstance().name(),
+                    Minecraft.getInstance().name(),
+                    self.getSchematicFile()
+            );
+        }
+        return null;
     }
 
     @Override

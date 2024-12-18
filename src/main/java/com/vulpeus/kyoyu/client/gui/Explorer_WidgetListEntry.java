@@ -172,15 +172,11 @@ public class Explorer_WidgetListEntry extends WidgetListEntryBase<KyoyuPlacement
                     ((ISchematicPlacement) placement).kyoyu$updateFromKyoyuPlacement(entry.kyoyuPlacement);
                     ((ISchematicPlacement) placement).kyoyu$setKyoyuId(entry.kyoyuPlacement.getUuid());
                     DataManager.getSchematicPlacementManager().addSchematicPlacement(placement, true);
-
-                    Kyoyu.savePlacement(entry.kyoyuPlacement);
-
                 }
             },
             DOWNLOAD() {
                 @Override
                 void onAction(Explorer_WidgetListEntry entry) {
-                    Kyoyu.savePlacement(entry.kyoyuPlacement);
                     FileRequestPacket fileRequestPacket = new FileRequestPacket(entry.kyoyuPlacement.getUuid());
                     KyoyuPacketManager.sendC2S(fileRequestPacket);
                 }
