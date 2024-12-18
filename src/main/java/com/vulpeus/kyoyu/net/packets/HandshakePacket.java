@@ -33,9 +33,11 @@ public class HandshakePacket extends IKyoyuPacket {
         KyoyuPacketManager.sendS2C(handshakePacket, player);
     }
 
+    //? if client {
     @Override
     public void onClient() {
         Kyoyu.LOGGER.info("Login to compatible server version `{}`", version);
         KyoyuClient.init(version);
     }
+    //?}
 }

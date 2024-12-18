@@ -1,8 +1,11 @@
 package com.vulpeus.kyoyu.net.packets;
 
 import com.vulpeus.kyoyu.Kyoyu;
+import com.vulpeus.kyoyu.client.ISchematicPlacement;
+import com.vulpeus.kyoyu.client.KyoyuClient;
 import com.vulpeus.kyoyu.net.IKyoyuPacket;
 import com.vulpeus.kyoyu.net.KyoyuPacketManager;
+import com.vulpeus.kyoyu.placement.KyoyuPlacement;
 import net.minecraft.server.level.ServerPlayer;
 
 import java.io.IOException;
@@ -42,17 +45,21 @@ public class FileRequestPacket extends IKyoyuPacket {
         }
     }
 
+    //? if client {
     @Override
     public void onClient() {
 
         Kyoyu.LOGGER.info("file request from server");
-
-        try {
-            FileResponsePacket fileResponsePacket = new FileResponsePacket(uuid, Kyoyu.findPlacement(uuid).readFromFile());
-            KyoyuPacketManager.sendC2S(fileResponsePacket);
-        } catch (IOException e) {
-            Kyoyu.LOGGER.error(e);
+        KyoyuClient kyoyuClient = KyoyuClient.getInstance();
+        if (kyoyuClient != null) {
+            try {
+                KyoyuPlacement kyoyuPlacement = ((ISchematicPlacement) kyoyuClient.findSchematicPlacement(uuid)).kyoyu$toKyoyuPlacement();
+                FileResponsePacket fileResponsePacket = new FileResponsePacket(uuid, kyoyuPlacement.readFromFile());
+                KyoyuPacketManager.sendC2S(fileResponsePacket);
+            } catch (IOException e) {
+                Kyoyu.LOGGER.error(e);
+            }
         }
-
     }
+    //?}
 }

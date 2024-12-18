@@ -2,7 +2,8 @@ package com.vulpeus.kyoyu.client.gui;
 
 //? if client {
 import com.vulpeus.kyoyu.Kyoyu;
-import com.vulpeus.kyoyu.client.LitematicHelper;
+import com.vulpeus.kyoyu.client.ISchematicPlacement;
+import com.vulpeus.kyoyu.client.KyoyuClient;
 import com.vulpeus.kyoyu.net.KyoyuPacketManager;
 import com.vulpeus.kyoyu.net.packets.FileRequestPacket;
 import com.vulpeus.kyoyu.placement.KyoyuPlacement;
@@ -38,6 +39,8 @@ public class Explorer_WidgetListEntry extends WidgetListEntryBase<KyoyuPlacement
         super(x, y, width, height, entry, listIndex);
         this.kyoyuPlacement = entry;
         this.isOdd = isOdd;
+        
+        KyoyuClient kyoyuClient = KyoyuClient.getInstance();
 
         int buttonHeight = 20;
         int buttonY = (height - buttonHeight)/2 + y;
@@ -72,7 +75,7 @@ public class Explorer_WidgetListEntry extends WidgetListEntryBase<KyoyuPlacement
         textWidth = getStringWidth(text) + 10;
         endX -= textWidth + 2;
         button = new ButtonGeneric(endX, buttonY, textWidth, buttonHeight, text);
-        button.setEnabled(kyoyuPlacement.existFile() && Kyoyu.findPlacement(kyoyuPlacement.getUuid()) == null);
+        button.setEnabled(kyoyuPlacement.existFile() && kyoyuClient.findSchematicPlacement(kyoyuPlacement.getUuid()) == null);
         listener = new ButtonListener(ButtonListener.Type.LOAD, this);
         addButton(button, listener);
 
@@ -166,7 +169,9 @@ public class Explorer_WidgetListEntry extends WidgetListEntryBase<KyoyuPlacement
                             true,
                             true
                     );
-                    LitematicHelper.newSchematicPlacementFromKyoyuPlacement(placement, entry.kyoyuPlacement);
+                    ((ISchematicPlacement) placement).kyoyu$updateFromKyoyuPlacement(entry.kyoyuPlacement);
+                    ((ISchematicPlacement) placement).kyoyu$setKyoyuId(entry.kyoyuPlacement.getUuid());
+                    DataManager.getSchematicPlacementManager().addSchematicPlacement(placement, true);
 
                     Kyoyu.savePlacement(entry.kyoyuPlacement);
 

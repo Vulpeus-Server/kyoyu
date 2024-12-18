@@ -1,6 +1,8 @@
 package com.vulpeus.kyoyu.net.packets;
 
 import com.vulpeus.kyoyu.Kyoyu;
+import com.vulpeus.kyoyu.client.ISchematicPlacement;
+import com.vulpeus.kyoyu.client.KyoyuClient;
 import com.vulpeus.kyoyu.net.IKyoyuPacket;
 import com.vulpeus.kyoyu.placement.KyoyuPlacement;
 import net.minecraft.server.level.ServerPlayer;
@@ -45,12 +47,16 @@ public class FileResponsePacket extends IKyoyuPacket {
 
     }
 
+    //? if client {
     @Override
     public void onClient() {
 
         Kyoyu.LOGGER.info("file response from server");
-        KyoyuPlacement kyoyuPlacement = Kyoyu.findPlacement(uuid);
-        kyoyuPlacement.writeToFile(data);
-
+        KyoyuClient kyoyuClient = KyoyuClient.getInstance();
+        if (kyoyuClient != null) {
+            KyoyuPlacement kyoyuPlacement = ((ISchematicPlacement) kyoyuClient.findSchematicPlacement(uuid)).kyoyu$toKyoyuPlacement();
+            kyoyuPlacement.writeToFile(data);
+        }
     }
+    //?}
 }

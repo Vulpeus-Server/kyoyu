@@ -1,7 +1,6 @@
 package com.vulpeus.kyoyu.client.mixins.litematica;
 
 //? if client {
-import com.vulpeus.kyoyu.Kyoyu;
 import com.vulpeus.kyoyu.client.KyoyuClient;
 import com.vulpeus.kyoyu.client.gui.LoadExplorer_ButtonActionListener;
 import fi.dy.masa.litematica.gui.GuiMainMenu;

@@ -6,17 +6,12 @@ import com.vulpeus.kyoyu.client.ISchematicPlacement;
 import com.vulpeus.kyoyu.net.KyoyuPacketManager;
 import com.vulpeus.kyoyu.net.packets.PlacementMetaPacket;
 import com.vulpeus.kyoyu.placement.KyoyuPlacement;
-import com.vulpeus.kyoyu.placement.KyoyuRegion;
 import fi.dy.masa.litematica.schematic.placement.SchematicPlacement;
 import fi.dy.masa.malilib.gui.GuiBase;
 import fi.dy.masa.malilib.gui.Message;
 import fi.dy.masa.malilib.gui.button.ButtonBase;
 import fi.dy.masa.malilib.gui.button.IButtonActionListener;
 import fi.dy.masa.malilib.util.InfoUtils;
-import net.minecraft.client.Minecraft;
-
-import java.io.File;
-import java.util.stream.Collectors;
 
 public class Shere_ButtonActionListener implements IButtonActionListener {
 
@@ -35,38 +30,14 @@ public class Shere_ButtonActionListener implements IButtonActionListener {
 
         buttonBase.setEnabled(false);
 
-        File placementFile = schematicPlacement.getSchematicFile();
-        if (placementFile == null) {
+        if (schematicPlacement.getSchematicFile() == null) {
             // TODO: in memory placement
             InfoUtils.showGuiOrInGameMessage(Message.MessageType.ERROR, "kyoyu.error.file_is_null");
             Kyoyu.LOGGER.error("File is null\n\t> note: may be added in the future");
             return;
         }
 
-//        FileType fileType = FileType.fromFile(placementFile);
-//        Kyoyu.LOGGER.info("getFileType {}", fileType.name());
-//        if (fileType == FileType.VANILLA_STRUCTURE || fileType == FileType.SCHEMATICA_SCHEMATIC) {
-//            InfoUtils.showGuiOrInGameMessage(Message.MessageType.ERROR, "kyoyu.error.share_incompatible_schematic");
-//        } else if (fileType != FileType.LITEMATICA_SCHEMATIC) {
-//            InfoUtils.showGuiOrInGameMessage(Message.MessageType.ERROR, "kyoyu.error.invalid_file");
-//        }
-
-        KyoyuPlacement kyoyuPlacement = new KyoyuPlacement(
-                new KyoyuRegion(
-                        schematicPlacement.getOrigin(),
-                        schematicPlacement.getMirror(),
-                        schematicPlacement.getRotation(),
-                        schematicPlacement.getName()
-                ),
-                schematicPlacement.getAllSubRegionsPlacements().stream().map(x ->
-                        new KyoyuRegion(x.getPos(), x.getMirror(), x.getRotation(), x.getName())
-                ).collect(Collectors.toList()),
-                Minecraft.getInstance().name(),
-                Minecraft.getInstance().name(),
-                placementFile
-        );
-
-        Kyoyu.savePlacement(kyoyuPlacement);
+        KyoyuPlacement kyoyuPlacement = ((ISchematicPlacement) schematicPlacement).kyoyu$toKyoyuPlacement();
         ((ISchematicPlacement) schematicPlacement).kyoyu$setKyoyuId(kyoyuPlacement.getUuid());
 
         PlacementMetaPacket placementMetaPacket = new PlacementMetaPacket(kyoyuPlacement);

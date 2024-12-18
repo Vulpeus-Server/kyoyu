@@ -4,9 +4,12 @@ import com.vulpeus.kyoyu.Kyoyu;
 import com.vulpeus.kyoyu.placement.KyoyuPlacement;
 
 import java.util.List;
+import java.util.UUID;
 
 //? if client {
 import com.vulpeus.kyoyu.client.gui.Explorer_GuiList;
+import fi.dy.masa.litematica.data.DataManager;
+import fi.dy.masa.litematica.schematic.placement.SchematicPlacement;
 import fi.dy.masa.malilib.gui.GuiBase;
 import fi.dy.masa.malilib.util.GuiUtils;
 //?}
@@ -43,11 +46,21 @@ public class KyoyuClient {
     }
 
 //? if client {
-    public void openExplorer(List<KyoyuPlacement> kyoyuPlacementList){
+    public void openExplorer(List<KyoyuPlacement> kyoyuPlacementList) {
         if (Kyoyu.isClient() && KyoyuClient.getInstance() != null && GuiUtils.getCurrentScreen() instanceof GuiBase) {
             GuiBase currentGui = (GuiBase) GuiUtils.getCurrentScreen();
             GuiBase.openGui(new Explorer_GuiList(currentGui.getParent(), kyoyuPlacementList));
         }
+    }
+
+    public SchematicPlacement findSchematicPlacement(UUID uuid) {
+        for (SchematicPlacement schematicPlacement: DataManager.getSchematicPlacementManager().getAllSchematicsPlacements()) {
+            UUID id = ((ISchematicPlacement) schematicPlacement).kyoyu$getKyoyuId();
+            if (id == uuid) {
+                return schematicPlacement;
+            }
+        }
+        return null;
     }
 //?}
 }

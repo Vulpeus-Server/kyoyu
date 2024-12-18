@@ -41,9 +41,11 @@ public class PlacementMetaPacket extends IKyoyuPacket {
         }
     }
 
+    //? if client {
     @Override
     public void onClient() {
         Kyoyu.LOGGER.info("Modify placement by {}", kyoyuPlacement.getUuid());
         // TODO: modify
     }
+    //?}
 }
