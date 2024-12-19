@@ -10,7 +10,9 @@ import fi.dy.masa.litematica.schematic.placement.SchematicPlacement;
 import fi.dy.masa.litematica.schematic.placement.SchematicPlacementManager;
 import fi.dy.masa.malilib.util.JsonUtils;
 import net.minecraft.client.Minecraft;
+import net.minecraft.core.BlockPos;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -23,6 +25,7 @@ import java.util.stream.Collectors;
 @Mixin(SchematicPlacement.class)
 public class SchematicPlacementMixin implements ISchematicPlacement {
 
+    @Shadow private BlockPos origin;
     @Unique
     private UUID kyoyu_id;
 
@@ -68,10 +71,11 @@ public class SchematicPlacementMixin implements ISchematicPlacement {
 
         self.setMirror(kyoyuPlacement.getRegion().getMirror(), null);
         self.setRotation(kyoyuPlacement.getRegion().getRotation(), null);
+        BlockPos origin = kyoyuPlacement.getRegion().getPos();
         for (KyoyuRegion subRegion: kyoyuPlacement.getSubRegions()) {
             String subRegionName = subRegion.getName();
 
-            self.moveSubRegionTo(subRegionName, subRegion.getPos(), null);
+            self.moveSubRegionTo(subRegionName, subRegion.getPos().offset(origin.getX(), origin.getY(), origin.getZ()), null);
             self.setSubRegionMirror(subRegionName, subRegion.getMirror(), null);
             self.setSubRegionRotation(subRegionName, subRegion.getRotation(), null);
         }
