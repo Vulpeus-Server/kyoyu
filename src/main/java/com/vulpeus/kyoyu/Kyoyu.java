@@ -1,6 +1,7 @@
 package com.vulpeus.kyoyu;
 
 import com.vulpeus.kyoyu.placement.KyoyuPlacement;
+import net.minecraft.server.level.ServerPlayer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -10,10 +11,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Kyoyu {
@@ -21,6 +19,8 @@ public class Kyoyu {
     public static final String MOD_VERSION = /*$ mod_version*/ "unknown";
 
     public static final Logger LOGGER = LogManager.getLogger(MOD_ID);
+
+    public static List<ServerPlayer> PLAYERS = new ArrayList<>();
 
     private static boolean isClient = false;
 
@@ -82,6 +82,16 @@ public class Kyoyu {
             Files.write(configPath, Collections.singletonList(kyoyuPlacement.toJson()), StandardCharsets.UTF_8);
         } catch (IOException e) {
             LOGGER.error("Kyoyu.savePlacement: save KyoyuPlacement from {}", kyoyuPlacement.getUuid());
+            LOGGER.error(e);
+        }
+    }
+
+    public static void unlinkPlacement(KyoyuPlacement kyoyuPlacement) {
+        Path configPath = getConfigDir().resolve(kyoyuPlacement.getUuid().toString() + ".json");
+        try {
+            Files.delete(configPath);
+        } catch (IOException e) {
+            LOGGER.error("Kyoyu.unlinkPlacement: unlink KyoyuPlacement {}", kyoyuPlacement.getUuid());
             LOGGER.error(e);
         }
     }

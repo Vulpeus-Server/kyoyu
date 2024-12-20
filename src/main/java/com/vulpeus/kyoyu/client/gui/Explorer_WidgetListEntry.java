@@ -6,6 +6,7 @@ import com.vulpeus.kyoyu.client.ISchematicPlacement;
 import com.vulpeus.kyoyu.client.KyoyuClient;
 import com.vulpeus.kyoyu.net.KyoyuPacketManager;
 import com.vulpeus.kyoyu.net.packets.FileRequestPacket;
+import com.vulpeus.kyoyu.net.packets.RemovePlacementPacket;
 import com.vulpeus.kyoyu.placement.KyoyuPlacement;
 import fi.dy.masa.litematica.data.DataManager;
 import fi.dy.masa.litematica.data.SchematicHolder;
@@ -14,12 +15,14 @@ import fi.dy.masa.litematica.materials.MaterialListSchematic;
 import fi.dy.masa.litematica.schematic.LitematicaSchematic;
 import fi.dy.masa.litematica.schematic.placement.SchematicPlacement;
 import fi.dy.masa.malilib.gui.GuiBase;
+import fi.dy.masa.malilib.gui.Message;
 import fi.dy.masa.malilib.gui.button.ButtonBase;
 import fi.dy.masa.malilib.gui.button.ButtonGeneric;
 import fi.dy.masa.malilib.gui.button.IButtonActionListener;
 import fi.dy.masa.malilib.gui.widgets.WidgetListEntryBase;
 import fi.dy.masa.malilib.render.RenderUtils;
 import fi.dy.masa.malilib.util.GuiUtils;
+import fi.dy.masa.malilib.util.InfoUtils;
 import fi.dy.masa.malilib.util.StringUtils;
 
 //? if >=1.20 {
@@ -184,9 +187,12 @@ public class Explorer_WidgetListEntry extends WidgetListEntryBase<KyoyuPlacement
             REMOVE() {
                 @Override
                 void onAction(Explorer_WidgetListEntry entry) {
-                    // TODO
-                    //  Packet Process on Remove
-                    //  REQUEST Remove KyoyuPlacement
+                    if (!GuiBase.isShiftDown()) {
+                        InfoUtils.showGuiOrInGameMessage(Message.MessageType.ERROR, "kyoyu.error.remove_without_shift");
+                        return;
+                    }
+                    RemovePlacementPacket removePlacementPacket = new RemovePlacementPacket(entry.kyoyuPlacement.getUuid());
+                    KyoyuPacketManager.sendC2S(removePlacementPacket);
                 }
             };
 

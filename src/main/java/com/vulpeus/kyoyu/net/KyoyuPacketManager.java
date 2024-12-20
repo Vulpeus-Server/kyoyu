@@ -27,6 +27,7 @@ public class KyoyuPacketManager {
         packetRegistry.add(new Packet("placement_meta", PlacementMetaPacket.class));
         packetRegistry.add(new Packet("file_request", FileRequestPacket.class));
         packetRegistry.add(new Packet("file_response", FileResponsePacket.class));
+        packetRegistry.add(new Packet("remove_placement", RemovePlacementPacket.class));
     }
 
     private static IKyoyuPacket decode(byte[] raw) {

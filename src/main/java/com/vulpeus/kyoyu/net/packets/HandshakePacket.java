@@ -29,6 +29,8 @@ public class HandshakePacket extends IKyoyuPacket {
     public void onServer(ServerPlayer player) {
         Kyoyu.LOGGER.info("Login `{}` with compatible client version `{}`", version, player.getName().getString());
 
+        Kyoyu.PLAYERS.add(player);
+
         HandshakePacket handshakePacket = new HandshakePacket(Kyoyu.MOD_VERSION);
         KyoyuPacketManager.sendS2C(handshakePacket, player);
     }
