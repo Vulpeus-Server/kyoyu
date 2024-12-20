@@ -3,10 +3,12 @@
 A Minecraft mod inspired by syncmatica.
 Share litematics with other players on the server.
 
-[![License](https://img.shields.io/github/license/Vulpeus-Server/kyoyu.svg)](http://www.gnu.org/licenses/lgpl-3.0.html)
-[![Issues](https://img.shields.io/github/issues/Vulpeus-Server/kyoyu.svg)](https://github.com/Vulpeus-Server/kyoyu/issues)
-[![workflow](https://github.com/Vulpeus-Server/kyoyu/actions/workflows/gradle.yml/badge.svg)](https://github.com/Vulpeus-Server/kyoyu/actions/workflows/gradle.yml)
+[![License](https://img.shields.io/github/license/Vulpeus-Server/kyoyu)](http://www.gnu.org/licenses/lgpl-3.0.html)
 [![Modrinth](https://img.shields.io/modrinth/dt/VozTPxB4?label=Modrinth%20Downloads)](https://modrinth.com/mod/VozTPxB4)
+
+[![GitHub Workflow](https://github.com/Vulpeus-Server/kyoyu/actions/workflows/gradle.yml/badge.svg)](https://github.com/Vulpeus-Server/kyoyu/actions/workflows/gradle.yml)
+[![GitHub Issues](https://img.shields.io/github/issues/Vulpeus-Server/kyoyu)](https://github.com/Vulpeus-Server/kyoyu/issues)
+[![GitHub Created At](https://img.shields.io/github/created-at/Vulpeus-Server/kyoyu)](https://github.com/Vulpeus-Server/kyoyu)
 
 ## Versions
 
@@ -64,7 +66,9 @@ Share litematics with other players on the server.
 - Server
 - [x] Save SyncLitematicConfig
 - [x] Restore SyncLitematicConfig
-- [ ] Plugin Support?
+- [ ] Plugin support?
+- [ ] Forgematica support?
+- [ ] 1.12- litematica support?
 - Data Types
 - [x] Pos
 - [x] Mirror
