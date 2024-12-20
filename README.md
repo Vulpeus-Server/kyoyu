@@ -41,17 +41,16 @@ Share litematics with other players on the server.
 
 ## Features (WIP)
 
-- [ ] Error Handling
-- [ ] Code Format and Review
+- [x] Error Handling
+- [x] Code Format and Review
 - [x] Client only depend (malilib, litematica)
 - network
 - [x] Handshake Packet
-- [x] SyncLitematic Packet
-- [x] SyncLitematicConfig Packet
-- [x] RequestLitematic Packet
-- [x] RequestLitematicsList Packet
-- [x] ResponceLitematicsList Packet
-- [x] RemoveLitematicConfig Packet
+- [x] FileRequest Packet
+- [x] FileResponce Packet
+- [x] LoadExplorer Packet
+- [x] PlacementMeta Packet
+- [x] RemovePlacement Packet
 - Client
 - [x] Share button on Placements menu
 - [x] Synced Litematics List UI
@@ -59,9 +58,9 @@ Share litematics with other players on the server.
     - [x] Load
     - [x] Material List
     - [x] Remove
-- [x] Re-Lock (modify)
-- [ ] Unload
-- [ ] Relogin compatibility
+- [ ] Re-Lock (modify)
+- [x] Unload
+- [x] Relogin compatibility
 - [x] on Placement Update Event
 - Server
 - [x] Save SyncLitematicConfig
