@@ -5,7 +5,7 @@ on:
     paths:
       - "README.md"
     branches:
-      - master
+      - main
 jobs:
   update_modrinth_readme:
     runs-on: ubuntu-latest
