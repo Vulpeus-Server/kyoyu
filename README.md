@@ -45,7 +45,10 @@ Share litematics with other players on the server.
 - [x] Error Handling
 - [x] Code Format and Review
 - [x] Client only depend (malilib, litematica)
-- network
+- [ ] legacy litematica support?
+- [ ] Forgematica support?
+- [ ] Plugin support?
+- Network
 - [x] Handshake Packet
 - [x] FileRequest Packet
 - [x] FileResponce Packet
@@ -66,9 +69,6 @@ Share litematics with other players on the server.
 - Server
 - [x] Save SyncLitematicConfig
 - [x] Restore SyncLitematicConfig
-- [ ] Plugin support?
-- [ ] Forgematica support?
-- [ ] 1.12- litematica support?
 - Data Types
 - [x] Pos
 - [x] Mirror
