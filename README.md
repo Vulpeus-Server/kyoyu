@@ -15,10 +15,10 @@ Share litematics with other players on the server.
 
 ## Dependencies
 
-| Loader     | Dependencies                    |
-|------------|---------------------------------|
-| **Fabric** | Malilib, Litematica, Fabric API |
-| **Forge**  | Malilib, Litematica             |
+| Loader        | Client                          | Server     |
+|---------------|---------------------------------|------------|
+| **Fabric**    | Malilib, Litematica, Fabric API | Fabric API |
+| **Forge**     | Malilib, Litematica             |            |
 
 ## Versions
 
