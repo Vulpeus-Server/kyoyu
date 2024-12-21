@@ -74,7 +74,7 @@ Share litematics with other players on the server.
 - [x] Save SyncLitematicConfig
 - [x] Restore SyncLitematicConfig
 
-##### Data Types
+#### Data Types
 
 - [x] Pos
 - [x] Mirror
