@@ -27,7 +27,7 @@ Share litematics with other players on the server.
 |                  | **Fabric** | **Forge** |｜| **Fabric** | **Forge** | **NeoForge** | **Paper** |
 | 1.14 - 1.14.4    | ✅        | 🚫        |｜| ✅        | ✅        | 🚫          | 🚫       |
 | 1.15 - 1.15.2    | ✅        | 🚫        |｜| ✅        | ✅        | 🚫          | 🚫       |
-| 1.16 - 1.16.5    | ✅        | ✅        |｜| ✅        | ✅        | 🚫          | 🚫       |
+| 1.16 - 1.16.5    | ✅        | ✅<sup><a href="#note1">[1]</a></sup>|｜| ✅        | ✅        | 🚫          | 🚫       |
 | 1.17 - 1.17.1    | ✅        | 🚫        |｜| ✅        | ✅        | 🚫          | 🚫       |
 | 1.18 - 1.18.2    | ✅        | 🚫        |｜| ✅        | ✅        | 🚫          | 🚫       |
 | 1.19 - 1.19.4    | ✅        | 🚫        |｜| ✅        | ✅        | 🚫          | ⚠️       |
@@ -35,6 +35,8 @@ Share litematics with other players on the server.
 | 1.20.5 - 1.20.6  | ✅        | 🚫        |｜| ✅        | ✅        | ✅          | ⚠️       |
 | 1.21 - 1.21.3    | ✅        | 🚫        |｜| ✅        | ✅        | ✅          | ⚠️       |
 ||<img src="https://raw.githubusercontent.com/FabricMC/fabric/refs/heads/1.21.4/src/main/resources/assets/fabric/icon.png" width="18px" alt="Fabric">|<img src="https://raw.githubusercontent.com/MinecraftForge/MinecraftForge/refs/heads/1.21.x/icon.ico" width="18px" alt="Forge">||<img src="https://raw.githubusercontent.com/FabricMC/fabric/refs/heads/1.21.4/src/main/resources/assets/fabric/icon.png" width="18px" alt="Fabric">|<img src="https://raw.githubusercontent.com/MinecraftForge/MinecraftForge/refs/heads/1.21.x/icon.ico" width="18px" alt="Forge">|<img src="https://raw.githubusercontent.com/neoforged/NeoForge/ac7a3bc021d604509763dd8d310aefc8fc4a4039/.idea/icon.svg" width="18px" alt="NeoForge">|<img src="https://forums.papermc.io/data/assets/logo/paperlogo512.png" width="18px" alt="Paper">|
+
+<div id="note1"><small>[1] This is only compatible with <a href="https://modrinth.com/mod/litematica/versions?g=1.16.5&l=forge" target="_blank">builds published by Litematica</a></small></div>
 
 ## Features (WIP)
 
