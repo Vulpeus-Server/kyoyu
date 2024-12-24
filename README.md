@@ -25,7 +25,7 @@ Share litematics with other players on the server.
 
 1. Install `Fabric`, `Forge`, `NeoForge`, or `Paper` on the server.
 2. Place the Kyoyu Mod into the Mods folder, along with its dependencies mods.
-3. Start the server!！
+3. Start the server!
 
 <b>It is possible to join a server with Kyoyu installed using a Vanilla client or an instance without Kyoyu, but you will not be able to use Kyoyu's features!</b>
 
