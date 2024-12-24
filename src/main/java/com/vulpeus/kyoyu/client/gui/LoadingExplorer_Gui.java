@@ -15,7 +15,7 @@ public class LoadingExplorer_Gui extends GuiBase {
 
     @Override
     public void init() {
-        this.setTitle(StringUtils.translate("kyoyu.gui.title.title", Kyoyu.MOD_VERSION));
+        this.setTitle(StringUtils.translate("kyoyu.gui.title", Kyoyu.MOD_VERSION));
     }
 
     @Override

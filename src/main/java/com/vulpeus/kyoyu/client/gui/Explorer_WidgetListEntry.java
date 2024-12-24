@@ -54,7 +54,7 @@ public class Explorer_WidgetListEntry extends WidgetListEntryBase<KyoyuPlacement
         ButtonListener listener;
 
         // REMOVE
-        text = StringUtils.translate("kyoyu.gui.button.remove_litematic");
+        text = StringUtils.translate("kyoyu.gui.button.remove");
         textWidth = getStringWidth(text) + 10;
         endX -= textWidth + 2;
         button = new ButtonGeneric(endX, buttonY, textWidth, buttonHeight, text);

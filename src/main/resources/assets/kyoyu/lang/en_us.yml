@@ -1,0 +1,14 @@
+kyoyu:
+  gui:
+    title: Kyoyu v%s
+
+    message:
+      loading: Loading...
+
+    button:
+      kyoyu: Kyoyu
+      open_explorer: Open Kyoyu Explorer
+      remove: Remove
+      download: Download
+      load: Load
+      material_list: MaterialList

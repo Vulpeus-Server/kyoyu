@@ -16,7 +16,7 @@ public class Explorer_GuiList extends GuiListBase<KyoyuPlacement, Explorer_Widge
     public Explorer_GuiList(Screen parentGui, List<KyoyuPlacement> kyoyuPlacementList) {
         super(12, 30);
         this.setParent(parentGui);
-        this.setTitle(StringUtils.translate("kyoyu.gui.title.title", Kyoyu.MOD_VERSION));
+        this.setTitle(StringUtils.translate("kyoyu.gui.title", Kyoyu.MOD_VERSION));
         this.kyoyuPlacementList = kyoyuPlacementList;
     }
 

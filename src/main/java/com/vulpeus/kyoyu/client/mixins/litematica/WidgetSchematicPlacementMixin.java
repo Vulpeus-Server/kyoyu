@@ -33,7 +33,7 @@ public abstract class WidgetSchematicPlacementMixin extends WidgetListEntryBase<
     @Inject(method = "<init>", at = @At("TAIL"), remap = false)
     public void init(int x, int y, int width, int height, boolean isOdd, SchematicPlacement placement, int listIndex, WidgetListSchematicPlacements parent, CallbackInfo ci) {
 
-        ButtonGeneric shareButton = new ButtonGeneric(buttonsStartX, y + 1, -1, true, "kyoyu.gui.button.share_litematic");
+        ButtonGeneric shareButton = new ButtonGeneric(buttonsStartX, y + 1, -1, true, "kyoyu.gui.button.kyoyu");
 
         shareButton.setEnabled(((ISchematicPlacement) placement).kyoyu$getKyoyuId() == null);
         addButton(shareButton, new Shere_ButtonActionListener(placement));
