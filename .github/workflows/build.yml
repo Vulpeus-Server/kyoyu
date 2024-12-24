@@ -41,9 +41,9 @@ jobs:
           chmod +x gradlew
           if [ -z "${{ inputs.target_subproject }}" ]; then
               echo "Building all subprojects"
-              ./gradlew build
+              ./gradlew build-all
           else
-              args=$(echo "${{ inputs.target_subproject }}" | tr ',' '\n' | sed 's/$/:build/' | paste -sd ' ')
+              args=$(echo "${{ inputs.target_subproject }}" | tr ',' '\n' | sed 's/^/build-/')
               echo "Building with arguments=$args"
               ./gradlew $args
           fi
