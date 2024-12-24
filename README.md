@@ -40,11 +40,11 @@ Share litematics with other players on the server.
 
 ## Features (WIP)
 
-### 　
+---
 
 - [x] Error Handling
 - [x] Code Format and Review
-- [x] Client only depend (malilib, litematica)
+- [ ] Client only depend (malilib, litematica)
 - [ ] legacy litematica support?
 - [ ] Forgematica support?
 - [ ] Plugin support?
@@ -60,8 +60,9 @@ Share litematics with other players on the server.
 
 #### Client
 
-- [x] Share button on Placements menu
-- [x] Synced Litematics List UI
+- [x] Kyoyu button on placements menu
+- [ ] Kyoyu in-memory placement
+- [x] Server Kyoyu placements explorer
   - [x] Download
   - [x] Load
   - [x] Material List
@@ -73,8 +74,8 @@ Share litematics with other players on the server.
 
 #### Server
 
-- [x] Save SyncLitematicConfig
-- [x] Restore SyncLitematicConfig
+- [x] Save KyoyuPlacementMeta
+- [x] Restore KyoyuPlacementMeta
 
 #### Data Types
 
