@@ -13,6 +13,22 @@ Share litematics with other players on the server.
 
 <strong> Do not report Kyoyu issues to Syncmatica </strong>
 
+## Usage
+
+### Client Side
+
+1. Install `Fabric`, `Forge`, or `NeoForge` to the instance.
+2. Add the Kyoyu Mod and its dependency mods to the Mods folder.
+3. Launch!
+
+### Server Side
+
+1. Install `Fabric`, `Forge`, `NeoForge`, or `Paper` to the server.
+2. Add the Kyoyu Mod and its dependency mods to the Mods folder.
+3. Start the server!
+
+<b>It is possible to join a server with Kyoyu installed using a Vanilla client or an instance without Kyoyu, but you will not be able to use Kyoyu's features!</b>
+
 ## Dependencies
 
 | Loader        | Client                          | Server     |
