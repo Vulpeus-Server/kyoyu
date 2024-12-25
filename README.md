@@ -23,6 +23,8 @@ Share litematics with other players on the server.
 
 <a>[1]</a>: 1.16.5 Only
 
+<b><font color=#F2E700>It is possible to join a server without Kyoyu installed using a client with Kyoyu, but you will not be able to use Kyoyu's features!</font></b>
+
 ### Server Side
 
 1. Install `Fabric`, `Forge`, `NeoForge`, or `Paper` to the server.
