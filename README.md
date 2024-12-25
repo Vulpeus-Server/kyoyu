@@ -50,6 +50,7 @@ Share litematics with other players on the server.
 | 1.20.1 - 1.20.4  | ✅        | 🚫        |｜| ✅        | ✅        | 🚫          | ⚠️       |
 | 1.20.5 - 1.20.6  | ✅        | 🚫        |｜| ✅        | ✅        | ✅          | ⚠️       |
 | 1.21 - 1.21.3    | ✅        | 🚫        |｜| ✅        | ✅        | ✅          | ⚠️       |
+| 1.21.4           | ✅        | 🚫        |｜| ✅        | ✅        | ✅          | 🚫       |
 ||<img src="https://raw.githubusercontent.com/FabricMC/fabric/refs/heads/1.21.4/src/main/resources/assets/fabric/icon.png" width="18px" alt="Fabric">|<img src="https://raw.githubusercontent.com/MinecraftForge/MinecraftForge/refs/heads/1.21.x/icon.ico" width="18px" alt="Forge">||<img src="https://raw.githubusercontent.com/FabricMC/fabric/refs/heads/1.21.4/src/main/resources/assets/fabric/icon.png" width="18px" alt="Fabric">|<img src="https://raw.githubusercontent.com/MinecraftForge/MinecraftForge/refs/heads/1.21.x/icon.ico" width="18px" alt="Forge">|<img src="https://raw.githubusercontent.com/neoforged/NeoForge/ac7a3bc021d604509763dd8d310aefc8fc4a4039/.idea/icon.svg" width="18px" alt="NeoForge">|<img src="https://forums.papermc.io/data/assets/logo/paperlogo512.png" width="18px" alt="Paper">|
 
 <small>[1] This is only compatible with <a href="https://modrinth.com/mod/litematica/versions?g=1.16.5&l=forge" target="_blank">builds published by Litematica</a></small>
