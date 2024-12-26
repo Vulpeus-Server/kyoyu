@@ -8,7 +8,8 @@
 [![GitHub Issues](https://img.shields.io/github/issues/Vulpeus-Server/kyoyu)](https://github.com/Vulpeus-Server/kyoyu/issues)
 [![GitHub Created At](https://img.shields.io/github/created-at/Vulpeus-Server/kyoyu)](https://github.com/Vulpeus-Server/kyoyu)
 
-**Kyōyū [kʲo̞ːjɯ̟ː]**
+> 共有 -> **Kyōyū [kʲo̞ːjɯ̟ː]**<br>
+> ≒ Sharing
 
 A Minecraft mod inspired by Syncmatica.<br>
 Share litematics with other players on the server.
