@@ -26,7 +26,7 @@ Share litematics with other players on the server.
 
 <a>[1]</a>: 1.16.5 Only
 
-<b><font color=#F2E700>It is possible to join a server without Kyoyu installed using a client with Kyoyu, but you will not be able to use Kyoyu's features!</font></b>
+<b><span style="color: #F2E700; background-color: #26292F;">It is possible to join a server without Kyoyu installed using a client with Kyoyu, but you will not be able to use Kyoyu's features!</span></b>
 
 ### Server Side
 
@@ -34,7 +34,7 @@ Share litematics with other players on the server.
 2. Add the Kyoyu Mod and its dependency mods to the Mods folder.
 3. Start the server!
 
-<b><font color=#F2E700>It is possible to join a server with Kyoyu installed using a Vanilla client or an instance without Kyoyu, but you will not be able to use Kyoyu's features!</font></b>
+<b><span style="color: #F2E700; background-color: #26292F;">It is possible to join a server with Kyoyu installed using a Vanilla client or an instance without Kyoyu, but you will not be able to use Kyoyu's features!</span></b>
 
 ## Dependencies
 
