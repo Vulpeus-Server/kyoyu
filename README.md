@@ -14,7 +14,7 @@
 A Minecraft mod inspired by Syncmatica.<br>
 Share litematics with other players on the server.
 
-<strong><font color=#FF4B00>Do not report Kyoyu issues to Syncmatica!</font></strong>
+<strong><font color=#ff223a>Do not report Kyoyu issues to Syncmatica!</font></strong>
 
 ## Usage (WIP)
 
