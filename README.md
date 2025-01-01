@@ -85,7 +85,7 @@ Share litematics with other players on the server.
 #### Client
 
 - [x] Kyoyu button on placements menu
-- [ ] Kyoyu in-memory placement
+- [x] Kyoyu in-memory placement
 - [x] Server Kyoyu placements explorer
   - [x] Download
   - [x] Load
