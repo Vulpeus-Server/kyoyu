@@ -11,8 +11,8 @@
 > 共有 -> **Kyōyū [kʲo̞ːjɯ̟ː]**<br>
 > ≒ Sharing
 
-A Minecraft mod inspired by Syncmatica.<br>
-Share litematics with other players on the server.
+This mod shares .litematic files with other players.<br>
+Litematica support. Inspired by Syncmatica.
 
 <strong><font color=#ff223a>Do not report Kyoyu issues to Syncmatica!</font></strong>
 
