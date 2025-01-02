@@ -53,7 +53,12 @@ public class FileRequestPacket extends IKyoyuPacket {
         KyoyuClient kyoyuClient = KyoyuClient.getInstance();
         if (kyoyuClient != null) {
             try {
-                KyoyuPlacement kyoyuPlacement = ((ISchematicPlacement) kyoyuClient.findSchematicPlacement(uuid)).kyoyu$toKyoyuPlacement();
+                ISchematicPlacement wrappedSchematicPlacement = (ISchematicPlacement) kyoyuClient.findSchematicPlacement(uuid);
+                if (wrappedSchematicPlacement==null) {
+                    Kyoyu.LOGGER.error("not found file");
+                    return;
+                }
+                KyoyuPlacement kyoyuPlacement = wrappedSchematicPlacement.kyoyu$toKyoyuPlacement();
                 FileResponsePacket fileResponsePacket = new FileResponsePacket(uuid, kyoyuPlacement.readFromFile());
                 KyoyuPacketManager.sendC2S(fileResponsePacket);
             } catch (IOException e) {

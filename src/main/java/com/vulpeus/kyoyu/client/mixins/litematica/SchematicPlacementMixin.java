@@ -3,9 +3,11 @@ package com.vulpeus.kyoyu.client.mixins.litematica;
 //? if client {
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
+import com.vulpeus.kyoyu.Kyoyu;
 import com.vulpeus.kyoyu.client.ISchematicPlacement;
 import com.vulpeus.kyoyu.placement.KyoyuPlacement;
 import com.vulpeus.kyoyu.placement.KyoyuRegion;
+import fi.dy.masa.litematica.schematic.LitematicaSchematic;
 import fi.dy.masa.litematica.schematic.placement.SchematicPlacement;
 import fi.dy.masa.litematica.schematic.placement.SchematicPlacementManager;
 import fi.dy.masa.malilib.util.JsonUtils;
@@ -19,6 +21,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import java.io.File;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -31,35 +34,42 @@ public class SchematicPlacementMixin implements ISchematicPlacement {
 
     @Override
     public void kyoyu$setKyoyuId(UUID uuid) {
-        kyoyu_id = uuid;
+        this.kyoyu_id = uuid;
     }
 
     @Override
     public UUID kyoyu$getKyoyuId() {
-        return kyoyu_id;
+        return this.kyoyu_id;
     }
 
     @Override
     public KyoyuPlacement kyoyu$toKyoyuPlacement() {
-        SchematicPlacement self = (SchematicPlacement) (Object) this;
-        if (kyoyu_id != null) {
-            return new KyoyuPlacement(
-                    kyoyu_id,
-                    new KyoyuRegion(
-                            self.getOrigin(),
-                            self.getMirror(),
-                            self.getRotation(),
-                            self.getName()
-                    ),
-                    self.getAllSubRegionsPlacements().stream().map(x ->
-                            new KyoyuRegion(x.getPos(), x.getMirror(), x.getRotation(), x.getName())
-                    ).collect(Collectors.toList()),
-                    Minecraft.getInstance().name(),
-                    Minecraft.getInstance().name(),
-                    self.getSchematicFile()
-            );
+        if (this.kyoyu_id == null) {
+            return null;
         }
-        return null;
+
+        SchematicPlacement self = (SchematicPlacement) (Object) this;
+        File file = self.getSchematicFile();
+        if (file == null) {
+            LitematicaSchematic litematicaSchematic = self.getSchematic();
+            litematicaSchematic.writeToFile(Kyoyu.getSaveSchemeDir().toFile(), "temporary.litematic", true);
+            file = Kyoyu.getSaveSchemeDir().resolve("temporary.litematic").toFile();
+        }
+        return new KyoyuPlacement(
+                this.kyoyu_id,
+                new KyoyuRegion(
+                        self.getOrigin(),
+                        self.getMirror(),
+                        self.getRotation(),
+                        self.getName()
+                ),
+                self.getAllSubRegionsPlacements().stream().map(x ->
+                        new KyoyuRegion(x.getPos(), x.getMirror(), x.getRotation(), x.getName())
+                ).collect(Collectors.toList()),
+                Minecraft.getInstance().name(),
+                Minecraft.getInstance().name(),
+                file
+        );
     }
 
     @Override

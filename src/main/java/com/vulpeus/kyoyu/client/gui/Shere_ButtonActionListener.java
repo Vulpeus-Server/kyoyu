@@ -1,7 +1,6 @@
 package com.vulpeus.kyoyu.client.gui;
 
 //? if client {
-import com.vulpeus.kyoyu.Kyoyu;
 import com.vulpeus.kyoyu.client.ISchematicPlacement;
 import com.vulpeus.kyoyu.net.KyoyuPacketManager;
 import com.vulpeus.kyoyu.net.packets.PlacementMetaPacket;
@@ -31,13 +30,6 @@ public class Shere_ButtonActionListener implements IButtonActionListener {
         }
 
         buttonBase.setEnabled(false);
-
-        if (schematicPlacement.getSchematicFile() == null) {
-            // TODO: in memory placement
-            InfoUtils.showGuiOrInGameMessage(Message.MessageType.ERROR, "kyoyu.error.file_is_null");
-            Kyoyu.LOGGER.error("File is null\n\t> note: may be added in the future");
-            return;
-        }
 
         ((ISchematicPlacement) schematicPlacement).kyoyu$setKyoyuId(UUID.randomUUID());
         KyoyuPlacement kyoyuPlacement = ((ISchematicPlacement) schematicPlacement).kyoyu$toKyoyuPlacement();

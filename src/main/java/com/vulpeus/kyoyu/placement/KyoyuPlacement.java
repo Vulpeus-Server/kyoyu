@@ -25,10 +25,6 @@ public class KyoyuPlacement {
     private final String filename;
     private transient File file = null;
 
-    public KyoyuPlacement(KyoyuRegion region, List<KyoyuRegion> subRegions, String ownerName, String updaterName, File file) {
-        this(UUID.randomUUID(), region, subRegions, ownerName, updaterName, file);
-    }
-
     public KyoyuPlacement(UUID uuid, KyoyuRegion region, List<KyoyuRegion> subRegions, String ownerName, String updaterName, File file) {
         this.uuid = uuid;
         this.region = region;
