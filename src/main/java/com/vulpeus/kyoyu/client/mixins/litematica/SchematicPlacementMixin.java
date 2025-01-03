@@ -102,7 +102,7 @@ public class SchematicPlacementMixin implements ISchematicPlacement {
     @Inject(method = "toJson", at = @At("RETURN"), remap = false)
     public void saveToJson(CallbackInfoReturnable<JsonObject> cir) {
         JsonObject saveData = cir.getReturnValue();
-        if (saveData != null) {
+        if (saveData != null && this.kyoyu_id != null) {
             saveData.add("kyoyu_id", new JsonPrimitive(kyoyu_id.toString()));
         }
     }
