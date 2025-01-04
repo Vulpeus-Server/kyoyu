@@ -11,13 +11,15 @@ public class KyoyuRegion {
     private final Rotation rotation;
     private final String name;
     private final boolean ignoreEntity;
+    private final boolean enable;
 
-    public KyoyuRegion(BlockPos pos, Mirror mirror, Rotation rotation, String name, boolean ignoreEntity) {
+    public KyoyuRegion(BlockPos pos, Mirror mirror, Rotation rotation, String name, boolean ignoreEntity, boolean enable) {
         this.pos = pos;
         this.mirror = mirror;
         this.rotation = rotation;
         this.name = name;
         this.ignoreEntity = ignoreEntity;
+        this.enable = enable;
     }
 
     public BlockPos getPos() {
@@ -38,5 +40,9 @@ public class KyoyuRegion {
 
     public boolean ignoreEntities() {
         return ignoreEntity;
+    }
+
+    public boolean isEnable() {
+        return enable;
     }
 }

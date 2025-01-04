@@ -107,12 +107,13 @@ Litematica support. Inspired by Syncmatica.
 - [x] Mirror
 - [x] Rotation
 - [x] Ignore Entities
-- [ ] Subregion
+- [x] Placement ON/OFF
+- [x] Subregion
   - [x] Pos
   - [x] Mirror
   - [x] Rotation
   - [x] Ignore Entities
-  - [ ] Placement ON/OFF
+  - [x] Placement ON/OFF
 
 ## Thanks
 

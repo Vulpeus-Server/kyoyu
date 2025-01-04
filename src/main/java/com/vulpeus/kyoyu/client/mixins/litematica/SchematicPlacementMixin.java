@@ -63,10 +63,18 @@ public class SchematicPlacementMixin implements ISchematicPlacement {
                         self.getMirror(),
                         self.getRotation(),
                         self.getName(),
-                        self.ignoreEntities()
+                        self.ignoreEntities(),
+                        self.isEnabled()
                 ),
                 self.getAllSubRegionsPlacements().stream().map(x ->
-                        new KyoyuRegion(x.getPos(), x.getMirror(), x.getRotation(), x.getName(), x.ignoreEntities())
+                        new KyoyuRegion(
+                                x.getPos(),
+                                x.getMirror(),
+                                x.getRotation(),
+                                x.getName(),
+                                x.ignoreEntities(),
+                                x.isEnabled()
+                        )
                 ).collect(Collectors.toList()),
                 Minecraft.getInstance().name(),
                 Minecraft.getInstance().name(),
@@ -86,6 +94,7 @@ public class SchematicPlacementMixin implements ISchematicPlacement {
         if (self.ignoreEntities() != kyoyuPlacement.getRegion().ignoreEntities()) {
             self.toggleIgnoreEntities(null);
         }
+        self.setEnabled(kyoyuPlacement.getRegion().isEnable());
 
         BlockPos origin = kyoyuPlacement.getRegion().getPos();
         for (KyoyuRegion subRegion: kyoyuPlacement.getSubRegions()) {
@@ -98,6 +107,9 @@ public class SchematicPlacementMixin implements ISchematicPlacement {
             SubRegionPlacement subRegionPlacement = self.getRelativeSubRegionPlacement(subRegionName);
             if (subRegionPlacement != null && subRegionPlacement.ignoreEntities() != subRegion.ignoreEntities()) {
                 self.toggleSubRegionIgnoreEntities(subRegionName, null);
+            }
+            if (subRegionPlacement != null && subRegionPlacement.isEnabled() != subRegion.isEnable()) {
+                self.toggleSubRegionEnabled(subRegionName, null);
             }
         }
         self.toggleLocked();
