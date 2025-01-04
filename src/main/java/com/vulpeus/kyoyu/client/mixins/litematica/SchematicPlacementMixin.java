@@ -10,6 +10,7 @@ import com.vulpeus.kyoyu.placement.KyoyuRegion;
 import fi.dy.masa.litematica.schematic.LitematicaSchematic;
 import fi.dy.masa.litematica.schematic.placement.SchematicPlacement;
 import fi.dy.masa.litematica.schematic.placement.SchematicPlacementManager;
+import fi.dy.masa.litematica.schematic.placement.SubRegionPlacement;
 import fi.dy.masa.malilib.util.JsonUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
@@ -61,10 +62,19 @@ public class SchematicPlacementMixin implements ISchematicPlacement {
                         self.getOrigin(),
                         self.getMirror(),
                         self.getRotation(),
-                        self.getName()
+                        self.getName(),
+                        self.ignoreEntities(),
+                        self.isEnabled()
                 ),
                 self.getAllSubRegionsPlacements().stream().map(x ->
-                        new KyoyuRegion(x.getPos(), x.getMirror(), x.getRotation(), x.getName())
+                        new KyoyuRegion(
+                                x.getPos(),
+                                x.getMirror(),
+                                x.getRotation(),
+                                x.getName(),
+                                x.ignoreEntities(),
+                                x.isEnabled()
+                        )
                 ).collect(Collectors.toList()),
                 Minecraft.getInstance().name(),
                 Minecraft.getInstance().name(),
@@ -81,6 +91,11 @@ public class SchematicPlacementMixin implements ISchematicPlacement {
 
         self.setMirror(kyoyuPlacement.getRegion().getMirror(), null);
         self.setRotation(kyoyuPlacement.getRegion().getRotation(), null);
+        if (self.ignoreEntities() != kyoyuPlacement.getRegion().ignoreEntities()) {
+            self.toggleIgnoreEntities(null);
+        }
+        self.setEnabled(kyoyuPlacement.getRegion().isEnable());
+
         BlockPos origin = kyoyuPlacement.getRegion().getPos();
         for (KyoyuRegion subRegion: kyoyuPlacement.getSubRegions()) {
             String subRegionName = subRegion.getName();
@@ -88,6 +103,14 @@ public class SchematicPlacementMixin implements ISchematicPlacement {
             self.moveSubRegionTo(subRegionName, subRegion.getPos().offset(origin.getX(), origin.getY(), origin.getZ()), null);
             self.setSubRegionMirror(subRegionName, subRegion.getMirror(), null);
             self.setSubRegionRotation(subRegionName, subRegion.getRotation(), null);
+
+            SubRegionPlacement subRegionPlacement = self.getRelativeSubRegionPlacement(subRegionName);
+            if (subRegionPlacement != null && subRegionPlacement.ignoreEntities() != subRegion.ignoreEntities()) {
+                self.toggleSubRegionIgnoreEntities(subRegionName, null);
+            }
+            if (subRegionPlacement != null && subRegionPlacement.isEnabled() != subRegion.isEnable()) {
+                self.toggleSubRegionEnabled(subRegionName, null);
+            }
         }
         self.toggleLocked();
     }
