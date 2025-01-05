@@ -127,3 +127,5 @@ Litematica support. Inspired by Syncmatica.
 **Uses ⭐**<br>
 🪨 [Stonecutter](https://stonecutter.kikugie.dev/) by kikugie<br>
 🍤 [Unitemplate](https://github.com/topi-banana/unitemplate/tree/stonecutter) by topi
+
+<small>Last README Update `2025/1/5 18:37` UTC+9</small>
