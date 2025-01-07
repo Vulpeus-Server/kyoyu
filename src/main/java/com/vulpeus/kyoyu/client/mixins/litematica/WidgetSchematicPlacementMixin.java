@@ -8,6 +8,7 @@ import fi.dy.masa.litematica.gui.widgets.WidgetSchematicPlacement;
 import fi.dy.masa.litematica.schematic.placement.SchematicPlacement;
 import fi.dy.masa.malilib.gui.button.ButtonGeneric;
 import fi.dy.masa.malilib.gui.widgets.WidgetListEntryBase;
+import fi.dy.masa.malilib.util.StringUtils;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -33,8 +34,8 @@ public abstract class WidgetSchematicPlacementMixin extends WidgetListEntryBase<
     @Inject(method = "<init>", at = @At("TAIL"), remap = false)
     public void init(int x, int y, int width, int height, boolean isOdd, SchematicPlacement placement, int listIndex, WidgetListSchematicPlacements parent, CallbackInfo ci) {
 
-        ButtonGeneric shareButton = new ButtonGeneric(buttonsStartX, y + 1, -1, true, "kyoyu.gui.button.kyoyu");
-
+        String text = StringUtils.translate("kyoyu.gui.button.kyoyu");
+        ButtonGeneric shareButton = new ButtonGeneric(buttonsStartX, y + 1, getStringWidth(text) + 10, true, text);
         shareButton.setEnabled(((ISchematicPlacement) placement).kyoyu$getKyoyuId() == null);
         addButton(shareButton, new Shere_ButtonActionListener(placement));
         buttonsStartX = shareButton.getX() - 1;

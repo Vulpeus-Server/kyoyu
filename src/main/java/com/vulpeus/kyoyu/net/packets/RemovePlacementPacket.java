@@ -1,6 +1,8 @@
 package com.vulpeus.kyoyu.net.packets;
 
 import com.vulpeus.kyoyu.Kyoyu;
+import com.vulpeus.kyoyu.client.ISchematicPlacement;
+import com.vulpeus.kyoyu.client.KyoyuClient;
 import com.vulpeus.kyoyu.net.IKyoyuPacket;
 import com.vulpeus.kyoyu.net.KyoyuPacketManager;
 import com.vulpeus.kyoyu.placement.KyoyuPlacement;
@@ -38,19 +40,22 @@ public class RemovePlacementPacket extends IKyoyuPacket {
             Kyoyu.LOGGER.error("Not found kyoyu placement '{}'!", uuid.toString());
         } else {
             for (ServerPlayer player: Kyoyu.PLAYERS) {
-                if (!player.equals(serverPlayer)) {
-                    RemovePlacementPacket removePlacementPacket = new RemovePlacementPacket(uuid);
-                    KyoyuPacketManager.sendS2C(removePlacementPacket, player);
-                }
+                RemovePlacementPacket removePlacementPacket = new RemovePlacementPacket(uuid);
+                KyoyuPacketManager.sendS2C(removePlacementPacket, player);
             }
             Kyoyu.unlinkPlacement(kyoyuPlacement);
         }
     }
 
+    //? if client {
     @Override
     public void onClient() {
         Kyoyu.LOGGER.info("Remove placement '{}'", uuid.toString());
-        // TODO
-        //  remove placement (force unload?)
+        KyoyuClient kyoyuClient = KyoyuClient.getInstance();
+        if (kyoyuClient == null) return;
+        ISchematicPlacement schematicPlacement = ((ISchematicPlacement) kyoyuClient.findSchematicPlacement(uuid));
+        if (schematicPlacement == null) return;
+        schematicPlacement.kyoyu$setKyoyuId(null);
     }
+    //?}
 }
