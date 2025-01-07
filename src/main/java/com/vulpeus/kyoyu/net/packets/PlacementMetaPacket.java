@@ -1,6 +1,8 @@
 package com.vulpeus.kyoyu.net.packets;
 
 import com.vulpeus.kyoyu.Kyoyu;
+import com.vulpeus.kyoyu.client.ISchematicPlacement;
+import com.vulpeus.kyoyu.client.KyoyuClient;
 import com.vulpeus.kyoyu.net.IKyoyuPacket;
 import com.vulpeus.kyoyu.net.KyoyuPacketManager;
 import com.vulpeus.kyoyu.placement.KyoyuPlacement;
@@ -29,23 +31,31 @@ public class PlacementMetaPacket extends IKyoyuPacket {
 
     @Override
     public void onServer(ServerPlayer player) {
-        Kyoyu.LOGGER.info("New placement by {}", player.getName());
         KyoyuPlacement preKyoyuPlacement = Kyoyu.findPlacement(kyoyuPlacement.getUuid());
         if (preKyoyuPlacement == null) {
+            Kyoyu.LOGGER.info("New placement by {}", player.getName());
             Kyoyu.savePlacement(kyoyuPlacement);
             FileRequestPacket fileRequestPacket = new FileRequestPacket(kyoyuPlacement.getUuid());
             KyoyuPacketManager.sendS2C(fileRequestPacket, player);
         } else {
-            // TODO: Modify
-            //  check diff and update `updater` field
+            kyoyuPlacement.updateBy(player.getName().getString());
+            Kyoyu.savePlacement(kyoyuPlacement);
+            for (ServerPlayer otherPlayer: Kyoyu.PLAYERS) {
+                if (player.equals(otherPlayer)) continue;
+                PlacementMetaPacket placementMetaPacket = new PlacementMetaPacket(kyoyuPlacement);
+                KyoyuPacketManager.sendS2C(placementMetaPacket, otherPlayer);
+            }
         }
     }
 
     //? if client {
     @Override
     public void onClient() {
-        Kyoyu.LOGGER.info("Modify placement by {}", kyoyuPlacement.getUuid());
-        // TODO: modify
+        KyoyuClient kyoyuClient = KyoyuClient.getInstance();
+        if (kyoyuClient == null) return;
+        ISchematicPlacement schematicPlacement = (ISchematicPlacement) kyoyuClient.findSchematicPlacement(kyoyuPlacement.getUuid());
+        if (schematicPlacement == null) return;
+        schematicPlacement.kyoyu$updateFromKyoyuPlacement(kyoyuPlacement);
     }
     //?}
 }

@@ -65,6 +65,10 @@ public class KyoyuPlacement {
         return updaterName;
     }
 
+    public void updateBy(String updaterName) {
+        this.updaterName = updaterName;
+    }
+
     public String getFilename() { return filename; }
 
     public File getFile() {

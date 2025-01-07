@@ -170,12 +170,6 @@ public class KyoyuPacketPayload
             //?}
     ) {
         //? if FABRIC || NEOFORGE {
-        //? if FABRIC && <=1.20.4 {
-        /* Kyoyu.LOGGER.info("onPacketServer {} {} {} {}", server, player, handler, sender); */
-        //?} else {
-        Kyoyu.LOGGER.info("onPacketServer {}", context);
-        //?}
-
         KyoyuPacketManager.handleC2S(
                 this.content,
                 //? if FABRIC && <=1.20.4 {
@@ -200,12 +194,6 @@ public class KyoyuPacketPayload
             /* Object context */
             //?}
     ) {
-        //? if FABRIC && <=1.20.4 {
-        /* Kyoyu.LOGGER.info("onPacketClient {} {} {}", client, handler, sender); */
-        //?} else {
-        Kyoyu.LOGGER.info("onPacketClient {}", context);
-        //?}
-
         KyoyuPacketManager.handleS2C(this.content);
     }
 }
