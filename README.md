@@ -95,7 +95,7 @@ Litematica support. Inspired by Syncmatica.
   - [x] Load
   - [x] Material List
   - [x] Remove
-- [ ] Re-Lock (modify)
+- [x] Modify
 - [x] Unload
 - [x] Relogin compatibility
 - [x] on Placement Update Event
