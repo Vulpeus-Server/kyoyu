@@ -5,6 +5,9 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 import com.vulpeus.kyoyu.Kyoyu;
 import com.vulpeus.kyoyu.client.ISchematicPlacement;
+import com.vulpeus.kyoyu.client.KyoyuClient;
+import com.vulpeus.kyoyu.net.KyoyuPacketManager;
+import com.vulpeus.kyoyu.net.packets.PlacementMetaPacket;
 import com.vulpeus.kyoyu.placement.KyoyuPlacement;
 import com.vulpeus.kyoyu.placement.KyoyuRegion;
 import fi.dy.masa.litematica.schematic.LitematicaSchematic;
@@ -32,6 +35,9 @@ public class SchematicPlacementMixin implements ISchematicPlacement {
     @Shadow private BlockPos origin;
     @Unique
     private UUID kyoyu_id;
+
+    @Unique
+    private boolean ignore_update = false;
 
     @Override
     public void kyoyu$setKyoyuId(UUID uuid) {
@@ -85,6 +91,7 @@ public class SchematicPlacementMixin implements ISchematicPlacement {
     @Override
     public void kyoyu$updateFromKyoyuPlacement(KyoyuPlacement kyoyuPlacement) {
         SchematicPlacement self = (SchematicPlacement) (Object) this;
+        this.ignore_update = true;
         if (self.isLocked()) {
             self.toggleLocked();
         }
@@ -113,13 +120,27 @@ public class SchematicPlacementMixin implements ISchematicPlacement {
             }
         }
         self.toggleLocked();
+        this.ignore_update = false;
     }
 
-    @Inject(method = "onModified(Lfi/dy/masa/litematica/schematic/placement/SchematicPlacementManager;)V", at = @At("HEAD"), remap = false)
+    @Unique
+    private void onModified() {
+        if (this.ignore_update) return;
+        if (KyoyuClient.getInstance() == null) return;
+        KyoyuPlacement kyoyuPlacement = this.kyoyu$toKyoyuPlacement();
+        if (kyoyuPlacement == null) return;
+        PlacementMetaPacket placementMetaPacket = new PlacementMetaPacket(kyoyuPlacement);
+        KyoyuPacketManager.sendC2S(placementMetaPacket);
+    }
+
+    @Inject(method = "onModified(Lfi/dy/masa/litematica/schematic/placement/SchematicPlacementManager;)V", at = @At("RETURN"), remap = false)
     public void onModified(SchematicPlacementManager manager, CallbackInfo ci) {
-        // TODO
-        //  attention when connecting server is compatible
-        //  if (getClient() != null)
+        onModified();
+    }
+
+    @Inject(method = "onModified(Ljava/lang/String;Lfi/dy/masa/litematica/schematic/placement/SchematicPlacementManager;)V", at = @At("RETURN"), remap = false)
+    public void onModified(String regionName, SchematicPlacementManager manager, CallbackInfo ci) {
+        onModified();
     }
 
     @Inject(method = "toJson", at = @At("RETURN"), remap = false)
