@@ -96,6 +96,7 @@ public class SchematicPlacementMixin implements ISchematicPlacement {
             self.toggleLocked();
         }
 
+        self.setOrigin(kyoyuPlacement.getRegion().getPos(), null);
         self.setMirror(kyoyuPlacement.getRegion().getMirror(), null);
         self.setRotation(kyoyuPlacement.getRegion().getRotation(), null);
         if (self.ignoreEntities() != kyoyuPlacement.getRegion().ignoreEntities()) {
