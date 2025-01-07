@@ -58,7 +58,7 @@ public class KyoyuClient {
     public SchematicPlacement findSchematicPlacement(UUID uuid) {
         for (SchematicPlacement schematicPlacement: DataManager.getSchematicPlacementManager().getAllSchematicsPlacements()) {
             UUID id = ((ISchematicPlacement) schematicPlacement).kyoyu$getKyoyuId();
-            if (id.equals(uuid)) return schematicPlacement;
+            if (id != null && id.equals(uuid)) return schematicPlacement;
         }
         return null;
     }
