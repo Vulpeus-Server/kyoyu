@@ -30,19 +30,22 @@ public class KyoyuConfig {
         if (log_level.equals("ALL")) Configurator.setLevel(Kyoyu.MOD_ID, Level.ALL);
     }
 
-    public boolean isAllowedModify(String playerName) {
-        playerName = playerName.toUpperCase();
-        String modify = this.modify.toUpperCase();
-        if (modify.equals("WHITELIST")) {
-            for (String otherPlayerName: modifyWhitelist) {
-                if (otherPlayerName.toUpperCase().equals(playerName)) return true;
-            }
-            return false;
-        } else {
-            for (String otherPlayerName: modifyBlacklist) {
-                if (otherPlayerName.toUpperCase().equals(playerName)) return false;
-            }
-            return true;
+    private boolean containsCaseInsensitive(List<String> list, String value) {
+        for (String otherValue: list) {
+            if (value.equalsIgnoreCase(otherValue)) return true;
         }
+        return false;
+    }
+
+    private boolean isAllowed(String name, String type, List<String> whilelist, List<String> blacklist) {
+        if (type.equalsIgnoreCase("WHITELIST")) {
+            return containsCaseInsensitive(whilelist, name);
+        } else {
+            return !containsCaseInsensitive(blacklist, name);
+        }
+    }
+
+    public boolean isAllowedModify(String playerName) {
+        return isAllowed(playerName, modify, modifyWhitelist, modifyBlacklist);
     }
 }
