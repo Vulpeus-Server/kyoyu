@@ -10,7 +10,7 @@
 
 - `modify`
 
-  Restricts which players can edit
+  Restricts which players can modify
 
   Type: `String` (case-insensitive)
 
@@ -25,6 +25,29 @@
 
 
 - `modify.blacklist`
+
+  Blacklist of Player MCID
+
+  Type: `List<String>` (case-insensitive)
+
+
+- `remove`
+
+  Restricts which players can remove
+
+  Type: `String` (case-insensitive)
+
+  Allow: [`whitelist`, `blacklist`]
+
+
+- `remove.whitelist`
+
+  Whitelist of Player MCID
+
+  Type: `List<String>` (case-insensitive)
+
+
+- `remove.blacklist`
 
   Blacklist of Player MCID
 

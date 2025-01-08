@@ -15,6 +15,10 @@ public class KyoyuConfig {
     private final List<String> modifyWhitelist = new ArrayList<>();
     private final List<String> modifyBlacklist = new ArrayList<>();
 
+    private final String remove = "blacklist";
+    private final List<String> removeWhitelist = new ArrayList<>();
+    private final List<String> removeBlacklist = new ArrayList<>();
+
     public static KyoyuConfig fromJson(String json) {
         Gson gson = new Gson();
         return gson.fromJson(json, KyoyuConfig.class);
@@ -47,5 +51,9 @@ public class KyoyuConfig {
 
     public boolean isAllowedModify(String playerName) {
         return isAllowed(playerName, modify, modifyWhitelist, modifyBlacklist);
+    }
+
+    public boolean isAllowedRemove(String playerName) {
+        return isAllowed(playerName, remove, removeWhitelist, removeBlacklist);
     }
 }

@@ -5,5 +5,11 @@
   "modify.whitelist": [],
   "modify.blacklist": [
     "Alex", "Steve"
+  ],
+
+  "remove": "blacklist",
+  "remove.whitelist": [],
+  "remove.blacklist": [
+    "Alex"
   ]
 }
