@@ -39,7 +39,10 @@ public class PlacementMetaPacket extends IKyoyuPacket {
             KyoyuPacketManager.sendS2C(fileRequestPacket, player);
         } else {
             String playerName = player.getName().getString();
-            if (!Kyoyu.CONFIG.isAllowedModify(playerName)) return;
+            if (!Kyoyu.CONFIG.isAllowedModify(playerName)) {
+                Kyoyu.LOGGER.warn("disallowed player attempted to modify.");
+                return;
+            }
             kyoyuPlacement.updateBy(playerName);
             Kyoyu.savePlacement(kyoyuPlacement);
             for (ServerPlayer otherPlayer: Kyoyu.PLAYERS) {

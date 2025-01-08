@@ -35,7 +35,10 @@ public class RemovePlacementPacket extends IKyoyuPacket {
     @Override
     public void onServer(ServerPlayer serverPlayer) {
         String playerName = serverPlayer.getName().getString();
-        if (!Kyoyu.CONFIG.isAllowedRemove(playerName)) return;
+        if (!Kyoyu.CONFIG.isAllowedRemove(playerName)) {
+            Kyoyu.LOGGER.warn("disallowed player attempted to remove.");
+            return;
+        }
         KyoyuPlacement kyoyuPlacement = Kyoyu.findPlacement(uuid);
         Kyoyu.LOGGER.info("Remove kyoyu placement '{}' by {}", uuid.toString(), playerName);
         if (kyoyuPlacement == null) {
