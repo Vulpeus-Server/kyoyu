@@ -41,6 +41,8 @@ public class KyoyuMod
                 /* false */
         );
 
+        Kyoyu.loadConfig();
+
         //? if FABRIC
         KyoyuPacketPayload.register();
         //? if NEOFORGE
