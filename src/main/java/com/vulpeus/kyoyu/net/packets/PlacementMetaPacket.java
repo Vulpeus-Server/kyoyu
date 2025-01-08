@@ -38,7 +38,9 @@ public class PlacementMetaPacket extends IKyoyuPacket {
             FileRequestPacket fileRequestPacket = new FileRequestPacket(kyoyuPlacement.getUuid());
             KyoyuPacketManager.sendS2C(fileRequestPacket, player);
         } else {
-            kyoyuPlacement.updateBy(player.getName().getString());
+            String playerName = player.getName().getString();
+            if (!Kyoyu.CONFIG.isAllowedModify(playerName)) return;
+            kyoyuPlacement.updateBy(playerName);
             Kyoyu.savePlacement(kyoyuPlacement);
             for (ServerPlayer otherPlayer: Kyoyu.PLAYERS) {
                 if (player.equals(otherPlayer)) continue;

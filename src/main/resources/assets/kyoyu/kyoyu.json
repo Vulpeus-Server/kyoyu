@@ -1,3 +1,9 @@
 {
-  "log_level": "info"
+  "log_level": "info",
+
+  "modify": "blacklist",
+  "modify.whitelist": [],
+  "modify.blacklist": [
+    "Alex", "Steve"
+  ]
 }
