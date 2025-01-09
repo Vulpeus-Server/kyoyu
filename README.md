@@ -14,6 +14,9 @@
 This mod shares .litematic files with other players.<br>
 Litematica support. Inspired by Syncmatica.
 
+This project is still a work in progress, so feel [free to share](https://github.com/Vulpeus-Server/kyoyu/issues) your feature requests or report any issues!<br>
+Just keep in mind that not everything may be implemented 😄
+
 <strong><font color=#ff223a>Do not report Kyoyu issues to Syncmatica!</font></strong>
 
 ## Usage (WIP)
