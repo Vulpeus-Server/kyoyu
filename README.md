@@ -19,10 +19,7 @@ Just keep in mind that not everything may be implemented 😄
 
 <strong><font color=#ff223a>Do not report Kyoyu issues to Syncmatica!</font></strong>
 
-<video src="https://imgur.com/gallery/kyoyu-1BHmifL"></video>
-
-
-
+<video src="https://github.com/user-attachments/assets/74d1d7f8-9d13-4886-aa26-96ae8849e093" controls="true"></video>
 
 ## Usage (WIP)
 
