@@ -125,7 +125,11 @@ Litematica support. Inspired by Syncmatica.
 ⛓️ [Syncmatica](https://github.com/End-Tech/syncmatica) by nnnik, kpzip, and sakura-ryoko<br>
 
 **Uses ⭐**<br>
+🍤 [Unitemplate](https://github.com/topi-banana/unitemplate/tree/stonecutter) by topi-banana<br>
 🪨 [Stonecutter](https://stonecutter.kikugie.dev/) by kikugie<br>
-🍤 [Unitemplate](https://github.com/topi-banana/unitemplate/tree/stonecutter) by topi
+🏗️ [Architectury Loom](https://github.com/architectury/architectury-loom) by architectury<br>
+🌃 [Night Config](https://github.com/TheElectronWill/night-config) by TheElectronWill<br>
+🇾 [yamlang](https://github.com/Fallen-Breath/yamlang) by Fallen-Breath <br>
+🇬 [Gson](https://github.com/google/gson) by google<br>
 
 <small>Last README Update `2025/1/5 18:37` UTC+9</small>
