@@ -134,4 +134,4 @@ Just keep in mind that not everything may be implemented 😄
 🪨 [Stonecutter](https://stonecutter.kikugie.dev/) by kikugie<br>
 🍤 [Unitemplate](https://github.com/topi-banana/unitemplate/tree/stonecutter) by topi
 
-<small>Last README Update `2025/1/9 22:19` UTC+9</smal>
+<small>Last README Update `2025/1/9 22:30` UTC+9
