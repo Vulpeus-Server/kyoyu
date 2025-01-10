@@ -1,5 +1,5 @@
 
-- `log_level`
+- `logLevel`
 
   Changes the log output level.
 
@@ -17,14 +17,14 @@
   Allow: [`whitelist`, `blacklist`]
 
 
-- `modify.whitelist`
+- `modify_whitelist`
 
   Whitelist of Player MCID
 
   Type: `List<String>` (case-insensitive)
 
 
-- `modify.blacklist`
+- `modify_blacklist`
 
   Blacklist of Player MCID
 
@@ -40,14 +40,14 @@
   Allow: [`whitelist`, `blacklist`]
 
 
-- `remove.whitelist`
+- `remove_whitelist`
 
   Whitelist of Player MCID
 
   Type: `List<String>` (case-insensitive)
 
 
-- `remove.blacklist`
+- `remove_blacklist`
 
   Blacklist of Player MCID
 
