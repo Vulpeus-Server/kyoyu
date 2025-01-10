@@ -14,8 +14,11 @@ import fi.dy.masa.litematica.schematic.LitematicaSchematic;
 import fi.dy.masa.litematica.schematic.placement.SchematicPlacement;
 import fi.dy.masa.litematica.schematic.placement.SchematicPlacementManager;
 import fi.dy.masa.litematica.schematic.placement.SubRegionPlacement;
+import fi.dy.masa.malilib.gui.Message;
+import fi.dy.masa.malilib.util.InfoUtils;
 import fi.dy.masa.malilib.util.JsonUtils;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.BlockPos;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -127,7 +130,14 @@ public class SchematicPlacementMixin implements ISchematicPlacement {
     @Unique
     private void onModified() {
         if (this.ignore_update) return;
-        if (KyoyuClient.getInstance() == null) return;
+        KyoyuClient instance = KyoyuClient.getInstance();
+        if (instance == null) return;
+        LocalPlayer localPlayer = Minecraft.getInstance().player;
+        if (localPlayer == null) return;
+        if (!instance.serverConfig().isAllowedModify(localPlayer.getName().getString())) {
+            InfoUtils.showGuiOrInGameMessage(Message.MessageType.ERROR, "kyoyu.error.disallowed_modify");
+            return;
+        }
         KyoyuPlacement kyoyuPlacement = this.kyoyu$toKyoyuPlacement();
         if (kyoyuPlacement == null) return;
         PlacementMetaPacket placementMetaPacket = new PlacementMetaPacket(kyoyuPlacement);

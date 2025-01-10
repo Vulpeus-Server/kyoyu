@@ -15,11 +15,6 @@ public class HandshakePacket extends IKyoyuPacket {
     private final String version;
     private final KyoyuConfig config;
 
-    public  HandshakePacket(String version) {
-        this.version = version;
-        this.config = null;
-    }
-
     public HandshakePacket(String version, KyoyuConfig config) {
         this.version = version;
         this.config = config;

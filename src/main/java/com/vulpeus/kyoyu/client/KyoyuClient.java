@@ -27,10 +27,10 @@ public class KyoyuClient {
         this.serverVersion = serverVersion;
         this.serverConfig = serverConfig;
     }
-    private String serverVersion() {
+    public String serverVersion() {
         return serverVersion;
     }
-    private KyoyuConfig serverConfig() {
+    public KyoyuConfig serverConfig() {
         return serverConfig;
     }
 

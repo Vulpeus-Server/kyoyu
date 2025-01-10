@@ -22,7 +22,6 @@ public class KyoyuConfig {
 
     public static KyoyuConfig fromJson(String json) {
         Gson gson = new Gson();
-        Kyoyu.LOGGER.info("{}", json);
         return gson.fromJson(json, KyoyuConfig.class);
     }
 
