@@ -1,6 +1,7 @@
 package com.vulpeus.kyoyu;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.core.config.Configurator;
 
@@ -9,23 +10,24 @@ import java.util.List;
 
 public class KyoyuConfig {
 
-    private final String log_level = "info";
+    private final String logLevel = "info";
 
     private final String modify = "blacklist";
-    private final List<String> modifyWhitelist = new ArrayList<>();
-    private final List<String> modifyBlacklist = new ArrayList<>();
+    private final List<String> modify_whitelist = new ArrayList<>();
+    private final List<String> modify_blacklist = new ArrayList<>();
 
     private final String remove = "blacklist";
-    private final List<String> removeWhitelist = new ArrayList<>();
-    private final List<String> removeBlacklist = new ArrayList<>();
+    private final List<String> remove_whitelist = new ArrayList<>();
+    private final List<String> remove_blacklist = new ArrayList<>();
 
     public static KyoyuConfig fromJson(String json) {
         Gson gson = new Gson();
+        Kyoyu.LOGGER.info("{}", json);
         return gson.fromJson(json, KyoyuConfig.class);
     }
 
     public void setLogLevel() {
-        String log_level = this.log_level.toUpperCase();
+        String log_level = this.logLevel.toUpperCase();
         if (log_level.equals("OFF")) Configurator.setLevel(Kyoyu.MOD_ID, Level.OFF);
         if (log_level.equals("INFO")) Configurator.setLevel(Kyoyu.MOD_ID, Level.INFO);
         if (log_level.equals("DEBUG")) Configurator.setLevel(Kyoyu.MOD_ID, Level.DEBUG);
@@ -50,10 +52,16 @@ public class KyoyuConfig {
     }
 
     public boolean isAllowedModify(String playerName) {
-        return isAllowed(playerName, modify, modifyWhitelist, modifyBlacklist);
+        return isAllowed(playerName, modify, modify_whitelist, modify_blacklist);
     }
 
     public boolean isAllowedRemove(String playerName) {
-        return isAllowed(playerName, remove, removeWhitelist, removeBlacklist);
+        return isAllowed(playerName, remove, remove_whitelist, remove_blacklist);
+    }
+
+    @Override
+    public String toString() {
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        return gson.toJson(this);
     }
 }

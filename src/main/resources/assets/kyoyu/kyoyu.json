@@ -1,15 +1,15 @@
 {
-  "log_level": "info",
+  "logLevel": "info",
 
   "modify": "blacklist",
-  "modify.whitelist": [],
-  "modify.blacklist": [
+  "modify_whitelist": [],
+  "modify_blacklist": [
     "Alex", "Steve"
   ],
 
   "remove": "blacklist",
-  "remove.whitelist": [],
-  "remove.blacklist": [
+  "remove_whitelist": [],
+  "remove_blacklist": [
     "Alex"
   ]
 }
