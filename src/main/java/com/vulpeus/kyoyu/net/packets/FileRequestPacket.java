@@ -1,12 +1,12 @@
 package com.vulpeus.kyoyu.net.packets;
 
+import com.vulpeus.kyoyu.CompatibleUtils;
 import com.vulpeus.kyoyu.Kyoyu;
 import com.vulpeus.kyoyu.client.ISchematicPlacement;
 import com.vulpeus.kyoyu.client.KyoyuClient;
 import com.vulpeus.kyoyu.net.IKyoyuPacket;
 import com.vulpeus.kyoyu.net.KyoyuPacketManager;
 import com.vulpeus.kyoyu.placement.KyoyuPlacement;
-import net.minecraft.server.level.ServerPlayer;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -27,18 +27,18 @@ public class FileRequestPacket extends IKyoyuPacket {
     @Override
     public byte[] encode() {
         ByteBuffer bb = ByteBuffer.allocate(16);
-        bb.putLong(uuid.getMostSignificantBits());
-        bb.putLong(uuid.getLeastSignificantBits());
+        bb.putLong(this.uuid.getMostSignificantBits());
+        bb.putLong(this.uuid.getLeastSignificantBits());
         return bb.array();
     }
 
     @Override
-    public void onServer(ServerPlayer player) {
+    public void onServer(CompatibleUtils.KyoyuPlayer player) {
 
-        Kyoyu.LOGGER.info("file request from {}", player.getName().getString());
+        Kyoyu.LOGGER.info("file request from {}", player.getName());
 
         try {
-            FileResponsePacket fileResponsePacket = new FileResponsePacket(uuid, Kyoyu.findPlacement(uuid).readFromFile());
+            FileResponsePacket fileResponsePacket = new FileResponsePacket(this.uuid, Kyoyu.findPlacement(this.uuid).readFromFile());
             KyoyuPacketManager.sendS2C(fileResponsePacket, player);
         } catch (IOException e) {
             Kyoyu.LOGGER.error(e);
@@ -53,13 +53,13 @@ public class FileRequestPacket extends IKyoyuPacket {
         KyoyuClient kyoyuClient = KyoyuClient.getInstance();
         if (kyoyuClient != null) {
             try {
-                ISchematicPlacement wrappedSchematicPlacement = (ISchematicPlacement) kyoyuClient.findSchematicPlacement(uuid);
+                ISchematicPlacement wrappedSchematicPlacement = (ISchematicPlacement) kyoyuClient.findSchematicPlacement(this.uuid);
                 if (wrappedSchematicPlacement==null) {
                     Kyoyu.LOGGER.error("not found file");
                     return;
                 }
                 KyoyuPlacement kyoyuPlacement = wrappedSchematicPlacement.kyoyu$toKyoyuPlacement();
-                FileResponsePacket fileResponsePacket = new FileResponsePacket(uuid, kyoyuPlacement.readFromFile());
+                FileResponsePacket fileResponsePacket = new FileResponsePacket(this.uuid, kyoyuPlacement.readFromFile());
                 KyoyuPacketManager.sendC2S(fileResponsePacket);
             } catch (IOException e) {
                 Kyoyu.LOGGER.error(e);

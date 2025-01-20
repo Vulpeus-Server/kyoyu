@@ -1,8 +1,8 @@
 package com.vulpeus.kyoyu.net;
 
+import com.vulpeus.kyoyu.CompatibleUtils;
 import com.vulpeus.kyoyu.Kyoyu;
 import com.vulpeus.kyoyu.net.packets.*;
-import net.minecraft.server.level.ServerPlayer;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -73,7 +73,7 @@ public class KyoyuPacketManager {
         }
     }
 
-    public static void handleC2S(byte[] data, ServerPlayer player) {
+    public static void handleC2S(byte[] data, CompatibleUtils.KyoyuPlayer player) {
         IKyoyuPacket packet = decode(data);
         if (packet==null) return;
         packet.onServer(player);
@@ -88,7 +88,7 @@ public class KyoyuPacketManager {
         KyoyuPacketPayload packetPayload = new KyoyuPacketPayload(encode(packet));
         packetPayload.sendC2S();
     }
-    public static void sendS2C(IKyoyuPacket packet, ServerPlayer player) {
+    public static void sendS2C(IKyoyuPacket packet, CompatibleUtils.KyoyuPlayer player) {
         KyoyuPacketPayload packetPayload = new KyoyuPacketPayload(encode(packet));
         packetPayload.sendS2C(player);
     }

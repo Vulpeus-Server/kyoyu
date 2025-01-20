@@ -4,7 +4,9 @@
   "package": "com.vulpeus.kyoyu.mixins",
   "compatibilityLevel": "${java_compatibility_level}",
   "mixins": [
-    "PlayerListMixin"
+    "MinecraftServerMixin",
+    "PlayerListMixin",
+    "ServerGamePacketListenerImplMixin"
   ],
   "injectors": {
     "defaultRequire": 1

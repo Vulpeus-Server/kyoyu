@@ -15,7 +15,7 @@ public class ConnectionMixin {
     @Inject(method = "channelInactive", at = @At("HEAD"))
     private void onLeave(ChannelHandlerContext channelHandlerContext, CallbackInfo ci) {
         Kyoyu.LOGGER.info("Leave from Server");
-        KyoyuClient.deinitClient();
+        KyoyuClient.deinit();
     }
 }
 //?}

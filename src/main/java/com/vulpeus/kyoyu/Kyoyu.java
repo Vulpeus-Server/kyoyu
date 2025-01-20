@@ -1,7 +1,6 @@
 package com.vulpeus.kyoyu;
 
 import com.vulpeus.kyoyu.placement.KyoyuPlacement;
-import net.minecraft.server.level.ServerPlayer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -20,7 +19,7 @@ public class Kyoyu {
 
     public static final Logger LOGGER = LogManager.getLogger(MOD_ID);
 
-    public static List<ServerPlayer> PLAYERS = new ArrayList<>();
+    public static PlayerList<CompatibleUtils.KyoyuPlayer> PLAYERS = new PlayerList<>();
 
     private static boolean isClient = false;
 

@@ -1,6 +1,6 @@
 package com.vulpeus.kyoyu.net;
 
-import net.minecraft.server.level.ServerPlayer;
+import com.vulpeus.kyoyu.CompatibleUtils;
 
 public abstract class IKyoyuPacket {
 
@@ -8,7 +8,7 @@ public abstract class IKyoyuPacket {
         return new byte[0];
     }
 
-    public void onServer(ServerPlayer player) {
+    public void onServer(CompatibleUtils.KyoyuPlayer player) {
         // nothing to do
     }
 

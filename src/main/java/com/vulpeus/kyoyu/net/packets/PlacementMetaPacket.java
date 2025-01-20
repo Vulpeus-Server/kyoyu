@@ -1,14 +1,15 @@
 package com.vulpeus.kyoyu.net.packets;
 
+import com.vulpeus.kyoyu.CompatibleUtils;
 import com.vulpeus.kyoyu.Kyoyu;
 import com.vulpeus.kyoyu.client.ISchematicPlacement;
 import com.vulpeus.kyoyu.client.KyoyuClient;
 import com.vulpeus.kyoyu.net.IKyoyuPacket;
 import com.vulpeus.kyoyu.net.KyoyuPacketManager;
 import com.vulpeus.kyoyu.placement.KyoyuPlacement;
-import net.minecraft.server.level.ServerPlayer;
 
 import java.nio.charset.StandardCharsets;
+import java.util.UUID;
 
 public class PlacementMetaPacket extends IKyoyuPacket {
 
@@ -25,24 +26,25 @@ public class PlacementMetaPacket extends IKyoyuPacket {
 
     @Override
     public byte[] encode() {
-        String json = kyoyuPlacement.toJson();
+        String json = this.kyoyuPlacement.toJson();
         return json.getBytes(StandardCharsets.UTF_8);
     }
 
     @Override
-    public void onServer(ServerPlayer player) {
-        KyoyuPlacement preKyoyuPlacement = Kyoyu.findPlacement(kyoyuPlacement.getUuid());
+    public void onServer(CompatibleUtils.KyoyuPlayer player) {
+        KyoyuPlacement preKyoyuPlacement = Kyoyu.findPlacement(this.kyoyuPlacement.getUuid());
         if (preKyoyuPlacement == null) {
             Kyoyu.LOGGER.info("New placement by {}", player.getName());
-            Kyoyu.savePlacement(kyoyuPlacement);
-            FileRequestPacket fileRequestPacket = new FileRequestPacket(kyoyuPlacement.getUuid());
+            Kyoyu.savePlacement(this.kyoyuPlacement);
+            FileRequestPacket fileRequestPacket = new FileRequestPacket(this.kyoyuPlacement.getUuid());
             KyoyuPacketManager.sendS2C(fileRequestPacket, player);
         } else {
-            kyoyuPlacement.updateBy(player.getName().getString());
-            Kyoyu.savePlacement(kyoyuPlacement);
-            for (ServerPlayer otherPlayer: Kyoyu.PLAYERS) {
+            this.kyoyuPlacement.updateBy(player.getName());
+            Kyoyu.savePlacement(this.kyoyuPlacement);
+            for (UUID uuid: Kyoyu.PLAYERS.getAll()) {
+                CompatibleUtils.KyoyuPlayer otherPlayer = Kyoyu.PLAYERS.getServerPlayer(uuid);
                 if (player.equals(otherPlayer)) continue;
-                PlacementMetaPacket placementMetaPacket = new PlacementMetaPacket(kyoyuPlacement);
+                PlacementMetaPacket placementMetaPacket = new PlacementMetaPacket(this.kyoyuPlacement);
                 KyoyuPacketManager.sendS2C(placementMetaPacket, otherPlayer);
             }
         }
@@ -53,9 +55,9 @@ public class PlacementMetaPacket extends IKyoyuPacket {
     public void onClient() {
         KyoyuClient kyoyuClient = KyoyuClient.getInstance();
         if (kyoyuClient == null) return;
-        ISchematicPlacement schematicPlacement = (ISchematicPlacement) kyoyuClient.findSchematicPlacement(kyoyuPlacement.getUuid());
+        ISchematicPlacement schematicPlacement = (ISchematicPlacement) kyoyuClient.findSchematicPlacement(this.kyoyuPlacement.getUuid());
         if (schematicPlacement == null) return;
-        schematicPlacement.kyoyu$updateFromKyoyuPlacement(kyoyuPlacement);
+        schematicPlacement.kyoyu$updateFromKyoyuPlacement(this.kyoyuPlacement);
     }
     //?}
 }

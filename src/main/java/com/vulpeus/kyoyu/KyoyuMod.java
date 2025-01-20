@@ -40,11 +40,5 @@ public class KyoyuMod
                 //? if PAPER
                 /* false */
         );
-
-        //? if FABRIC
-        KyoyuPacketPayload.register();
-        //? if NEOFORGE
-         /* modBus.addListener(KyoyuPacketPayload::register); */
-        // TODO: Forge Packet Register
     }
 }
