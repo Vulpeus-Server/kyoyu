@@ -38,12 +38,32 @@ public class Kyoyu {
     }
 
     public static void loadConfig() {
+        File kyoyuDir;
+        if (isClient()) {
+            File schematicsDir = Paths.get("schematics").toFile();
+            if (schematicsDir.mkdir()) {
+                LOGGER.info("File not found. generated: {}", schematicsDir);
+            }
+            kyoyuDir = Paths.get("schematics/kyoyu").toFile();
+        } else {
+            kyoyuDir = Paths.get("kyoyu").toFile();
+        }
+        if (kyoyuDir.mkdir()) {
+            LOGGER.info("File not found. generated: {}", kyoyuDir);
+        }
+
+        File configDir = Paths.get("config").toFile();
+        if (configDir.mkdir()) {
+            LOGGER.info("File not found. generated: {}", configDir);
+        }
+
         try {
             Path configFile = Paths.get("config/kyoyu.json");
             if (!configFile.toFile().exists()) {
                 InputStream istream = Kyoyu.class.getResourceAsStream("/assets/kyoyu/kyoyu.json");
                 if (istream == null) return;
                 FileUtils.copyInputStreamToFile(istream, configFile.toFile());
+                LOGGER.info("File not found. generated: {}", configFile);
             }
             String json = new String(Files.readAllBytes(configFile), StandardCharsets.UTF_8);
             CONFIG = KyoyuConfig.fromJson(json);
