@@ -1,5 +1,6 @@
 {
-  "logLevel": "info",
+  "logLevel_chat": "info",
+  "logLevel_console": "info",
 
   "modify": "blacklist",
   "modify_whitelist": [],

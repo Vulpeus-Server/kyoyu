@@ -2,37 +2,46 @@ package com.vulpeus.kyoyu;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.core.config.Configurator;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class KyoyuConfig {
 
-    private final String logLevel = "info";
+    private final String logLevel_chat;
+    private final String logLevel_console;
 
-    private final String modify = "blacklist";
-    private final List<String> modify_whitelist = new ArrayList<>();
-    private final List<String> modify_blacklist = new ArrayList<>();
+    private final String modify;
+    private final List<String> modify_whitelist;
+    private final List<String> modify_blacklist;
 
-    private final String remove = "blacklist";
-    private final List<String> remove_whitelist = new ArrayList<>();
-    private final List<String> remove_blacklist = new ArrayList<>();
+    private final String remove;
+    private final List<String> remove_whitelist;
+    private final List<String> remove_blacklist;
+
+    public KyoyuConfig() {
+        this.logLevel_chat = "info";
+        this.logLevel_console = "info";
+
+        this.modify = "blacklist";
+        this.modify_whitelist = new ArrayList<>();
+        this.modify_blacklist = new ArrayList<>();
+
+        this.remove = "blacklist";
+        this.remove_whitelist = new ArrayList<>();
+        this.remove_blacklist = new ArrayList<>();
+    }
+
+    public KyoyuLogger.Level chatLogLevel() {
+        return KyoyuLogger.Level.fromString(logLevel_chat);
+    }
+    public KyoyuLogger.Level consoleLogLevel() {
+        return KyoyuLogger.Level.fromString(logLevel_console);
+    }
 
     public static KyoyuConfig fromJson(String json) {
         Gson gson = new Gson();
         return gson.fromJson(json, KyoyuConfig.class);
-    }
-
-    public void setLogLevel() {
-        String log_level = this.logLevel.toUpperCase();
-        if (log_level.equals("OFF")) Configurator.setLevel(Kyoyu.MOD_ID, Level.OFF);
-        if (log_level.equals("INFO")) Configurator.setLevel(Kyoyu.MOD_ID, Level.INFO);
-        if (log_level.equals("DEBUG")) Configurator.setLevel(Kyoyu.MOD_ID, Level.DEBUG);
-        if (log_level.equals("ERROR")) Configurator.setLevel(Kyoyu.MOD_ID, Level.ERROR);
-        if (log_level.equals("WARN")) Configurator.setLevel(Kyoyu.MOD_ID, Level.WARN);
-        if (log_level.equals("ALL")) Configurator.setLevel(Kyoyu.MOD_ID, Level.ALL);
     }
 
     private boolean containsCaseInsensitive(List<String> list, String value) {

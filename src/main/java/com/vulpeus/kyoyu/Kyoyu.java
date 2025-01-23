@@ -3,8 +3,6 @@ package com.vulpeus.kyoyu;
 import com.vulpeus.kyoyu.placement.KyoyuPlacement;
 import net.minecraft.server.level.ServerPlayer;
 import org.apache.commons.io.FileUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,7 +18,7 @@ public class Kyoyu {
     public static final String MOD_ID = "kyoyu";
     public static final String MOD_VERSION = /*$ mod_version*/ "unknown";
 
-    public static final Logger LOGGER = LogManager.getLogger(MOD_ID);
+    public static final KyoyuLogger LOGGER = new KyoyuLogger();
 
     public static KyoyuConfig CONFIG = null;
 
@@ -49,7 +47,8 @@ public class Kyoyu {
             }
             String json = new String(Files.readAllBytes(configFile), StandardCharsets.UTF_8);
             CONFIG = KyoyuConfig.fromJson(json);
-            CONFIG.setLogLevel();
+            LOGGER.setChatLevel(CONFIG.chatLogLevel());
+            LOGGER.setConsoleLevel(CONFIG.consoleLogLevel());
         } catch (IOException e) {
             LOGGER.error("cannot read config");
             LOGGER.error(e);

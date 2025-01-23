@@ -1,5 +1,14 @@
 
-- `logLevel`
+- `logLevel_chat`
+
+  Changes the log output level.
+
+  Type: `String` (case-insensitive)
+
+  Allow: [`info`, `off`, `debug`, `error`, `warn`, `all`]
+
+
+- `consoleLogLevel`
 
   Changes the log output level.
 
