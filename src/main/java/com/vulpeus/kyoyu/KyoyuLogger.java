@@ -18,21 +18,21 @@ public class KyoyuLogger {
         this.consoleLevel = Level.INFO;
     }
     public void info(Object obj) {
-        error("{}", obj);
+        info("{}", obj);
     }
     public void info(String fmt, Object... objects) {
         log(Level.INFO, fmt, objects);
     }
 
     public void warn(Object obj) {
-        error("{}", obj);
+        warn("{}", obj);
     }
     public void warn(String fmt, Object... objects) {
         log(Level.WARN, fmt, objects);
     }
 
     public void debug(Object obj) {
-        error("{}", obj);
+        debug("{}", obj);
     }
     public void debug(String fmt, Object... objects) {
         log(Level.DEBUG, fmt, objects);
