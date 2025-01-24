@@ -16,7 +16,7 @@ public class ClientPacketListenerMixin {
     @Inject(method = "handleLogin", at = @At("RETURN"))
     private void onJoin(ClientboundLoginPacket clientboundLoginPacket, CallbackInfo ci) {
         Kyoyu.LOGGER.info("Login to Server");
-        KyoyuPacketManager.sendC2S(new HandshakePacket(Kyoyu.MOD_VERSION));
+        KyoyuPacketManager.sendC2S(new HandshakePacket(Kyoyu.MOD_VERSION, Kyoyu.CONFIG));
     }
 }
 //?}

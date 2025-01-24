@@ -25,7 +25,7 @@ public class Explorer_WidgetList extends WidgetListBase<KyoyuPlacement, Explorer
         super(x, y, width, height, selectionListener);
         this.browserEntryHeight = 22;
         this.kyoyuPlacement = kyoyuPlacement;
-        Kyoyu.LOGGER.info("{}", getAllEntries());
+        Kyoyu.LOGGER.info(getAllEntries());
         setSize(width, height);
     }
 

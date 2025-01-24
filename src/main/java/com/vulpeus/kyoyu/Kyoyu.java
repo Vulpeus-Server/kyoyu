@@ -2,11 +2,11 @@ package com.vulpeus.kyoyu;
 
 import com.vulpeus.kyoyu.placement.KyoyuPlacement;
 import net.minecraft.server.level.ServerPlayer;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -18,7 +18,9 @@ public class Kyoyu {
     public static final String MOD_ID = "kyoyu";
     public static final String MOD_VERSION = /*$ mod_version*/ "unknown";
 
-    public static final Logger LOGGER = LogManager.getLogger(MOD_ID);
+    public static final KyoyuLogger LOGGER = new KyoyuLogger();
+
+    public static KyoyuConfig CONFIG = null;
 
     public static List<ServerPlayer> PLAYERS = new ArrayList<>();
 
@@ -35,6 +37,39 @@ public class Kyoyu {
         return !isClient;
     }
 
+    public static void loadConfig() {
+        File kyoyuDir;
+        if (isClient()) {
+            kyoyuDir = Paths.get("schematics/kyoyu").toFile();
+        } else {
+            kyoyuDir = Paths.get("kyoyu/files").toFile();
+        }
+        if (kyoyuDir.mkdirs()) {
+            LOGGER.info("File not found. generated: {}", kyoyuDir);
+        }
+
+        File configDir = Paths.get("config").toFile();
+        if (configDir.mkdir()) {
+            LOGGER.info("File not found. generated: {}", configDir);
+        }
+
+        try {
+            Path configFile = Paths.get("config/kyoyu.json");
+            if (!configFile.toFile().exists()) {
+                InputStream istream = Kyoyu.class.getResourceAsStream("/assets/kyoyu/kyoyu.json");
+                if (istream == null) return;
+                FileUtils.copyInputStreamToFile(istream, configFile.toFile());
+                LOGGER.info("File not found. generated: {}", configFile);
+            }
+            String json = new String(Files.readAllBytes(configFile), StandardCharsets.UTF_8);
+            CONFIG = KyoyuConfig.fromJson(json);
+            LOGGER.setChatLevel(CONFIG.chatLogLevel());
+            LOGGER.setConsoleLevel(CONFIG.consoleLogLevel());
+        } catch (IOException e) {
+            LOGGER.error("cannot read config");
+            LOGGER.error(e);
+        }
+    }
 
     public static Path getConfigDir() {
         return Paths.get("kyoyu");
