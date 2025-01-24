@@ -40,15 +40,11 @@ public class Kyoyu {
     public static void loadConfig() {
         File kyoyuDir;
         if (isClient()) {
-            File schematicsDir = Paths.get("schematics").toFile();
-            if (schematicsDir.mkdir()) {
-                LOGGER.info("File not found. generated: {}", schematicsDir);
-            }
             kyoyuDir = Paths.get("schematics/kyoyu").toFile();
         } else {
-            kyoyuDir = Paths.get("kyoyu").toFile();
+            kyoyuDir = Paths.get("kyoyu/files").toFile();
         }
-        if (kyoyuDir.mkdir()) {
+        if (kyoyuDir.mkdirs()) {
             LOGGER.info("File not found. generated: {}", kyoyuDir);
         }
 
