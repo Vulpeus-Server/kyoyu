@@ -1,6 +1,5 @@
 package com.vulpeus.kyoyu;
 
-import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -50,7 +49,13 @@ public class KyoyuLogger {
         String message = format(fmt, objects);
         if (shouldLog(level, this.chatLevel)) {
             for (ServerPlayer serverPlayer: Kyoyu.PLAYERS) {
-                serverPlayer.sendSystemMessage(Component.empty().append(message));
+                //? if >=1.19 {
+                    serverPlayer.sendSystemMessage(CompatibleUtils.text(message));
+                //?} elif >=1.16 {
+                    /* serverPlayer.sendMessage(CompatibleUtils.text(message), net.minecraft.Util.NIL_UUID); */
+                //?} else {
+                    /* serverPlayer.sendMessage(CompatibleUtils.text(message)); */
+                //?}
             }
         }
         if (shouldLog(level, this.consoleLevel)) {
