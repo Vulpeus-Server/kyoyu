@@ -22,7 +22,7 @@ Litematica support. Inspired by Syncmatica.
 
 1. Install `Fabric` or (`Forge`)<a><sup>[1]</sup></a> to the instance.
 2. Add the Kyoyu Mod and its dependency mods to the Mods folder.
-4. Launch!
+3. Launch!
 
 <a>[1]</a>: 1.16.5 Only
 
@@ -32,7 +32,7 @@ Litematica support. Inspired by Syncmatica.
 
 1. Install `Fabric`, `Forge`, `NeoForge`, or `Paper` to the server.
 2. Add the Kyoyu Mod and its dependency mods to the Mods folder.
-4. Start the server!
+3. Start the server!
 
 <b><font color=#F9AA00>It is possible to join a server with Kyoyu installed using a Vanilla client or an instance without Kyoyu, but you will not be able to use Kyoyu's features!</font></b>
 
