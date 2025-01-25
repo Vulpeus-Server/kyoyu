@@ -12,15 +12,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-
-//? if >=1.20.2 {
+//? if >=1.20.2
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-
-//? if >=1.20.2 <1.20.5 {
-    /* import net.minecraft.server.network.ServerCommonPacketListenerImpl; */
-//?} else {
-    import net.minecraft.server.network.ServerGamePacketListenerImpl;
-//?}
 
 //? if <=1.19.4 {
     /* import net.minecraft.network.protocol.game.ServerboundCustomPayloadPacket; */
@@ -29,18 +22,25 @@ import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 //?}
 
 
+//? if <=1.19.4 {
+/*
+    import net.minecraft.resources.ResourceLocation;
+    import net.minecraft.network.FriendlyByteBuf;
+*/
+//?}
+
 @Mixin(
         //? if >=1.20.2 <1.20.5 {
-            /* ServerCommonPacketListenerImpl.class */
+            /* net.minecraft.server.network.ServerCommonPacketListenerImpl.class */
         //?} else {
-            ServerGamePacketListenerImpl.class
+            net.minecraft.server.network.ServerGamePacketListenerImpl.class
         //?}
 )
 public class ServerGamePacketListenerImplMixin {
     //? if >1.19.4 {
         @Shadow protected GameProfile playerProfile() { return null; }
     //?} else {
-        /* @Shadow ServerPlayer player; */
+        /* @Shadow net.minecraft.server.level.ServerPlayer player; */
     //?}
 
     @Unique
@@ -62,19 +62,26 @@ public class ServerGamePacketListenerImplMixin {
                 //? if <1.20.5 {
                 /*
                     // handle
-                    Kyoyu.LOGGER.info("{}", getPlayer().getName());
+                    Kyoyu.LOGGER.info("on custom packet payload {}", getPlayer().getName());
                 */
                 //?} else {
                     // handle
-                    Kyoyu.LOGGER.info("{}", getPlayer().getName());
+                    Kyoyu.LOGGER.info("on custom packet payload {}", getPlayer().getName());
                 //?}
                 ci.cancel();
             }
         //?} else {
         /*
-            if (customPayloadPacket.getIdentifier().equals(KyoyuPacketPayload.identifier)) {
-                byte[] payload = customPayloadPacket.getData().readByteArray();
-                Kyoyu.LOGGER.info("{}", getPlayer().getName());
+            //? if <=1.16.5 {
+                ResourceLocation identifier = ((ServerboundCustomPayloadPacketIMixin) customPayloadPacket).getIdentifier();
+                FriendlyByteBuf data = ((ServerboundCustomPayloadPacketIMixin) customPayloadPacket).getData();
+            //?} else {
+                ResourceLocation identifier = customPayloadPacket.getIdentifier();z
+                FriendlyByteBuf data = customPayloadPacket.getData();
+            //?}
+            if (identifier.equals(KyoyuPacketPayload.identifier)) {
+                byte[] payload = data.readByteArray();
+                Kyoyu.LOGGER.info("on custom packet payload {}", getPlayer().getName());
                 // handle(player)
                 ci.cancel();
             }

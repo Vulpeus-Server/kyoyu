@@ -4,6 +4,7 @@
   "package": "com.vulpeus.kyoyu.client.mixins",
   "compatibilityLevel": "${java_compatibility_level}",
   "client": [
+    "ClientCommonPacketListenerImplMixin",
     "ClientPacketListenerMixin",
     "ConnectionMixin",
     "litematica.GuiMainMenuMixin",
