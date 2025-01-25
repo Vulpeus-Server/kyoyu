@@ -76,7 +76,7 @@ public class ServerGamePacketListenerImplMixin {
                 ResourceLocation identifier = ((ServerboundCustomPayloadPacketIMixin) customPayloadPacket).getIdentifier();
                 FriendlyByteBuf data = ((ServerboundCustomPayloadPacketIMixin) customPayloadPacket).getData();
             //?} else {
-                ResourceLocation identifier = customPayloadPacket.getIdentifier();z
+                ResourceLocation identifier = customPayloadPacket.getIdentifier();
                 FriendlyByteBuf data = customPayloadPacket.getData();
             //?}
             if (identifier.equals(KyoyuPacketPayload.identifier)) {
