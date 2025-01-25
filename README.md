@@ -2,7 +2,7 @@
 
 [![License](https://img.shields.io/github/license/Vulpeus-Server/kyoyu)](http://www.gnu.org/licenses/lgpl-3.0.html)
 [![Modrinth](https://img.shields.io/modrinth/dt/VozTPxB4?label=Modrinth%20Downloads)](https://modrinth.com/mod/VozTPxB4)
-[![Discord](https://img.shields.io/discord/1157213775791935539?logo=Discord)](https://discord.gg/tjayanzYMf)
+[![Discord](https://img.shields.io/discord/1157213775791935539?logo=Discord)](https://discord.gg/RcqXRsVcSr)
 
 [![GitHub Workflow](https://github.com/Vulpeus-Server/kyoyu/actions/workflows/gradle.yml/badge.svg)](https://github.com/Vulpeus-Server/kyoyu/actions/workflows/gradle.yml)
 [![GitHub Issues](https://img.shields.io/github/issues/Vulpeus-Server/kyoyu)](https://github.com/Vulpeus-Server/kyoyu/issues)
@@ -10,6 +10,8 @@
 
 > 共有 -> **Kyōyū [kʲo̞ːjɯ̟ː]**<br>
 > ≒ Sharing
+
+***[Discord server is now open!](https://discord.gg/RcqXRsVcSr)***
 
 This mod shares .litematic files with other players.<br>
 Litematica support. Inspired by Syncmatica.
