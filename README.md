@@ -70,58 +70,12 @@ Just keep in mind that not everything may be implemented 😄
 <a>[2]</a>: This is only compatible with <a href="https://modrinth.com/mod/litematica/versions?g=1.16.5&l=forge" target="_blank">builds published by Litematica</a><br>
 <a>[3]</a>: It launches, but cannot share the schematic.
 
-## Features (WIP)
+## Roadmap (WIP)
 
-### 　
-
-- [x] Error Handling
-- [x] Code Format and Review
+- [ ] [legacy litematica (Ornithe)](https://github.com/maruohon/litematica/tree/ornithe/1.12.2) support?
+- [ ] [Forgematica](https://modrinth.com/mod/forgematica) support?
+- [ ] [Paper](https://papermc.io/) plugin support? (retry)
 - [ ] Client only depend (malilib, litematica)
-- [ ] legacy litematica support?
-- [ ] Forgematica support?
-- [ ] Plugin support?
-
-#### Network
-
-- [x] Handshake Packet
-- [x] FileRequest Packet
-- [x] FileResponce Packet
-- [x] LoadExplorer Packet
-- [x] PlacementMeta Packet
-- [x] RemovePlacement Packet
-
-#### Client
-
-- [x] Kyoyu button on placements menu
-- [x] Kyoyu in-memory placement
-- [x] Server Kyoyu placements explorer
-  - [x] Download
-  - [x] Load
-  - [x] Material List
-  - [x] Remove
-- [x] Modify
-- [x] Unload
-- [x] Relogin compatibility
-- [x] on Placement Update Event
-
-#### Server
-
-- [x] Save KyoyuPlacementMeta
-- [x] Restore KyoyuPlacementMeta
-
-#### Data Types
-
-- [x] Pos
-- [x] Mirror
-- [x] Rotation
-- [x] Ignore Entities
-- [x] Placement ON/OFF
-- [x] Subregion
-  - [x] Pos
-  - [x] Mirror
-  - [x] Rotation
-  - [x] Ignore Entities
-  - [x] Placement ON/OFF
 
 ## Thanks
 
