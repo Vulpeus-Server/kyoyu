@@ -39,10 +39,14 @@ public class PlacementMetaPacket extends IKyoyuPacket {
             FileRequestPacket fileRequestPacket = new FileRequestPacket(this.kyoyuPlacement.getUuid());
             KyoyuPacketManager.sendS2C(fileRequestPacket, player);
         } else {
-            this.kyoyuPlacement.updateBy(player.getName());
-            Kyoyu.savePlacement(this.kyoyuPlacement);
-            for (UUID uuid: Kyoyu.PLAYERS.getAll()) {
-                CompatibleUtils.KyoyuPlayer otherPlayer = Kyoyu.PLAYERS.getServerPlayer(uuid);
+            String playerName = player.getName().getString();
+            if (!Kyoyu.CONFIG.isAllowedModify(playerName)) {
+                Kyoyu.LOGGER.warn("disallowed player attempted to modify.");
+                return;
+            }
+            kyoyuPlacement.updateBy(playerName);
+            Kyoyu.savePlacement(kyoyuPlacement);
+            for (ServerPlayer otherPlayer: Kyoyu.PLAYERS) {
                 if (player.equals(otherPlayer)) continue;
                 PlacementMetaPacket placementMetaPacket = new PlacementMetaPacket(this.kyoyuPlacement);
                 KyoyuPacketManager.sendS2C(placementMetaPacket, otherPlayer);

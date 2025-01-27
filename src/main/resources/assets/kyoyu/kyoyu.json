@@ -1,0 +1,16 @@
+{
+  "logLevel_chat": "info",
+  "logLevel_console": "info",
+
+  "modify": "blacklist",
+  "modify_whitelist": [],
+  "modify_blacklist": [
+    "Alex", "Steve"
+  ],
+
+  "remove": "blacklist",
+  "remove_whitelist": [],
+  "remove_blacklist": [
+    "Alex"
+  ]
+}

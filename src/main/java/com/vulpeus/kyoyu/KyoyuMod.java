@@ -40,5 +40,7 @@ public class KyoyuMod
                 //? if PAPER
                 /* false */
         );
+
+        Kyoyu.loadConfig();
     }
 }

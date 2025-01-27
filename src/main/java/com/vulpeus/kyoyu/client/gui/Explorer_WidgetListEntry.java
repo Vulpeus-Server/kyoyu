@@ -24,6 +24,7 @@ import fi.dy.masa.malilib.render.RenderUtils;
 import fi.dy.masa.malilib.util.GuiUtils;
 import fi.dy.masa.malilib.util.InfoUtils;
 import fi.dy.masa.malilib.util.StringUtils;
+import net.minecraft.client.Minecraft;
 
 //? if >=1.20 {
 import net.minecraft.client.gui.GuiGraphics;
@@ -58,7 +59,7 @@ public class Explorer_WidgetListEntry extends WidgetListEntryBase<KyoyuPlacement
         textWidth = getStringWidth(text) + 10;
         endX -= textWidth + 2;
         button = new ButtonGeneric(endX, buttonY, textWidth, buttonHeight, text);
-        button.setEnabled(true);
+        button.setEnabled(kyoyuClient.serverConfig().isAllowedRemove(Minecraft.getInstance().player.getName().getString()));
         listener = new ButtonListener(ButtonListener.Type.REMOVE, this);
         addButton(button, listener);
 
@@ -141,15 +142,14 @@ public class Explorer_WidgetListEntry extends WidgetListEntryBase<KyoyuPlacement
             if (type == null) {
                 return;
             }
-            button.setEnabled(false);
+            button.setEnabled(!this.type.onAction(entry));
             Kyoyu.LOGGER.info("{} on click {}", entry.kyoyuPlacement.getName(), type.name());
-            this.type.onAction(entry);
         }
 
         public enum Type {
             MATERIAL_LIST() {
                 @Override
-                void onAction(Explorer_WidgetListEntry entry) {
+                boolean onAction(Explorer_WidgetListEntry entry) {
                     LitematicaSchematic schematic = SchematicHolder.getInstance().getOrLoad(entry.kyoyuPlacement.getFile());
                     Set<String> regionNames= schematic.getAreas().keySet();
                     MaterialListSchematic materialList = new MaterialListSchematic(schematic, regionNames, true);
@@ -159,11 +159,12 @@ public class Explorer_WidgetListEntry extends WidgetListEntryBase<KyoyuPlacement
                     gui.setTitle(StringUtils.translate("litematica.gui.title.material_list.select_schematic_regions", schematic.getMetadata().getName()));
                     gui.setParent(GuiUtils.getCurrentScreen());
                     GuiBase.openGui(gui);
+                    return true;
                 }
             },
             LOAD() {
                 @Override
-                void onAction(Explorer_WidgetListEntry entry) {
+                boolean onAction(Explorer_WidgetListEntry entry) {
 
                     SchematicPlacement placement = SchematicPlacement.createFor(
                             SchematicHolder.getInstance().getOrLoad(entry.kyoyuPlacement.getFile()),
@@ -175,28 +176,31 @@ public class Explorer_WidgetListEntry extends WidgetListEntryBase<KyoyuPlacement
                     ((ISchematicPlacement) placement).kyoyu$updateFromKyoyuPlacement(entry.kyoyuPlacement);
                     ((ISchematicPlacement) placement).kyoyu$setKyoyuId(entry.kyoyuPlacement.getUuid());
                     DataManager.getSchematicPlacementManager().addSchematicPlacement(placement, true);
+                    return true;
                 }
             },
             DOWNLOAD() {
                 @Override
-                void onAction(Explorer_WidgetListEntry entry) {
+                boolean onAction(Explorer_WidgetListEntry entry) {
                     FileRequestPacket fileRequestPacket = new FileRequestPacket(entry.kyoyuPlacement.getUuid());
                     KyoyuPacketManager.sendC2S(fileRequestPacket);
+                    return true;
                 }
             },
             REMOVE() {
                 @Override
-                void onAction(Explorer_WidgetListEntry entry) {
+                boolean onAction(Explorer_WidgetListEntry entry) {
                     if (!GuiBase.isShiftDown()) {
                         InfoUtils.showGuiOrInGameMessage(Message.MessageType.ERROR, "kyoyu.error.remove_without_shift");
-                        return;
+                        return false;
                     }
                     RemovePlacementPacket removePlacementPacket = new RemovePlacementPacket(entry.kyoyuPlacement.getUuid());
                     KyoyuPacketManager.sendC2S(removePlacementPacket);
+                    return true;
                 }
             };
 
-            abstract void onAction(Explorer_WidgetListEntry entry);
+            abstract boolean onAction(Explorer_WidgetListEntry entry);
         }
 
     }

@@ -1,6 +1,7 @@
 package com.vulpeus.kyoyu.client;
 
 import com.vulpeus.kyoyu.Kyoyu;
+import com.vulpeus.kyoyu.KyoyuConfig;
 import com.vulpeus.kyoyu.placement.KyoyuPlacement;
 
 import java.util.List;
@@ -18,22 +19,28 @@ public class KyoyuClient {
 
     private static KyoyuClient instance = null;
 
+    private final KyoyuConfig serverConfig;
+
     private final String serverVersion;
 
-    public KyoyuClient(String serverVersion) {
+    public KyoyuClient(String serverVersion, KyoyuConfig serverConfig) {
         this.serverVersion = serverVersion;
+        this.serverConfig = serverConfig;
     }
-    private String serverVersion() {
+    public String serverVersion() {
         return serverVersion;
     }
+    public KyoyuConfig serverConfig() {
+        return serverConfig;
+    }
 
-    public static void init(String serverVersion) {
+    public static void init(String serverVersion, KyoyuConfig config) {
         if (instance != null) {
             Kyoyu.LOGGER.error("Duplicate client init");
             return;
         }
         Kyoyu.LOGGER.info("Kyoyu client init");
-        instance = new KyoyuClient(serverVersion);
+        instance = new KyoyuClient(serverVersion, config);
     }
 
     public static void deinit() {

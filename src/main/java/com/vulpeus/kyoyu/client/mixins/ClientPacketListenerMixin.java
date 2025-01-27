@@ -22,7 +22,7 @@ public class ClientPacketListenerMixin {
             /* if (Minecraft.getInstance().isLocalServer()) return; */
         //?}
         Kyoyu.LOGGER.info("Login to Server");
-        KyoyuPacketManager.sendC2S(new HandshakePacket(Kyoyu.MOD_VERSION));
+        KyoyuPacketManager.sendC2S(new HandshakePacket(Kyoyu.MOD_VERSION, Kyoyu.CONFIG));
     }
 }
 //?}

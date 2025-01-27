@@ -2,7 +2,7 @@
 
 [![License](https://img.shields.io/github/license/Vulpeus-Server/kyoyu)](http://www.gnu.org/licenses/lgpl-3.0.html)
 [![Modrinth](https://img.shields.io/modrinth/dt/VozTPxB4?label=Modrinth%20Downloads)](https://modrinth.com/mod/VozTPxB4)
-[![Discord](https://img.shields.io/discord/1157213775791935539?logo=Discord)](https://discord.gg/tjayanzYMf)
+[![Discord](https://img.shields.io/discord/1157213775791935539?logo=Discord)](https://discord.gg/RcqXRsVcSr)
 
 [![GitHub Workflow](https://github.com/Vulpeus-Server/kyoyu/actions/workflows/gradle.yml/badge.svg)](https://github.com/Vulpeus-Server/kyoyu/actions/workflows/gradle.yml)
 [![GitHub Issues](https://img.shields.io/github/issues/Vulpeus-Server/kyoyu)](https://github.com/Vulpeus-Server/kyoyu/issues)
@@ -11,15 +11,17 @@
 > 共有 -> **Kyōyū [kʲo̞ːjɯ̟ː]**<br>
 > ≒ Sharing
 
+***[Discord server is now open!](https://discord.gg/RcqXRsVcSr)***
+
 This mod shares .litematic files with other players.<br>
 Litematica support. Inspired by Syncmatica.
 
-This project is still a work in progress, so feel [free to share](https://github.com/Vulpeus-Server/kyoyu/issues) your feature requests or report any issues!<br>
+This project is still a work in progress, so feel free to send your feature requests or report any issues on [GitHub](https://github.com/Vulpeus-Server/kyoyu/issues)! <br>
 Just keep in mind that not everything may be implemented 😄
 
 <strong><font color=#ff223a>Do not report Kyoyu issues to Syncmatica!</font></strong>
 
-<video src="https://github.com/user-attachments/assets/74d1d7f8-9d13-4886-aa26-96ae8849e093"></video>
+<video src="https://github.com/user-attachments/assets/74d1d7f8-9d13-4886-aa26-96ae8849e093" controls="true"></video>
 
 ## Usage (WIP)
 
@@ -27,9 +29,7 @@ Just keep in mind that not everything may be implemented 😄
 
 1. Install `Fabric` or (`Forge`)<a><sup>[1]</sup></a> to the instance.
 2. Add the Kyoyu Mod and its dependency mods to the Mods folder.
-3. ! This process will no longer be necessary in future updates !<br>
-   Create a `kyoyu` folder in the `schematic` folder. (`~/[instance]/schematic/kyoyu`)
-4. Launch!
+3. Launch!
 
 <a>[1]</a>: 1.16.5 Only
 
@@ -39,9 +39,7 @@ Just keep in mind that not everything may be implemented 😄
 
 1. Install `Fabric`, `Forge`, `NeoForge`, or `Paper` to the server.
 2. Add the Kyoyu Mod and its dependency mods to the Mods folder.
-3. ! This process will no longer be necessary in future updates !<br>
-   Create a `kyoyu` folder in the server folder and create a `files` folder in the `kyoyu` folder. (`~/[server]/kyoyu/files`)
-4. Start the server!
+3. Start the server!
 
 <b><font color=#F9AA00>It is possible to join a server with Kyoyu installed using a Vanilla client or an instance without Kyoyu, but you will not be able to use Kyoyu's features!</font></b>
 
@@ -68,63 +66,17 @@ Just keep in mind that not everything may be implemented 😄
 | 1.20.5 - 1.20.6  | ✅        | 🚫        |｜| ✅        | ✅        | ✅          | ⚠️<a><sup>[3]</sup></a>|
 | 1.21 - 1.21.3    | ✅        | 🚫        |｜| ✅        | ✅        | ✅          | ⚠️<a><sup>[3]</sup></a>|
 | 1.21.4           | ✅        | 🚫        |｜| ✅        | ✅        | ✅          | 🚫       |
-||<img src="https://raw.githubusercontent.com/FabricMC/fabric/refs/heads/1.21.4/src/main/resources/assets/fabric/icon.png" width="18px" alt="Fabric">|<img src="https://raw.githubusercontent.com/MinecraftForge/MinecraftForge/refs/heads/1.21.x/icon.ico" width="18px" alt="Forge">||<img src="https://raw.githubusercontent.com/FabricMC/fabric/refs/heads/1.21.4/src/main/resources/assets/fabric/icon.png" width="18px" alt="Fabric">|<img src="https://raw.githubusercontent.com/MinecraftForge/MinecraftForge/refs/heads/1.21.x/icon.ico" width="18px" alt="Forge">|<img src="https://raw.githubusercontent.com/neoforged/NeoForge/ac7a3bc021d604509763dd8d310aefc8fc4a4039/.idea/icon.svg" width="18px" alt="NeoForge">|<img src="https://forums.papermc.io/data/assets/logo/paperlogo512.png" width="18px" alt="Paper">|
+||<a href="https://fabricmc.net/" target="_blank"><img src="https://raw.githubusercontent.com/FabricMC/fabric/refs/heads/1.21.4/src/main/resources/assets/fabric/icon.png" width="18px" alt="Fabric"></a>|<a href="https://files.minecraftforge.net/net/minecraftforge/forge/" target="_blank"><img src="https://raw.githubusercontent.com/MinecraftForge/MinecraftForge/refs/heads/1.21.x/icon.ico" width="18px" alt="Forge"></a>||<a href="https://fabricmc.net/" target="_blank"><img src="https://raw.githubusercontent.com/FabricMC/fabric/refs/heads/1.21.4/src/main/resources/assets/fabric/icon.png" width="18px" alt="Fabric"></a>|<a href="https://files.minecraftforge.net/net/minecraftforge/forge/" target="_blank"><img src="https://raw.githubusercontent.com/MinecraftForge/MinecraftForge/refs/heads/1.21.x/icon.ico" width="18px" alt="Forge"></a>|<a href="https://neoforged.net/" target="_blank"><img src="https://raw.githubusercontent.com/neoforged/NeoForge/ac7a3bc021d604509763dd8d310aefc8fc4a4039/.idea/icon.svg" width="18px" alt="NeoForge"></a>|<a href="https://papermc.io/software/paper"  target="_blank"><img src="https://forums.papermc.io/data/assets/logo/paperlogo512.png" width="18px" alt="Paper"></a>|
 
 <a>[2]</a>: This is only compatible with <a href="https://modrinth.com/mod/litematica/versions?g=1.16.5&l=forge" target="_blank">builds published by Litematica</a><br>
 <a>[3]</a>: It launches, but cannot share the schematic.
 
-## Features (WIP)
+## Roadmap (WIP)
 
-### 　
-
-- [x] Error Handling
-- [x] Code Format and Review
+- [ ] [legacy litematica (Ornithe)](https://github.com/maruohon/litematica/tree/ornithe/1.12.2) support?
+- [ ] [Forgematica](https://modrinth.com/mod/forgematica) support?
+- [ ] [Paper](https://papermc.io/) plugin support? (retry)
 - [ ] Client only depend (malilib, litematica)
-- [ ] legacy litematica support?
-- [ ] Forgematica support?
-- [ ] Plugin support?
-
-#### Network
-
-- [x] Handshake Packet
-- [x] FileRequest Packet
-- [x] FileResponce Packet
-- [x] LoadExplorer Packet
-- [x] PlacementMeta Packet
-- [x] RemovePlacement Packet
-
-#### Client
-
-- [x] Kyoyu button on placements menu
-- [x] Kyoyu in-memory placement
-- [x] Server Kyoyu placements explorer
-  - [x] Download
-  - [x] Load
-  - [x] Material List
-  - [x] Remove
-- [x] Modify
-- [x] Unload
-- [x] Relogin compatibility
-- [x] on Placement Update Event
-
-#### Server
-
-- [x] Save KyoyuPlacementMeta
-- [x] Restore KyoyuPlacementMeta
-
-#### Data Types
-
-- [x] Pos
-- [x] Mirror
-- [x] Rotation
-- [x] Ignore Entities
-- [x] Placement ON/OFF
-- [x] Subregion
-  - [x] Pos
-  - [x] Mirror
-  - [x] Rotation
-  - [x] Ignore Entities
-  - [x] Placement ON/OFF
 
 ## Thanks
 
@@ -132,7 +84,10 @@ Just keep in mind that not everything may be implemented 😄
 ⛓️ [Syncmatica](https://github.com/End-Tech/syncmatica) by nnnik, kpzip, and sakura-ryoko<br>
 
 **Uses ⭐**<br>
+🍤 [Unitemplate](https://github.com/topi-banana/unitemplate/tree/stonecutter) by topi-banana<br>
 🪨 [Stonecutter](https://stonecutter.kikugie.dev/) by kikugie<br>
-🍤 [Unitemplate](https://github.com/topi-banana/unitemplate/tree/stonecutter) by topi
+🏗️ [Architectury Loom](https://github.com/architectury/architectury-loom) by architectury<br>
+🇾 [yamlang](https://github.com/Fallen-Breath/yamlang) by Fallen-Breath <br>
+🇬 [Gson](https://github.com/google/gson) by google<br>
 
 <small>Last README Update `2025/1/14 18:45` UTC+9
