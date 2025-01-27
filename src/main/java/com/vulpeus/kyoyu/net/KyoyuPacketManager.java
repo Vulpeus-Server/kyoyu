@@ -1,8 +1,8 @@
 package com.vulpeus.kyoyu.net;
 
+import com.vulpeus.kyoyu.CompatibleUtils;
 import com.vulpeus.kyoyu.Kyoyu;
 import com.vulpeus.kyoyu.net.packets.*;
-import net.minecraft.server.level.ServerPlayer;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -73,13 +73,13 @@ public class KyoyuPacketManager {
         }
     }
 
-    public static void handleC2S(byte[] data, ServerPlayer player) {
+    public static void handleC2S(byte[] data, CompatibleUtils.KyoyuPlayer player) {
         IKyoyuPacket packet = decode(data);
         if (packet==null) {
-            Kyoyu.LOGGER.warn("packet[C2S] Not Found Packet from {}. Please check kyoyu version!", player.getName().getString());
+            Kyoyu.LOGGER.warn("packet[C2S] Not Found Packet from {}. Please check kyoyu version!", player.getName());
             return;
         }
-        Kyoyu.LOGGER.debug("packet[C2S] packet {} from {}", packet, player.getName().getString());
+        Kyoyu.LOGGER.debug("packet[C2S] packet {} from {}", packet, player.getName());
         packet.onServer(player);
     }
     public static void handleS2C(byte[] data) {
@@ -97,8 +97,9 @@ public class KyoyuPacketManager {
         KyoyuPacketPayload packetPayload = new KyoyuPacketPayload(encode(packet));
         packetPayload.sendC2S();
     }
-    public static void sendS2C(IKyoyuPacket packet, ServerPlayer player) {
-        Kyoyu.LOGGER.debug("packet[S2C] packet {} to {}", packet, player.getName().getString());
+
+    public static void sendS2C(IKyoyuPacket packet, CompatibleUtils.KyoyuPlayer player) {
+        Kyoyu.LOGGER.debug("packet[S2C] packet {} to {}", packet, player.getName());
         KyoyuPacketPayload packetPayload = new KyoyuPacketPayload(encode(packet));
         packetPayload.sendS2C(player);
     }

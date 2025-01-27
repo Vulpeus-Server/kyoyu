@@ -5,6 +5,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.message.ParameterizedMessage;
 
+import java.util.UUID;
+
 public class KyoyuLogger {
     private final String prefix;
     private Level chatLevel;
@@ -48,13 +50,18 @@ public class KyoyuLogger {
     private void log(Level level, String fmt, Object... objects) {
         String message = format(fmt, objects);
         if (shouldLog(level, this.chatLevel)) {
-            for (ServerPlayer serverPlayer: Kyoyu.PLAYERS) {
-                //? if >=1.19 {
-                    serverPlayer.sendSystemMessage(CompatibleUtils.text(message));
-                //?} elif >=1.16 {
-                    /* serverPlayer.sendMessage(CompatibleUtils.text(message), net.minecraft.Util.NIL_UUID); */
+            for (UUID uuid: Kyoyu.PLAYERS.getAll()) {
+                CompatibleUtils.KyoyuPlayer player = Kyoyu.PLAYERS.getServerPlayer(uuid);
+                //? if PAPER {
+                    /* player.player().sendMessage(message); */
                 //?} else {
-                    /* serverPlayer.sendMessage(CompatibleUtils.text(message)); */
+                    //? if >=1.19 {
+                        player.player().sendSystemMessage(CompatibleUtils.text(message));
+                    //?} elif >=1.16 {
+                        /* player.player().sendMessage(CompatibleUtils.text(message), net.minecraft.Util.NIL_UUID); */
+                    //?} else {
+                        /* player.player().sendMessage(CompatibleUtils.text(message)); */
+                    //?}
                 //?}
             }
         }

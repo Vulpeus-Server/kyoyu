@@ -61,7 +61,8 @@ Just keep in mind that not everything may be implemented 😄
 | 1.17 - 1.17.1    | ✅        | 🚫        |｜| ✅        | ✅        | 🚫          | 🚫       |
 | 1.18 - 1.18.2    | ✅        | 🚫        |｜| ✅        | ✅        | 🚫          | 🚫       |
 | 1.19 - 1.19.4    | ✅        | 🚫        |｜| ✅        | ✅        | 🚫          | ⚠️<a><sup>[3]</sup></a>|
-| 1.20 - 1.20.4    | ✅        | 🚫        |｜| ✅        | ✅        | 🚫          | ⚠️<a><sup>[3]</sup></a>|
+| 1.20 - 1.20.2    | ✅        | 🚫        |｜| ✅        | ✅        | 🚫          | ⚠️<a><sup>[3]</sup></a>|
+| 1.20.3 - 1.20.4  | ✅        | 🚫        |｜| ✅        | ✅        | 🚫          | ⚠️<a><sup>[3]</sup></a>|
 | 1.20.5 - 1.20.6  | ✅        | 🚫        |｜| ✅        | ✅        | ✅          | ⚠️<a><sup>[3]</sup></a>|
 | 1.21 - 1.21.3    | ✅        | 🚫        |｜| ✅        | ✅        | ✅          | ⚠️<a><sup>[3]</sup></a>|
 | 1.21.4           | ✅        | 🚫        |｜| ✅        | ✅        | ✅          | 🚫       |
@@ -89,5 +90,4 @@ Just keep in mind that not everything may be implemented 😄
 🇾 [yamlang](https://github.com/Fallen-Breath/yamlang) by Fallen-Breath <br>
 🇬 [Gson](https://github.com/google/gson) by google<br>
 
-<small>Last README Update `2025/1/11 12:57` UTC+9
-
+<small>Last README Update `2025/1/14 18:45` UTC+9

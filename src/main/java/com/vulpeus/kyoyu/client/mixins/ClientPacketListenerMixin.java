@@ -4,6 +4,7 @@ package com.vulpeus.kyoyu.client.mixins;
 import com.vulpeus.kyoyu.Kyoyu;
 import com.vulpeus.kyoyu.net.KyoyuPacketManager;
 import com.vulpeus.kyoyu.net.packets.HandshakePacket;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientPacketListener;
 import net.minecraft.network.protocol.game.ClientboundLoginPacket;
 import org.spongepowered.asm.mixin.Mixin;
@@ -15,6 +16,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class ClientPacketListenerMixin {
     @Inject(method = "handleLogin", at = @At("RETURN"))
     private void onJoin(ClientboundLoginPacket clientboundLoginPacket, CallbackInfo ci) {
+        //? if >=1.19 {
+            if (Minecraft.getInstance().isSingleplayer()) return;
+        //?} else {
+            /* if (Minecraft.getInstance().isLocalServer()) return; */
+        //?}
         Kyoyu.LOGGER.info("Login to Server");
         KyoyuPacketManager.sendC2S(new HandshakePacket(Kyoyu.MOD_VERSION, Kyoyu.CONFIG));
     }

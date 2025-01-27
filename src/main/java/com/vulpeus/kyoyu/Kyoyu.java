@@ -22,7 +22,7 @@ public class Kyoyu {
 
     public static KyoyuConfig CONFIG = null;
 
-    public static List<ServerPlayer> PLAYERS = new ArrayList<>();
+    public static PlayerList<CompatibleUtils.KyoyuPlayer> PLAYERS = new PlayerList<>();
 
     private static boolean isClient = false;
 

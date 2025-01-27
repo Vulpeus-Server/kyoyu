@@ -1,12 +1,12 @@
 package com.vulpeus.kyoyu.net.packets;
 
+import com.vulpeus.kyoyu.CompatibleUtils;
 import com.google.gson.Gson;
 import com.vulpeus.kyoyu.Kyoyu;
 import com.vulpeus.kyoyu.KyoyuConfig;
 import com.vulpeus.kyoyu.client.KyoyuClient;
 import com.vulpeus.kyoyu.net.IKyoyuPacket;
 import com.vulpeus.kyoyu.net.KyoyuPacketManager;
-import net.minecraft.server.level.ServerPlayer;
 
 import java.nio.charset.StandardCharsets;
 
@@ -35,10 +35,10 @@ public class HandshakePacket extends IKyoyuPacket {
     }
 
     @Override
-    public void onServer(ServerPlayer player) {
-        Kyoyu.LOGGER.info("Login `{}` with compatible client version `{}`", version, player.getName().getString());
+    public void onServer(CompatibleUtils.KyoyuPlayer player) {
+        Kyoyu.LOGGER.info("Login `{}` with compatible client version `{}`", this.version, player.getName());
 
-        Kyoyu.PLAYERS.add(player);
+        Kyoyu.PLAYERS.getServerPlayer(player.getUUID()).setCompatible(true);
 
         HandshakePacket handshakePacket = new HandshakePacket(Kyoyu.MOD_VERSION, Kyoyu.CONFIG);
         KyoyuPacketManager.sendS2C(handshakePacket, player);

@@ -43,7 +43,7 @@ public class KyoyuClient {
         instance = new KyoyuClient(serverVersion, config);
     }
 
-    public static void deinitClient() {
+    public static void deinit() {
         if (instance != null) {
             Kyoyu.LOGGER.info("Kyoyu client deinit");
             instance = null;

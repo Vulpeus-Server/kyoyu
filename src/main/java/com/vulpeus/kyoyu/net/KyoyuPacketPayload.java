@@ -3,47 +3,40 @@ package com.vulpeus.kyoyu.net;
 import com.vulpeus.kyoyu.CompatibleUtils;
 import com.vulpeus.kyoyu.Kyoyu;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
+import org.jetbrains.annotations.NotNull;
 
 //? if >=1.20.6 {
-import net.minecraft.network.codec.ByteBufCodecs;
-import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.minecraft.network.RegistryFriendlyByteBuf;
+    import net.minecraft.network.codec.ByteBufCodecs;
+    import net.minecraft.network.codec.StreamCodec;
+    import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+    import net.minecraft.network.RegistryFriendlyByteBuf;
 //?} else {
 /*
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.server.network.ServerGamePacketListenerImpl;
+    import net.minecraft.network.FriendlyByteBuf;
+    import net.minecraft.server.network.ServerGamePacketListenerImpl;
 */
 //?}
 
 
 //? if FABRIC {
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
-    //? if >1.20.4 {
-    import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
-    //?} else {
+    import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+    import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+    //? if <=1.20.4 {
     /*
-    import io.netty.buffer.Unpooled;
-    import net.fabricmc.fabric.api.networking.v1.PacketSender;
-    import net.minecraft.client.multiplayer.ClientPacketListener;
-    import net.minecraft.client.Minecraft;
-    import net.minecraft.server.MinecraftServer;
+        import io.netty.buffer.Unpooled;
+        import net.fabricmc.fabric.api.networking.v1.PacketSender;
+        import net.minecraft.client.multiplayer.ClientPacketListener;
+        import net.minecraft.client.Minecraft;
+        import net.minecraft.server.MinecraftServer;
     */
     //?}
 //?} elif NEOFORGE {
 /*
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.neoforge.network.PacketDistributor;
-import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
-import net.neoforged.neoforge.network.handling.DirectionalPayloadHandler;
-import net.neoforged.neoforge.network.handling.IPayloadContext;
-import net.neoforged.neoforge.network.registration.PayloadRegistrar;
+    import net.neoforged.neoforge.network.PacketDistributor;
+    import net.neoforged.neoforge.network.handling.IPayloadContext;
 */
 //?}
-import net.minecraft.server.level.ServerPlayer;
-import org.jetbrains.annotations.NotNull;
 
 public class KyoyuPacketPayload
         //? if >1.20.4
@@ -59,124 +52,73 @@ public class KyoyuPacketPayload
     }
 
 
-    private static final ResourceLocation identifier = CompatibleUtils.identifier(Kyoyu.MOD_ID, "kyoyu");
+    public static final ResourceLocation identifier = CompatibleUtils.identifier(Kyoyu.MOD_ID, "kyoyu");
 
     //? if >1.20.4 {
-    private static final Type<KyoyuPacketPayload> TYPE = new Type<>(identifier);
-    private static final StreamCodec<RegistryFriendlyByteBuf, KyoyuPacketPayload> CODEC = StreamCodec.composite(
-            ByteBufCodecs.BYTE_ARRAY, KyoyuPacketPayload::content, KyoyuPacketPayload::new
-    );
-    @Override
-    public @NotNull Type<? extends CustomPacketPayload> type() {
+        private static final Type<KyoyuPacketPayload> TYPE = new Type<>(identifier);
+        private static final StreamCodec<RegistryFriendlyByteBuf, KyoyuPacketPayload> CODEC = StreamCodec.composite(
+                ByteBufCodecs.BYTE_ARRAY, KyoyuPacketPayload::content, KyoyuPacketPayload::new
+        );
+        @Override
+        public @NotNull Type<? extends CustomPacketPayload> type() {
         return TYPE;
     }
-    //?}
-
-    //? FABRIC {
-    public static void register() {
-        //? if >1.20.4 {
-        PayloadTypeRegistry.playC2S().register(TYPE, CODEC);
-        PayloadTypeRegistry.playS2C().register(TYPE, CODEC);
-        //?}
-
-        if (Kyoyu.isClient()) {
-            ClientPlayNetworking.registerGlobalReceiver(
-                    //? if >1.20.4 {
-                    TYPE, KyoyuPacketPayload::onPacketClient
-                    //?} else {
-                    /*
-                    identifier, (client, handler, buf, responseSender) -> {
-                        KyoyuPacketPayload packetPayload = new KyoyuPacketPayload(buf.readByteArray());
-                        packetPayload.onPacketClient(client, handler, responseSender);
-                    }
-                    */
-                    //?}
-            );
-        } else {
-            ServerPlayNetworking.registerGlobalReceiver(
-                    //? if >1.20.4 {
-                    TYPE, KyoyuPacketPayload::onPacketServer
-                    //?} else {
-                    /*
-                    identifier, (server, player, handler, buf, responseSender) -> {
-                        KyoyuPacketPayload packetPayload = new KyoyuPacketPayload(buf.readByteArray());
-                        packetPayload.onPacketServer(server, player, handler, responseSender);
-                    }
-                    */
-                    //?}
-            );
-        }
-    }
-    //?} elif NEOFORGE {
-    /*
-    public static void register(final RegisterPayloadHandlersEvent event) {
-        event.registrar(Kyoyu.MOD_ID)
-                .versioned("1")
-                .optional()
-                .playBidirectional(
-                        KyoyuPacketPayload.TYPE,
-                        KyoyuPacketPayload.CODEC,
-                        new DirectionalPayloadHandler<>(
-                                KyoyuPacketPayload::onPacketClient,
-                                KyoyuPacketPayload::onPacketServer
-                        )
-                );
-    }
-    */
     //?}
 
     public void sendC2S() {
         //? FABRIC {
             //? >=1.20.6 {
-            ClientPlayNetworking.send(this);
+                ClientPlayNetworking.send(this);
             //?} else {
             /*
-            FriendlyByteBuf packetbb = new FriendlyByteBuf(Unpooled.buffer());
-            packetbb.writeByteArray(this.content);
-            ClientPlayNetworking.send(identifier, packetbb);
+                FriendlyByteBuf packetbb = new FriendlyByteBuf(Unpooled.buffer());
+                packetbb.writeByteArray(this.content);
+                ClientPlayNetworking.send(identifier, packetbb);
             */
             //?}
         //?} elif NEOFORGE {
-        /* PacketDistributor.sendToServer(this); */
+            /* PacketDistributor.sendToServer(this); */
         //?}
     }
-    public void sendS2C(ServerPlayer player) {
+    public void sendS2C(CompatibleUtils.KyoyuPlayer player) {
         //? FABRIC {
             //? >=1.20.6 {
-            ServerPlayNetworking.send(player, this);
+                ServerPlayNetworking.send(player.player(), this);
             //?} else {
             /*
-            FriendlyByteBuf packetbb = new FriendlyByteBuf(Unpooled.buffer());
-            packetbb.writeByteArray(this.content);
-            ServerPlayNetworking.send(player, identifier, packetbb);
+                FriendlyByteBuf packetbb = new FriendlyByteBuf(Unpooled.buffer());
+                packetbb.writeByteArray(this.content);
+                ServerPlayNetworking.send(player.player(), identifier, packetbb);
             */
-        //?}
+            //?}
         //?} elif NEOFORGE {
-        /* PacketDistributor.sendToPlayer(player, this); */
+            /* PacketDistributor.sendToPlayer(player.player(), this); */
         //?}
     }
 
     public void onPacketServer(
             //? FABRIC {
                 //? if >1.20.4 {
-                ServerPlayNetworking.Context context
+                    ServerPlayNetworking.Context context
                 //?} else {
-                /* MinecraftServer server, ServerPlayer player, ServerGamePacketListenerImpl handler, PacketSender sender */
+                    /* MinecraftServer server, ServerPlayer player, ServerGamePacketListenerImpl handler, PacketSender sender */
                 //?}
             //?} elif NEOFORGE {
-            /* IPayloadContext context */
+                /* IPayloadContext context */
             //?} else {
-            /* Object context */
+                /* Object context */
             //?}
     ) {
         //? if FABRIC || NEOFORGE {
         KyoyuPacketManager.handleC2S(
                 this.content,
-                //? if FABRIC && <=1.20.4 {
-                    /* player */
-                //?} else {
-                    (ServerPlayer) context.player()
-                //?}
+                new CompatibleUtils.KyoyuPlayer(
+                    //? if FABRIC && <=1.20.4 {
+                        /* player */
+                    //?} else {
+                        (ServerPlayer) context.player()
+                    //?}
+                )
         );
         //?}
     }
@@ -184,14 +126,14 @@ public class KyoyuPacketPayload
     public void onPacketClient(
             //? FABRIC {
                 //? if >1.20.4 {
-                ClientPlayNetworking.Context context
+                    ClientPlayNetworking.Context context
                 //?} else {
-                /* Minecraft client, ClientPacketListener handler, PacketSender sender */
+                    /* Minecraft client, ClientPacketListener handler, PacketSender sender */
                 //?}
             //?} elif NEOFORGE {
-            /* IPayloadContext context */
+                /* IPayloadContext context */
             //?} else {
-            /* Object context */
+                /* Object context */
             //?}
     ) {
         KyoyuPacketManager.handleS2C(this.content);
