@@ -76,10 +76,10 @@ public class KyoyuPacketManager {
     public static void handleC2S(byte[] data, CompatibleUtils.KyoyuPlayer player) {
         IKyoyuPacket packet = decode(data);
         if (packet==null) {
-            Kyoyu.LOGGER.warn("packet[C2S] Not Found Packet from {}. Please check kyoyu version!", player.getName().getString());
+            Kyoyu.LOGGER.warn("packet[C2S] Not Found Packet from {}. Please check kyoyu version!", player.getName());
             return;
         }
-        Kyoyu.LOGGER.debug("packet[C2S] packet {} from {}", packet, player.getName().getString());
+        Kyoyu.LOGGER.debug("packet[C2S] packet {} from {}", packet, player.getName());
         packet.onServer(player);
     }
     public static void handleS2C(byte[] data) {
@@ -99,7 +99,7 @@ public class KyoyuPacketManager {
     }
 
     public static void sendS2C(IKyoyuPacket packet, CompatibleUtils.KyoyuPlayer player) {
-        Kyoyu.LOGGER.debug("packet[S2C] packet {} to {}", packet, player.getName().getString());
+        Kyoyu.LOGGER.debug("packet[S2C] packet {} to {}", packet, player.getName());
         KyoyuPacketPayload packetPayload = new KyoyuPacketPayload(encode(packet));
         packetPayload.sendS2C(player);
     }
