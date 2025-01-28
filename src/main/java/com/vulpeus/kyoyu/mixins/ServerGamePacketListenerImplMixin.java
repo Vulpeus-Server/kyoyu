@@ -15,14 +15,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 //? if >=1.20.2
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 
-//? if <=1.19.4 {
+//? if <=1.20.1 {
     /* import net.minecraft.network.protocol.game.ServerboundCustomPayloadPacket; */
 //?} else {
     import net.minecraft.network.protocol.common.ServerboundCustomPayloadPacket;
 //?}
 
 
-//? if <=1.19.4 {
+//? if <=1.20.1 {
 /*
     import net.minecraft.resources.ResourceLocation;
     import net.minecraft.network.FriendlyByteBuf;
@@ -37,7 +37,7 @@ import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
         //?}
 )
 public class ServerGamePacketListenerImplMixin {
-    //? if >1.19.4 {
+    //? if >1.20.1 {
         @Shadow protected GameProfile playerProfile() { return null; }
     //?} else {
         /* @Shadow net.minecraft.server.level.ServerPlayer player; */
@@ -45,7 +45,7 @@ public class ServerGamePacketListenerImplMixin {
 
     @Unique
     private CompatibleUtils.KyoyuPlayer getPlayer() {
-        //? if >1.19.4 {
+        //? if >1.20.1 {
             return Kyoyu.PLAYERS.getServerPlayer(playerProfile().getId());
         //?} else {
             /* return new CompatibleUtils.KyoyuPlayer(player); */

@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 //? if >=1.20.2
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 
-//? if <=1.19.4 {
+//? if <=1.20.1 {
     /* import net.minecraft.network.protocol.game.ClientboundCustomPayloadPacket; */
 //?} else {
     import net.minecraft.network.protocol.common.ClientboundCustomPayloadPacket;
