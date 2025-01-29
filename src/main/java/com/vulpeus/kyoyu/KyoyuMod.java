@@ -40,6 +40,7 @@ public class KyoyuMod
                 //? if PAPER
                 /* false */
         );
+        KyoyuPacketPayload.register();
 
         Kyoyu.loadConfig();
     }

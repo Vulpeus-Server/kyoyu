@@ -65,6 +65,13 @@ public class KyoyuPacketPayload
     }
     //?}
 
+    public static void register() {
+        //? if FABRIC && >1.20.4 {
+            net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry.playC2S().register(TYPE, CODEC);
+            net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry.playS2C().register(TYPE, CODEC);
+        //?}
+    }
+
     public void sendC2S() {
         //? FABRIC {
             //? >=1.20.6 {
@@ -96,46 +103,11 @@ public class KyoyuPacketPayload
         //?}
     }
 
-    public void onPacketServer(
-            //? FABRIC {
-                //? if >1.20.4 {
-                    ServerPlayNetworking.Context context
-                //?} else {
-                    /* MinecraftServer server, ServerPlayer player, ServerGamePacketListenerImpl handler, PacketSender sender */
-                //?}
-            //?} elif NEOFORGE {
-                /* IPayloadContext context */
-            //?} else {
-                /* Object context */
-            //?}
-    ) {
-        //? if FABRIC || NEOFORGE {
-        KyoyuPacketManager.handleC2S(
-                this.content,
-                new CompatibleUtils.KyoyuPlayer(
-                    //? if FABRIC && <=1.20.4 {
-                        /* player */
-                    //?} else {
-                        (ServerPlayer) context.player()
-                    //?}
-                )
-        );
-        //?}
+    public void onPacketServer(CompatibleUtils.KyoyuPlayer player) {
+        KyoyuPacketManager.handleC2S(this.content, player);
     }
 
-    public void onPacketClient(
-            //? FABRIC {
-                //? if >1.20.4 {
-                    ClientPlayNetworking.Context context
-                //?} else {
-                    /* Minecraft client, ClientPacketListener handler, PacketSender sender */
-                //?}
-            //?} elif NEOFORGE {
-                /* IPayloadContext context */
-            //?} else {
-                /* Object context */
-            //?}
-    ) {
+    public void onPacketClient() {
         KyoyuPacketManager.handleS2C(this.content);
     }
 }

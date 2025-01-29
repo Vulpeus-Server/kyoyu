@@ -54,21 +54,11 @@ public class ServerGamePacketListenerImplMixin {
 
     @Inject(method = "handleCustomPayload", at = @At("HEAD"), cancellable = true)
     private void handleCustomPayload(ServerboundCustomPayloadPacket customPayloadPacket, CallbackInfo ci) {
+        KyoyuPacketPayload kyoyuPacketPayload = null;
         //? if >=1.20.2 {
             CustomPacketPayload payload = customPayloadPacket.payload();
             if (payload instanceof KyoyuPacketPayload) {
-                KyoyuPacketPayload kyoyuPacketPayload = (KyoyuPacketPayload) payload;
-                // handle(player)
-                //? if <1.20.5 {
-                /*
-                    // handle
-                    Kyoyu.LOGGER.info("on custom packet payload {}", getPlayer().getName());
-                */
-                //?} else {
-                    // handle
-                    Kyoyu.LOGGER.info("on custom packet payload {}", getPlayer().getName());
-                //?}
-                ci.cancel();
+                kyoyuPacketPayload = (KyoyuPacketPayload) payload;
             }
         //?} else {
         /*
@@ -81,12 +71,14 @@ public class ServerGamePacketListenerImplMixin {
             //?}
             if (identifier.equals(KyoyuPacketPayload.identifier)) {
                 byte[] payload = data.readByteArray();
-                Kyoyu.LOGGER.info("on custom packet payload {}", getPlayer().getName());
-                // handle(player)
-                ci.cancel();
+                kyoyuPacketPayload = new KyoyuPacketPayload(payload);
             }
         */
         //?}
+        if (kyoyuPacketPayload != null) {
+            kyoyuPacketPayload.onPacketServer(getPlayer());
+            ci.cancel();
+        }
     }
 }
 //?}

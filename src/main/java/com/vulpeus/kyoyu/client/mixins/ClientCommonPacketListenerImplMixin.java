@@ -36,32 +36,24 @@ public class ClientCommonPacketListenerImplMixin {
 
     @Inject(method = targetMethod, at = @At("HEAD"), cancellable = true)
     private void handleCustomPayload(ClientboundCustomPayloadPacket customPayloadPacket, CallbackInfo ci) {
+        KyoyuPacketPayload kyoyuPacketPayload = null;
         //? if >=1.20.2 {
             CustomPacketPayload payload = customPayloadPacket.payload();
             if (payload instanceof KyoyuPacketPayload) {
-                KyoyuPacketPayload kyoyuPacketPayload = (KyoyuPacketPayload) payload;
-                // handle(player)
-                //? if <1.20.5 {
-                    /*
-                        // handle
-                        Kyoyu.LOGGER.info("on custom packet payload");
-                    */
-                //?} else {
-                // handle
-                Kyoyu.LOGGER.info("on custom packet payload");
-                //?}
-                ci.cancel();
+                kyoyuPacketPayload = (KyoyuPacketPayload) payload;
             }
         //?} else {
         /*
             if (customPayloadPacket.getIdentifier().equals(KyoyuPacketPayload.identifier)) {
                 byte[] payload = customPayloadPacket.getData().readByteArray();
-                Kyoyu.LOGGER.info("on custom packet payload");
-                // handle(player)
-                ci.cancel();
+                kyoyuPacketPayload = new KyoyuPacketPayload(payload);
             }
         */
         //?}
+        if (kyoyuPacketPayload != null) {
+            kyoyuPacketPayload.onPacketClient();
+            ci.cancel();
+        }
     }
 }
 //?}
