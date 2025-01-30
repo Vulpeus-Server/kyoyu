@@ -54,7 +54,7 @@ public class LoadExplorerPacket extends IKyoyuPacket {
         KyoyuClient kyoyuClient = KyoyuClient.getInstance();
         if (this.kyoyuPlacementList != null && kyoyuClient != null) {
             Kyoyu.LOGGER.info("KyoyuPlacement list from server");
-            kyoyuClient.openExplorer(this.kyoyuPlacementList);
+            net.minecraft.client.Minecraft.getInstance().execute(() -> kyoyuClient.openExplorer(this.kyoyuPlacementList));
         } else {
             Kyoyu.LOGGER.info("KyoyuPlacement list is empty!");
         }
