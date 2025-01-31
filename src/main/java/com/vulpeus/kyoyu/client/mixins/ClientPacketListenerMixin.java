@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class ClientPacketListenerMixin {
     @Inject(method = "handleLogin", at = @At("RETURN"))
     private void onJoin(ClientboundLoginPacket clientboundLoginPacket, CallbackInfo ci) {
-        //? if >=1.19 {
+        //? if >=1.19.3 {
             if (Minecraft.getInstance().isSingleplayer()) return;
         //?} else {
             /* if (Minecraft.getInstance().isLocalServer()) return; */
