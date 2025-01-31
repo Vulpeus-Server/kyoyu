@@ -1,9 +1,11 @@
 package com.vulpeus.kyoyu.placement;
 
+import com.google.gson.annotations.JsonAdapter;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.Rotation;
 
+@JsonAdapter(KyoyuRegionJsonAdapter.class)
 public class KyoyuRegion {
 
     private final BlockPos pos;
