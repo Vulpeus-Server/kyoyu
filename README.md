@@ -79,6 +79,7 @@ Just keep in mind that not everything may be implemented 😄
 - [ ] [Forgematica](https://modrinth.com/mod/forgematica) support?
 - [ ] [Paper](https://papermc.io/) plugin support? (retry)
 - [ ] Client only depend (malilib, litematica)
+- [ ] GUI improvements
 
 ## Thanks
 
