@@ -12,3 +12,7 @@ kyoyu:
       download: Download
       load: Load
       material_list: MaterialList
+
+  error:
+    share_without_shift: Hold Shift while sharing
+    remove_without_shift: Hold Shift while removing
