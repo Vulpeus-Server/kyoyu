@@ -80,6 +80,7 @@ Just keep in mind that not everything may be implemented 😄
 - [ ] [Paper](https://papermc.io/) plugin support? (retry)
 - [ ] Client only depend (malilib, litematica)
 - [ ] GUI improvements
+- [ ] Merged jars
 
 ## Thanks
 
@@ -93,4 +94,4 @@ Just keep in mind that not everything may be implemented 😄
 🇾 [yamlang](https://github.com/Fallen-Breath/yamlang) by Fallen-Breath <br>
 🇬 [Gson](https://github.com/google/gson) by google<br>
 
-<small>Last README Update `2025/1/31 04:03` UTC+9
+<small>Last README Update `2025/2/07 22:54` UTC+9
