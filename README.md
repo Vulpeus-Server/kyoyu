@@ -2,7 +2,7 @@
 
 [![License](https://img.shields.io/github/license/Vulpeus-Server/kyoyu)](http://www.gnu.org/licenses/lgpl-3.0.html)
 [![Modrinth](https://img.shields.io/modrinth/dt/VozTPxB4?label=Modrinth%20Downloads)](https://modrinth.com/mod/VozTPxB4)
-[![Discord](https://img.shields.io/discord/1157213775791935539?logo=Discord)](https://discord.gg/RcqXRsVcSr)
+[![Discord](https://img.shields.io/discord/1331335879469563914?logo=Discord)](https://discord.gg/RcqXRsVcSr)
 
 [![GitHub Workflow](https://github.com/Vulpeus-Server/kyoyu/actions/workflows/gradle.yml/badge.svg)](https://github.com/Vulpeus-Server/kyoyu/actions/workflows/gradle.yml)
 [![GitHub Issues](https://img.shields.io/github/issues/Vulpeus-Server/kyoyu)](https://github.com/Vulpeus-Server/kyoyu/issues)
@@ -95,4 +95,4 @@ Just keep in mind that not everything may be implemented 😄
 🇾 [yamlang](https://github.com/Fallen-Breath/yamlang) by Fallen-Breath <br>
 🇬 [Gson](https://github.com/google/gson) by google<br>
 
-<small>Last README Update `2025/02/08 00:10` UTC+9
+<small>Last README Update `2025/02/08 08:33` UTC+9
