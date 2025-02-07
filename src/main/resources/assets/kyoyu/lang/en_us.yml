@@ -14,5 +14,5 @@ kyoyu:
       material_list: MaterialList
 
   error:
-    share_without_shift: Hold Shift while sharing
-    remove_without_shift: Hold Shift while removing
+    share_without_shift: Require holding shift to share
+    remove_without_shift: Require holding shift to remove
