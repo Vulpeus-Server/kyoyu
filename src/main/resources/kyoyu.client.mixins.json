@@ -4,7 +4,7 @@
   "package": "com.vulpeus.kyoyu.client.mixins",
   "compatibilityLevel": "${java_compatibility_level}",
   "client": [
-    //? FABRIC && >=1.20.2 <1.20.5
+    //? >=1.20.2 <=1.20.4
     "ClientboundCustomPayloadPacketMixin",
     "ClientCommonPacketListenerImplMixin",
     "ClientPacketListenerMixin",

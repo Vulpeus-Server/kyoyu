@@ -30,7 +30,7 @@ import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 //?}
 
 @Mixin(
-        //? if >=1.20.2 <1.20.5 {
+        //? if >=1.20.2 <=1.20.4 {
             /* net.minecraft.server.network.ServerCommonPacketListenerImpl.class */
         //?} else {
             net.minecraft.server.network.ServerGamePacketListenerImpl.class

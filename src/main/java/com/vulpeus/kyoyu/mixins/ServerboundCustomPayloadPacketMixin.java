@@ -1,6 +1,6 @@
 package com.vulpeus.kyoyu.mixins;
 
-//? if FABRIC && >=1.20.2 <1.20.5 {
+//? if !PAPER && >=1.20.2 <=1.20.4 {
 /*
 import com.vulpeus.kyoyu.Kyoyu;
 import com.vulpeus.kyoyu.net.KyoyuPacketPayload;

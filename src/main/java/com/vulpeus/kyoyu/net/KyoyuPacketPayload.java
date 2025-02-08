@@ -61,16 +61,14 @@ public class KyoyuPacketPayload
         }
     //?}
 
-    //? if >=1.20.2 <1.20.5 {
+    //? if >=1.20.2 <=1.20.4
     /* @Override */
-    //?}
     public ResourceLocation id() {
         return identifier;
     }
 
-    //? if >=1.20.2 <1.20.5 {
+    //? if >=1.20.2 <=1.20.4
     /* @Override */
-    //?}
     public void write(FriendlyByteBuf output) {
         output.writeByteArray(content);
     }
