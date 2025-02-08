@@ -4,29 +4,24 @@ import com.vulpeus.kyoyu.CompatibleUtils;
 import com.vulpeus.kyoyu.Kyoyu;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
+import net.minecraft.network.FriendlyByteBuf;
 
 //? if >=1.20.2 {
     import net.minecraft.network.protocol.common.ClientboundCustomPayloadPacket;
     import net.minecraft.network.protocol.common.ServerboundCustomPayloadPacket;
+    import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 //?} else {
     /*
     import net.minecraft.network.protocol.game.ClientboundCustomPayloadPacket;
     import net.minecraft.network.protocol.game.ServerboundCustomPayloadPacket;
+    import io.netty.buffer.Unpooled;
     */
-//?}
-
-//? if >=1.20.2 {
-    import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-//?} else {
-    /* import io.netty.buffer.Unpooled; */
 //?}
 
 //? if >=1.20.6 {
     import net.minecraft.network.codec.ByteBufCodecs;
     import net.minecraft.network.codec.StreamCodec;
     import net.minecraft.network.RegistryFriendlyByteBuf;
-//?} else {
-    /* import net.minecraft.network.FriendlyByteBuf; */
 //?}
 
 
@@ -43,6 +38,11 @@ public class KyoyuPacketPayload
     public KyoyuPacketPayload(byte[] content) {
         this.content = content;
     }
+
+    public KyoyuPacketPayload(FriendlyByteBuf input) {
+        this(input.readByteArray());
+    }
+
     public byte[] content() {
         return this.content;
     }
@@ -59,18 +59,19 @@ public class KyoyuPacketPayload
         public @NotNull Type<? extends CustomPacketPayload> type() {
             return TYPE;
         }
-    //?} elif >=1.20.2 {
-        /*
-        @Override
-        public ResourceLocation id() {
-            return identifier;
-        }
-        @Override
-        public void write(FriendlyByteBuf packetbb) {
-            this.content = packetbb.readByteArray();
-        }
-        */
     //?}
+
+    //? if >=1.20.2 <=1.20.4
+    /* @Override */
+    public ResourceLocation id() {
+        return identifier;
+    }
+
+    //? if >=1.20.2 <=1.20.4
+    /* @Override */
+    public void write(FriendlyByteBuf output) {
+        output.writeByteArray(content);
+    }
 
     public static void register() {
         //? if FABRIC && >=1.20.6 {
@@ -86,7 +87,7 @@ public class KyoyuPacketPayload
             //?} else {
             /*
                 FriendlyByteBuf packetbb = new FriendlyByteBuf(Unpooled.buffer());
-                packetbb.writeByteArray(this.content);
+                write(packetbb);
                 Minecraft.getInstance().getConnection().send(new ServerboundCustomPayloadPacket(identifier, packetbb));
             */
             //?}
@@ -99,7 +100,7 @@ public class KyoyuPacketPayload
             //?} else {
             /*
                 FriendlyByteBuf packetbb = new FriendlyByteBuf(Unpooled.buffer());
-                packetbb.writeByteArray(this.content);
+                write(packetbb);
                 player.player().connection.send(new ClientboundCustomPayloadPacket(identifier, packetbb));
             */
             //?}

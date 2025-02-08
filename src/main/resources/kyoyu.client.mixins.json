@@ -4,6 +4,8 @@
   "package": "com.vulpeus.kyoyu.client.mixins",
   "compatibilityLevel": "${java_compatibility_level}",
   "client": [
+    //? >=1.20.2 <=1.20.4
+    "ClientboundCustomPayloadPacketMixin",
     "ClientCommonPacketListenerImplMixin",
     "ClientPacketListenerMixin",
     "ConnectionMixin",
