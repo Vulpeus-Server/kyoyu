@@ -11,6 +11,8 @@ plugins {
 
     // https://github.com/Fallen-Breath/yamlang
     id 'me.fallenbreath.yamlang' version '1.4.0'
+
+    id 'com.vulpeus.mod_relocator'
 }
 
 repositories {
@@ -283,3 +285,13 @@ if (use_paperweight) {
         }
     }
 }
+
+relocator {
+    group = project.group
+    platform = project.platform
+    originalJar = project.file("build/libs/${project.mod_name}-${fullProjectVersion}.jar")
+    mergedJar = project.file("build/libs/${project.mod_name}-${fullProjectVersion}-relocate.jar")
+    mixins = ['kyoyu.mixins.json', 'kyoyu.client.mixins.json']
+}
+
+build.finalizedBy(relocate);
