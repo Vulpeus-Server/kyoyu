@@ -9,6 +9,7 @@ on:
       - "versions/**"
       - ".github/**"
       - "buildSrc/**"
+      - "settings.json"
   pull_request:
 
 
