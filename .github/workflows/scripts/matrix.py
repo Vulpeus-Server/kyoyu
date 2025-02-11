@@ -2,7 +2,7 @@
 A script to scan through the versions directory and collect all folder names as the subproject list,
 then output a json as the github action include matrix
 """
-__author__ = 'Fallen_Breath'
+__author__ = 'Fallen_Breath and topi_banana'
 
 import json
 import os
@@ -10,30 +10,28 @@ import sys
 
 
 def main():
-	target_subproject_env = os.environ.get('TARGET_SUBPROJECT', '')
-	target_subprojects = list(filter(None, target_subproject_env.split(',') if target_subproject_env != '' else []))
-	print('target_subprojects: {}'.format(target_subprojects))
+	target_version_env = os.environ.get('TARGET_VERSION', '')
+	target_versions = list(filter(None, target_version_env.split(',') if target_version_env != '' else []))
+	print('target_versions: {}'.format(target_versions))
 
 	with open('settings.json') as f:
 		settings: dict = json.load(f)
 
-	if len(target_subprojects) == 0:
-		subprojects = settings['versions']
+	if len(target_versions) == 0:
+		versions = settings['versions']
 	else:
-		subprojects = []
-		for subproject in settings['versions']:
-			if subproject in target_subprojects:
-				subprojects.append(subproject)
-				target_subprojects.remove(subproject)
-		if len(target_subprojects) > 0:
-			print('Unexpected subprojects: {}'.format(target_subprojects), file=sys.stderr)
+		versions = []
+		for version in settings['versions']:
+			if version['version'] in target_versions:
+				versions.append(version)
+				target_versions.remove(version['version'])
+		if len(target_versions) > 0:
+			print('Unexpected subprojects: {}'.format(target_versions), file=sys.stderr)
 			sys.exit(1)
 
 	matrix_entries = []
-	for subproject in subprojects:
-		matrix_entries.append({
-			'subproject': subproject,
-		})
+	for version in versions:
+		matrix_entries.append(version)
 	matrix = {'include': matrix_entries}
 	with open(os.environ['GITHUB_OUTPUT'], 'w') as f:
 		f.write('matrix={}\n'.format(json.dumps(matrix)))

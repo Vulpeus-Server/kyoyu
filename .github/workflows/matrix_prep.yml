@@ -3,7 +3,7 @@ name: _step.matrix_prepare
 on:
   workflow_call:
     inputs:
-      target_subproject:
+      target_version:
         description: see release.yml, for generating matrix entries
         type: string
         required: false
@@ -16,14 +16,14 @@ on:
 
 jobs:
   matrix_prep:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
       - id: setmatrix
-        run: python3 .github/workflows/scripts/matrix.py  # ubuntu-22.04 uses Python 3.10.6
+        run: python3 .github/workflows/scripts/matrix.py
         env:
-          TARGET_SUBPROJECT: ${{ inputs.target_subproject }}
+          TARGET_VERSION: ${{ inputs.target_version }}
 
     outputs:
       matrix: ${{ steps.setmatrix.outputs.matrix }}

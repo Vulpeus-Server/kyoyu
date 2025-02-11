@@ -2,7 +2,7 @@
 A script to scan through all valid mod jars in build-artifacts.zip/$version/build/libs,
 and generate an artifact summary table for that to GitHub action step summary
 """
-__author__ = 'Fallen_Breath'
+__author__ = 'Fallen_Breath and topi_banana'
 
 import functools
 import glob
@@ -31,9 +31,9 @@ def get_sha256_hash(file_path: str) -> str:
 
 
 def main():
-	target_subproject_env = os.environ.get('TARGET_SUBPROJECT', '')
-	target_subprojects = list(filter(None, target_subproject_env.split(',') if target_subproject_env != '' else []))
-	print('target_subprojects: {}'.format(target_subprojects))
+	target_version_env = os.environ.get('TARGET_VERSION', '')
+	target_versions = list(filter(None, target_version_env.split(',') if target_version_env != '' else []))
+	print('target_versions: {}'.format(target_versions))
 
 	with open('settings.json') as f:
 		settings: dict = json.load(f)
@@ -44,13 +44,13 @@ def main():
 		f.write('| --- | --- | --- | --- | --- |\n')
 
 		warnings = []
-		for subproject in settings['versions']:
-			if len(target_subprojects) > 0 and subproject not in target_subprojects:
-				print('skipping {}'.format(subproject))
+		for version in settings['versions']:
+			if len(target_versions) > 0 and version['version'] not in target_versions:
+				print('skipping {}'.format(version['version']))
 				continue
-			game_versions = read_prop('versions/{}/gradle.properties'.format(subproject), 'game_versions')
+			game_versions = version['game_versions']
 			game_versions = game_versions.strip().replace('\r', '').replace('\n', ', ')
-			file_paths = glob.glob('build-artifacts/{}/build/libs/*.jar'.format(subproject))
+			file_paths = glob.glob('build-artifacts/build/libs/*.jar')
 			file_paths = list(filter(lambda fp: not fp.endswith('-sources.jar') and not fp.endswith('-dev.jar') and not fp.endswith('-shadow.jar'), file_paths))
 			if len(file_paths) == 0:
 				file_name = '*not found*'
@@ -60,9 +60,9 @@ def main():
 				file_size = '{} B'.format(os.path.getsize(file_paths[0]))
 				sha256 = '`{}`'.format(get_sha256_hash(file_paths[0]))
 				if len(file_paths) > 1:
-					warnings.append('Found too many build files in subproject {}: {}'.format(subproject, ', '.join(file_paths)))
+					warnings.append('Found too many build files in subproject {}: {}'.format(version, ', '.join(file_paths)))
 
-			f.write('| {} | {} | {} | {} | {} |\n'.format(subproject, game_versions, file_name, file_size, sha256))
+			f.write('| {} | {} | {} | {} | {} |\n'.format(version, game_versions, file_name, file_size, sha256))
 
 		if len(warnings) > 0:
 			f.write('\n### Warnings\n\n')

@@ -8,6 +8,7 @@ on:
       - "src/**"
       - "versions/**"
       - ".github/**"
+      - "buildSrc/**"
   pull_request:
 
 
