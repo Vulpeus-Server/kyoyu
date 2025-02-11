@@ -56,6 +56,7 @@ jobs:
 
       - name: Build with gradle
         run: |
+          chmod +x gradlew
           args=$(echo "${{ matrix.platforms }}" | tr ',' '\n' | sed 's/^/build-/' | sed 's/$/-${{ matrix.version }}/')
           echo "Building with arguments=$args"
           ./gradlew $args
