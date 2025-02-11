@@ -57,7 +57,7 @@ jobs:
       - name: Build with gradle
         run: |
           chmod +x gradlew
-          args=$(echo "${{ matrix.platforms }}" | tr ',' '\n' | sed 's/^/build-/' | sed 's/$/-${{ matrix.version }}/')
+          args=$(echo "${{ matrix.platforms }}" | sed 's/^/build-/' | sed 's/$/-${{ matrix.version }}/')
           echo "Building with arguments=$args"
           ./gradlew $args
         env:
@@ -66,7 +66,7 @@ jobs:
 
       - name: Merge Jars
         run: |
-          zip_paths=$(echo "${{ matrix.platforms }}" | tr ',' '\n' | sed 's/^/versions\//' | sed 's/$/-${{ matrix.version }}\/build\/libs\/*-relocate.jar/')
+          zip_paths=$(echo "${{ matrix.platforms }}" | sed 's/^/versions\//' | sed 's/$/-${{ matrix.version }}\/build\/libs\/*-relocate.jar/')
           
           output_path="build/libs/${{ steps.properties_g.outputs.mod_name }}-v${{ steps.properties_g.outputs.mod_version }}-mc${{ matrix.version }}.jar"
           work_dir="temp_work_dir"
@@ -74,7 +74,7 @@ jobs:
           mkdir -p "$work_dir"
           
           for zip_path in $zip_paths; do
-            unzip -o "$zip_path" -d "$work_dir"
+            unzip -o $(ls $zip_path) -d "$work_dir"
           done
           
           zip -j "$output_path" "$work_dir"/*
