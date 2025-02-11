@@ -74,7 +74,7 @@ jobs:
           mkdir -p "$work_dir"
           
           for zip_path in $zip_paths; do
-            unzip -o "$file" -d "$zip_path"
+            unzip -o "$zip_path" -d "$work_dir"
           done
           
           zip -j "$output_path" "$work_dir"/*
