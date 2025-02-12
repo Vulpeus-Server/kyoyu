@@ -81,9 +81,9 @@ jobs:
       - name: Merge Jars
         run: |
           shopt -s extglob
-          zip_paths=$(echo "${{ matrix.platforms }}" | sed 's/^/versions\//' | sed 's/$/-${{ matrix.version }}\/build\/libs\/*-relocate.jar/')
+          zip_paths=$(echo "${{ matrix.platforms }}" | sed 's/^/all-versions\//' | sed 's/$/-${{ matrix.version }}\/build\/libs\/*-relocate.jar/')
           
-          output_path="all-versions/build/libs/${{ steps.properties_g.outputs.mod_name }}-v${{ steps.properties_g.outputs.mod_version }}-mc${{ matrix.version }}.jar"
+          output_path="build/libs/${{ steps.properties_g.outputs.mod_name }}-v${{ steps.properties_g.outputs.mod_version }}-mc${{ matrix.version }}.jar"
           work_dir="temp_work_dir"
           
           mkdir -p "$work_dir"
