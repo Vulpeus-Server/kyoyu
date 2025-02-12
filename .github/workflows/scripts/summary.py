@@ -26,13 +26,13 @@ def main():
 
 	with open(os.environ['GITHUB_STEP_SUMMARY'], 'w') as f:
 		f.write('## Build Artifacts Summary\n\n')
-		f.write('| for Minecraft | File | Size | SHA-256 |\n')
-		f.write('| --- | --- | --- | --- |\n')
+		f.write('| File | Platform | for Minecraft | Size | SHA-256 |\n')
+		f.write('| --- | --- | --- | --- | --- |\n')
 
 		warnings = []
 		for version in settings['versions']:
-			game_versions = version['game_versions']
-			game_versions = game_versions.strip().replace('\r', '').replace('\n', ', ')
+			game_versions = version['game_versions'].strip().replace('\r', '').replace('\n', ', ')
+			platforms = version['platforms'].strip().replace('\r', '').replace('\n', ', ')
 			file_paths = glob.glob(f'build-artifacts/*-mc{version["version"]}-*.jar')
 			print(file_paths)
 			if len(file_paths) == 0:
@@ -46,7 +46,7 @@ def main():
 				if len(file_paths) > 1:
 					warnings.append('Found too many build files in subproject {}: {}'.format(version['version'], ', '.join(file_paths)))
 
-			f.write('| {} | {} | {} | {} |\n'.format(game_versions, file_name, file_size, sha256))
+			f.write('| {} | {} | {} | {} | {} |\n'.format(file_name, platforms, game_versions, file_size, sha256))
 
 		if len(warnings) > 0:
 			f.write('\n### Warnings\n\n')
