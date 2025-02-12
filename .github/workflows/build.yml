@@ -50,27 +50,6 @@ jobs:
           BUILD_ID: ${{ github.run_number }}
           BUILD_RELEASE: ${{ inputs.release }}
 
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: all-versions
-          path: versions/*/build/libs/
-
-  merger:
-    runs-on: ubuntu-latest
-    needs:
-      - matrix_prep
-      - build
-    strategy:
-      matrix: ${{ fromJson(needs.matrix_prep.outputs.matrix) }}
-    steps:
-      - uses: actions/checkout@v4
-      - name: Download build artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: all-versions
-          path: all-versions
-
       - name: Read common properties
         id: properties_g
         uses: christian-draeger/read-properties@1.1.1
@@ -80,23 +59,11 @@ jobs:
 
       - name: Merge Jars
         run: |
-          shopt -s extglob
-          zip_paths=$(echo "${{ matrix.platforms }}" | sed 's/^/all-versions\//' | sed 's/$/-${{ matrix.version }}\/build\/libs\/*-relocate.jar/')
-          
           mkdir build/
           mkdir build/libs/
-          output_path="build/libs/${{ steps.properties_g.outputs.mod_name }}-v${{ steps.properties_g.outputs.mod_version }}-mc${{ matrix.version }}.jar"
-          work_dir="temp_work_dir"
-          
-          mkdir -p "$work_dir"
-          
-          for zip_path in $zip_paths; do
-            unzip -o $(ls $zip_path) -d "$work_dir"
-          done
-          
-          zip -j "$output_path" "$work_dir"/*
-          
-          rm -rf "$work_dir"
+          python .github/workflows/scripts/merger.py
+        env:
+          FILE_SUFFIX: build/libs/${{ steps.properties_g.outputs.mod_name }}-v${{ steps.properties_g.outputs.mod_version }}
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
