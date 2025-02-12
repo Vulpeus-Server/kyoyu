@@ -80,6 +80,7 @@ jobs:
 
       - name: Make build summary
         run: |
+          ls -lah
           python .github/workflows/scripts/summary.py
         env:
           TARGET_VERSION: ${{ inputs.target_version }}

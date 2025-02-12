@@ -33,7 +33,9 @@ def main():
 		for version in settings['versions']:
 			game_versions = version['game_versions'].strip().replace('\r', '').replace('\n', ', ')
 			platforms = version['platforms'].strip().replace('\r', '').replace('\n', ', ')
-			file_paths = glob.glob(f'build-artifacts/*-mc{version["version"]}-*.jar')
+			file_path = f'build-artifacts/*-mc{version["version"]}-*.jar'
+			print(file_path)
+			file_paths = glob.glob(file_path)
 			print(file_paths)
 			if len(file_paths) == 0:
 				file_name = '*not found*'
