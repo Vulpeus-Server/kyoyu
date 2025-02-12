@@ -16,7 +16,7 @@ def main():
         mc_ver = version['version']
         platforms = version['platforms'].split('\n')
         for platform in platforms:
-            subproject = f'{platform}-{mc_ver}'
+            subproject = f'{platform}-mc{mc_ver}'
             jars.extend(glob.glob(f'versions/{subproject}/build/libs/*-relocate.jar'))
 
         if len(jars) == 0:
