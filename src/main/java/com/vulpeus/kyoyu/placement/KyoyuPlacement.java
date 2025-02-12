@@ -117,6 +117,14 @@ public class KyoyuPlacement {
     }
 
     public void writeToFile(byte[] byteArray) {
+        writeToFile(this.file, byteArray);
+    }
+
+    public static void writeToFile(String file, byte[] byteArray) {
+        writeToFile(getFileFromFilename(file), byteArray);
+    }
+
+    public static void writeToFile(File file, byte[] byteArray) {
         try (FileOutputStream outputStream = new FileOutputStream(file)) {
             outputStream.write(byteArray);
         } catch (IOException e) {
