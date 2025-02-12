@@ -1,66 +1,18 @@
 name: Release
 
-# release: <default> (release title)
-# dispatch (all): Manual release for $target_release_tag
-# dispatch (specified): Manual release for $target_release_tag (subproject: $target_subproject)
-run-name: |-
-  ${{ github.event_name == 'workflow_dispatch' && format('Manual release for {0}{1}', inputs.target_release_tag, inputs.target_subproject && format(' (subproject: {0})', inputs.target_subproject) || '') || '' }}
-
 on:
   release:
     types:
       - published
-  workflow_dispatch:
-    inputs:
-      target_version:
-        description: |-
-          The subproject name(s) of the specified Minecraft version to be released, seperated with ",".
-          By default all subprojects will be released
-        type: string
-        required: false
-        default: ''
-      target_release_tag:
-        description: The tag of the release you want to append the artifact to
-        type: string
-        required: true
-
 
 jobs:
-  show_action_parameters:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Show action parameters
-        run: |
-          cat <<EOF > $GITHUB_STEP_SUMMARY
-          ## Action Parameters
-          - target_version: \`${{ github.event.inputs.target_version }}\`
-          - target_release_tag: \`${{ github.event.inputs.target_release_tag }}\`
-          EOF
-
   matrix_prep:
     uses: ./.github/workflows/matrix_prep.yml
-    with:
-      target_version: ${{ github.event.inputs.target_version }}
-
-  # ensure the input release tag is valid
-  validate_release:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Get github release information
-        if: ${{ github.event_name == 'workflow_dispatch' }}
-        uses: cardinalby/git-get-release-action@1.2.5
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-        with:
-          tag: ${{ github.event.inputs.target_release_tag }}
 
   build:
     uses: ./.github/workflows/build.yml
     secrets: inherit
-    needs:
-      - validate_release
     with:
-      target_subproject: ${{ github.event.inputs.target_subproject }}
       release: true
 
   release:
@@ -80,41 +32,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Display context
-        run: |
-          echo ref_name = ${{ github.ref_name }}
-          echo target_subproject = ${{ github.event.inputs.target_subproject }}
-          echo target_release_tag = ${{ github.event.inputs.target_release_tag }}
-
       - name: Download build artifacts
         uses: actions/download-artifact@v4
         with:
           name: build-artifacts
           path: build-artifacts
-
-      - name: Get github release information
-        if: ${{ github.event_name == 'workflow_dispatch' }}
-        id: get_release
-        uses: cardinalby/git-get-release-action@1.2.5
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-        with:
-          tag: ${{ github.event.inputs.target_release_tag }}
-
-      - name: Generate publish related information
-        id: release_info
-        run: |
-          if [ $GITHUB_EVENT_NAME == 'release' ]
-          then
-              # Leave an empty value here, so Kir-Antipov/mc-publish will infer the tag from the action context
-              echo "tag_name=" >> $GITHUB_OUTPUT
-          elif [ $GITHUB_EVENT_NAME == 'workflow_dispatch' ]
-          then
-              echo "tag_name=${{ github.event.inputs.target_release_tag }}" >> $GITHUB_OUTPUT
-          else
-              echo Unknown github event name $GITHUB_EVENT_NAME
-              exit 1
-          fi
 
       - name: Read common properties
         id: properties_g
@@ -127,7 +49,7 @@ jobs:
         id: file_info
         run: |
           shopt -s extglob
-          FILE_PATHS=$(ls "build-artifacts/build/libs/${{ steps.properties_g.outputs.mod_name }}-v${{ steps.properties_g.outputs.mod_version }}-mc${{ matrix.version }}.jar")
+          FILE_PATHS=$(ls "build-artifacts/${{ steps.properties_g.outputs.mod_name }}-v${{ steps.properties_g.outputs.mod_version }}-mc${{ matrix.version }}.jar")
           if (( ${#FILE_PATHS[@]} != 1 )); then
               echo "Error: Found ${#FILE_PATHS[@]} files, expected exactly 1"
               exit 1
@@ -150,7 +72,7 @@ jobs:
           result-encoding: string
         env:
           CHANGELOG: |-
-            ${{ format('{0}{1}', github.event.release.body, steps.get_release.outputs.body) }}
+            ${{ github.event.release.body }}
             
             -------
             
@@ -167,7 +89,7 @@ jobs:
           modrinth-id: VozTPxB4
           modrinth-token: ${{ secrets.MODRINTH_API_TOKEN }}
 
-          github-tag: ${{ steps.release_info.outputs.tag_name }}
+          github-tag:
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
           files: ${{ steps.file_info.outputs.path }}
@@ -179,10 +101,10 @@ jobs:
           version-type: beta
 
           modrinth-loaders: ${{ matrix.platforms }}
-          game-versions: ${{ steps.game_versions.outputs.value }}
+          game-versions: ${{ matrix.game_versions }}
           game-version-filter: any
 
-          github-changelog: ${{ format('{0}{1}', github.event.release.body, steps.get_release.outputs.body) }}
+          github-changelog: ${{ github.event.release.body }}
           modrinth-changelog: ${{ steps.changelog.outputs.result }}
 
           retry-attempts: 3

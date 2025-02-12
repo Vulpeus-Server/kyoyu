@@ -24,8 +24,8 @@ def main():
 
         output_path = os.getenv("FILE_SUFFIX")
         output_path += f'-mc{mc_ver}'
-        if os.getenv('GITHUB_EVENT_NAME') != 'release':
-            buildNumber = os.getenv('GITHUB_RUN_ID')
+        if os.getenv('BUILD_RELEASE') != 'true':
+            buildNumber = os.getenv('BUILD_ID')
             if buildNumber:
                 output_path += f'+build.{buildNumber}'
             else:

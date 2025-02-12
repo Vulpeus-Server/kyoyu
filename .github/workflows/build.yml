@@ -53,6 +53,8 @@ jobs:
           mkdir build/libs/
           python .github/workflows/scripts/merger.py
         env:
+          BUILD_ID: ${{ github.run_number }}
+          BUILD_RELEASE: ${{ inputs.release }}
           FILE_SUFFIX: build/libs/${{ steps.properties_g.outputs.mod_name }}-v${{ steps.properties_g.outputs.mod_version }}
 
       - name: Upload artifacts
@@ -81,5 +83,3 @@ jobs:
       - name: Make build summary
         run: |
           python .github/workflows/scripts/summary.py
-        env:
-          TARGET_VERSION: ${{ inputs.target_version }}
