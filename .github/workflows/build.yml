@@ -50,13 +50,6 @@ jobs:
           BUILD_ID: ${{ github.run_number }}
           BUILD_RELEASE: ${{ inputs.release }}
 
-      - name: Read common properties
-        id: properties_g
-        uses: christian-draeger/read-properties@1.1.1
-        with:
-          path: gradle.properties
-          properties: 'mod_name mod_version'
-
       - name: Merge Jars
         run: |
           mkdir build/
