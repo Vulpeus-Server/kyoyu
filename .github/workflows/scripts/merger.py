@@ -16,14 +16,14 @@ def main():
         mc_ver = version['version']
         platforms = version['platforms'].split('\n')
         for platform in platforms:
-            subproject = f'{platform}-mc{mc_ver}'
+            subproject = f'{platform}-{mc_ver}'
             jars.extend(glob.glob(f'versions/{subproject}/build/libs/*-relocate.jar'))
 
         if len(jars) == 0:
             sys.exit(1)
 
         output_path = os.getenv("FILE_SUFFIX")
-        output_path += f'-{mc_ver}'
+        output_path += f'-mc{mc_ver}'
         if os.getenv("BUILD_RELEASE") != "true":
             buildNumber = os.getenv("BUILD_ID")
             if buildNumber:
