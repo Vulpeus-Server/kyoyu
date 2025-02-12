@@ -67,7 +67,7 @@ jobs:
   summary:
     runs-on: ubuntu-latest
     needs:
-      - merger
+      - build
 
     steps:
       - uses: actions/checkout@v4
