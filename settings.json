@@ -1,46 +1,74 @@
 {
   "versions": [
-    "fabric-1.14.4",
-    "fabric-1.15.2",
-    "fabric-1.16.5",
-    "fabric-1.17.1",
-    "fabric-1.18.2",
-    "fabric-1.19.2",
-    "fabric-1.19.4",
-    "fabric-1.20.1",
-    "fabric-1.20.2",
-    "fabric-1.20.4",
-    "fabric-1.20.6",
-    "fabric-1.21.1",
-    "fabric-1.21.3",
-    "fabric-1.21.4",
-
-    "forge-1.14.4",
-    "forge-1.15.2",
-    "forge-1.16.5",
-    "forge-1.17.1",
-    "forge-1.18.2",
-    "forge-1.19.2",
-    "forge-1.19.4",
-    "forge-1.20.1",
-    "forge-1.20.2",
-    "forge-1.20.4",
-    "forge-1.20.6",
-    "forge-1.21.1",
-    "forge-1.21.3",
-    "forge-1.21.4",
-
-    "neoforge-1.20.6",
-    "neoforge-1.21.1",
-    "neoforge-1.21.3",
-    "neoforge-1.21.4",
-
-    "paper-1.19.4",
-    "paper-1.20.1",
-    "paper-1.20.2",
-    "paper-1.20.4",
-    "paper-1.20.6",
-    "paper-1.21.1",
-    "paper-1.21.3"
+    {
+      "version": "1.14.4",
+      "platforms": "fabric\nforge",
+      "game_versions": "1.14\n1.14.1\n1.14.2\n1.14.3\n1.14.4"
+    },
+    {
+      "version": "1.15.2",
+      "platforms": "fabric\nforge",
+      "game_versions": "1.15\n1.15.1\n1.15.2"
+    },
+    {
+      "version": "1.16.5",
+      "platforms": "fabric\nforge",
+      "game_versions": "1.16\n1.16.1\n1.16.2\n1.16.3\n1.16.4\n1.16.5"
+    },
+    {
+      "version": "1.17.1",
+      "platforms": "fabric\nforge",
+      "game_versions": "1.17\n1.17.1"
+    },
+    {
+      "version": "1.18.2",
+      "platforms": "fabric\nforge",
+      "game_versions": "1.18\n1.18.1\n1.18.2\n1.18.3\n1.18.4"
+    },
+    {
+      "version": "1.19.2",
+      "platforms": "fabric\nforge",
+      "game_versions": "1.19\n1.19.1\n1.19.2"
+    },
+    {
+      "version": "1.19.4",
+      "platforms": "fabric\nforge\npaper",
+      "game_versions": "1.19.3\n1.19.4"
+    },
+    {
+      "version": "1.20.1",
+      "platforms": "fabric\nforge\npaper",
+      "game_versions": "1.20\n1.20.1"
+    },
+    {
+      "version": "1.20.2",
+      "platforms": "fabric\nforge\npaper",
+      "game_versions": "1.20.2"
+    },
+    {
+      "version": "1.20.4",
+      "platforms": "fabric\nforge\npaper",
+      "game_versions": "1.20.3\n1.20.4"
+    },
+    {
+      "version": "1.20.6",
+      "platforms": "fabric\nforge\npaper\nneoforge",
+      "game_versions": "1.20.5\n1.20.6"
+    },
+    {
+      "version": "1.21.1",
+      "platforms": "fabric\nforge\npaper\nneoforge",
+      "game_versions": "1.21\n1.21.1"
+    },
+    {
+      "version": "1.21.3",
+      "platforms": "fabric\nforge\npaper\nneoforge",
+      "game_versions": "1.21.2\n1.21.3"
+    },
+    {
+      "version": "1.21.4",
+      "platforms": "fabric\nforge\nneoforge",
+      "game_versions": "1.21.4"
+    }
   ]
 }
