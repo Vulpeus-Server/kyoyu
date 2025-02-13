@@ -120,10 +120,13 @@ public class Explorer_WidgetListEntry extends WidgetListEntryBase<KyoyuPlacement
         String schematicName = kyoyuPlacement.getName();
 
         //? if >=1.16 {
-        drawString(x + 20, y + 7, 0xFFFFFFFF, schematicName, drawContext);
-        drawSubWidgets(mouseX, mouseY, drawContext);
+            drawString(x + 20, y + 7, 0xFFFFFFFF, schematicName, drawContext);
+            drawSubWidgets(mouseX, mouseY, drawContext);
         //?} else {
-        /* drawSubWidgets(mouseX, mouseY); */
+            /*
+            drawString(x + 20, y + 7, 0xFFFFFFFF, schematicName);
+            drawSubWidgets(mouseX, mouseY);
+            */
         //?}
     }
 
