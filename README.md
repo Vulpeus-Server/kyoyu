@@ -43,6 +43,10 @@ Just keep in mind that not everything may be implemented 😄
 
 <b><font color=#F9AA00>It is possible to join a server with Kyoyu installed using a Vanilla client or an instance without Kyoyu, but you will not be able to use Kyoyu's features!</font></b>
 
+#### Config
+
+[Documentation](https://github.com/Vulpeus-Server/kyoyu/blob/main/docs/config.md)
+
 ## Dependencies
 
 | Loader        | Client                          | Server     |
