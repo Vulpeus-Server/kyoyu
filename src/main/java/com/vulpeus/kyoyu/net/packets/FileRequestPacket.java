@@ -38,7 +38,8 @@ public class FileRequestPacket extends IKyoyuPacket {
         Kyoyu.LOGGER.info("file request from {}", player.getName());
 
         try {
-            FileResponsePacket fileResponsePacket = new FileResponsePacket(this.uuid, Kyoyu.findPlacement(this.uuid).readFromFile());
+            KyoyuPlacement kyoyuPlacement = Kyoyu.findPlacement(this.uuid);
+            FileResponsePacket fileResponsePacket = new FileResponsePacket(kyoyuPlacement);
             KyoyuPacketManager.sendS2C(fileResponsePacket, player);
         } catch (IOException e) {
             Kyoyu.LOGGER.error(e);
@@ -59,7 +60,7 @@ public class FileRequestPacket extends IKyoyuPacket {
                     return;
                 }
                 KyoyuPlacement kyoyuPlacement = wrappedSchematicPlacement.kyoyu$toKyoyuPlacement();
-                FileResponsePacket fileResponsePacket = new FileResponsePacket(this.uuid, kyoyuPlacement.readFromFile());
+                FileResponsePacket fileResponsePacket = new FileResponsePacket(kyoyuPlacement);
                 KyoyuPacketManager.sendC2S(fileResponsePacket);
             } catch (IOException e) {
                 Kyoyu.LOGGER.error(e);
