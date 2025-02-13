@@ -58,17 +58,24 @@ def mcVersion = convertVersion(project.minecraft_version)
 String MOD_ICON_PATH = 'assets/kyoyu/icon.png'
 String LANG_DIR = 'assets/kyoyu/lang'
 JavaVersion JAVA_COMPATIBILITY
+JavaVersion MIXIN_COMPATIBILITY
 if (mcVersion >= 12005) {
     JAVA_COMPATIBILITY = JavaVersion.VERSION_21
+    if (project.platform == 'forge' && mcVersion <= 12006) {
+        MIXIN_COMPATIBILITY = JavaVersion.VERSION_17
+    } else {
+        MIXIN_COMPATIBILITY = JavaVersion.VERSION_21
+    }
 } else if (mcVersion >= 11800) {
     JAVA_COMPATIBILITY = JavaVersion.VERSION_17
+    MIXIN_COMPATIBILITY = JavaVersion.VERSION_17
 } else if (mcVersion >= 11700) {
     JAVA_COMPATIBILITY = JavaVersion.VERSION_16
+    MIXIN_COMPATIBILITY = JavaVersion.VERSION_16
 } else {
     JAVA_COMPATIBILITY = JavaVersion.VERSION_1_8
+    MIXIN_COMPATIBILITY = JavaVersion.VERSION_1_8
 }
-JavaVersion MIXIN_COMPATIBILITY_LEVEL = JAVA_COMPATIBILITY
-
 
 String modVersionSuffix = ''
 String artifactVersion = project.mod_version
@@ -212,7 +219,7 @@ processResources {
                         "homepage": project.mod_homepage,
                         "sources": project.mod_sources,
                         "issue": project.mod_issue,
-                        "java_compatibility_level": "JAVA_${MIXIN_COMPATIBILITY_LEVEL.ordinal() + 1}",
+                        "java_compatibility_level": "JAVA_${MIXIN_COMPATIBILITY.ordinal() + 1}",
                 ]
                 expand valueMap
             }
