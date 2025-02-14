@@ -1,5 +1,5 @@
 modLoader = "javafml"
-loaderVersion = "[31,)"
+loaderVersion = "[28,)"
 license = "LGPLv3"
 issueTrackerURL = "${issue}"
 
