@@ -5,12 +5,12 @@ plugins {
     id 'dev.architectury.loom' version '1.7-SNAPSHOT' apply false
 
     // https://docs.papermc.io/paper/dev/userdev
-    id 'io.papermc.paperweight.userdev' version '1.7.4' apply false
+    id 'io.papermc.paperweight.userdev' version '1.7.7' apply false
     // https://github.com/jpenilla/run-task
     id 'xyz.jpenilla.run-paper' version '2.3.1' apply false
 
     // https://github.com/Fallen-Breath/yamlang
-    id 'me.fallenbreath.yamlang' version '1.4.0'
+    id 'me.fallenbreath.yamlang' version '1.4.1'
 
     id 'com.vulpeus.mod_relocator'
 }
@@ -42,7 +42,6 @@ if (use_architectury_loom) {
 }
 if (use_paperweight) {
     apply plugin: 'io.papermc.paperweight.userdev'
-    apply plugin: 'xyz.jpenilla.run-paper'
 }
 
 static Number convertVersion(String version) {
@@ -123,14 +122,6 @@ dependencies {
     if (use_architectury_loom) {
         minecraft "com.mojang:minecraft:${project.minecraft_version}"
         mappings loom.officialMojangMappings()
-//        mappings loom.layered {
-//            mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
-//
-//            // https://github.com/architectury/architectury-loom/issues/214
-//            if (project.platform == 'neoforge' && project.hasProperty('yarn_mappings_patch')) {
-//                it.mappings("dev.architectury:yarn-mappings-patch-neoforge:${project.yarn_mappings_patch}")
-//            }
-//        }
     }
     if (use_paperweight) {
         paperweight.paperDevBundle("${project.minecraft_version}-R0.1-SNAPSHOT")
@@ -281,10 +272,6 @@ if (use_paperweight) {
         dependsOn(tasks.reobfJar)
     }
     tasks {
-        runServer {
-            dependsOn(tasks.assemble)
-            minecraftVersion(project.minecraft_version)
-        }
         reobfJar {
             // This is an example of how you might change the output location for reobfJar. It's recommended not to do this
             // for a variety of reasons, however it's asked frequently enough that an example of how to do it is included here.
