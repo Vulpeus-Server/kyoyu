@@ -2,10 +2,10 @@ plugins {
     id 'java'
 
     // https://github.com/architectury/architectury-loom
-    id 'dev.architectury.loom' version '1.7-SNAPSHOT' apply false
+    id 'dev.architectury.loom' version '1.9.426' apply false
 
     // https://docs.papermc.io/paper/dev/userdev
-    id 'io.papermc.paperweight.userdev' version '1.7.7' apply false
+    id 'io.papermc.paperweight.userdev' version '2.0.0-beta.14' apply false
     // https://github.com/jpenilla/run-task
     id 'xyz.jpenilla.run-paper' version '2.3.1' apply false
 
@@ -139,6 +139,7 @@ dependencies {
     }
     if (project.platform == 'paper') {
         compileOnly "io.papermc.paper:paper-api:${project.minecraft_version}-R0.1-SNAPSHOT"
+        paperweight.paperDevBundle("${project.minecraft_version}-R0.1-SNAPSHOT")
     }
     if (project.hasProperty('litematica_version')) {
         modImplementation "maven.modrinth:litematica:${project.litematica_version}"
@@ -168,9 +169,6 @@ if (use_architectury_loom) {
                 mixinConfigs = ['kyoyu.mixins.json', 'kyoyu.client.mixins.json']
             }
         }
-    }
-    remapJar {
-        remapperIsolation = true
     }
 }
 
@@ -270,13 +268,6 @@ jar {
 if (use_paperweight) {
     tasks.assemble {
         dependsOn(tasks.reobfJar)
-    }
-    tasks {
-        reobfJar {
-            // This is an example of how you might change the output location for reobfJar. It's recommended not to do this
-            // for a variety of reasons, however it's asked frequently enough that an example of how to do it is included here.
-            outputJar = layout.buildDirectory.file("libs/${project.mod_name}-${fullProjectVersion}.jar")
-        }
     }
 }
 
