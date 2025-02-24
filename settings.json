@@ -67,7 +67,7 @@
     },
     {
       "version": "1.21.4",
-      "platforms": "fabric\nforge\nneoforge",
+      "platforms": "fabric\nforge\npaper\nneoforge",
       "game_versions": "1.21.4"
     }
   ]
