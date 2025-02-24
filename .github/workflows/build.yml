@@ -49,8 +49,7 @@ jobs:
 
       - name: Merge Jars
         run: |
-          mkdir build/
-          mkdir build/libs/
+          mkdir -p build/libs/
           python .github/workflows/scripts/merger.py
         env:
           BUILD_ID: ${{ github.run_number }}
