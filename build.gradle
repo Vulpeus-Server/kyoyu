@@ -108,7 +108,7 @@ stonecutter.const('QUILT', project.platform == 'quilt')
 stonecutter.const('FORGE', project.platform == 'forge')
 stonecutter.const('NEOFORGE', project.platform == 'neoforge')
 stonecutter.const('PAPER', project.platform == 'paper')
-stonecutter.const('client', project.hasProperty('litematica_version') && project.hasProperty('malilib_version'))
+stonecutter.const('client', (project.hasProperty('litematica_version') && project.hasProperty('malilib_version')) || (project.hasProperty('forgematica_version') && project.hasProperty('mafglib_version')))
 stonecutter.swap("mod_version", "\"${fullArtifactVersion}\";")
 
 if (use_architectury_loom) {
@@ -141,15 +141,17 @@ dependencies {
         compileOnly "io.papermc.paper:paper-api:${project.minecraft_version}-R0.1-SNAPSHOT"
         paperweight.paperDevBundle("${project.minecraft_version}-R0.1-SNAPSHOT")
     }
-    if (project.hasProperty('litematica_version')) {
+    if (project.hasProperty('litematica_version') && project.hasProperty('malilib_version')) {
         modImplementation "maven.modrinth:litematica:${project.litematica_version}"
-    }
-    if (project.hasProperty('malilib_version')) {
         modImplementation "maven.modrinth:malilib:${project.malilib_version}"
         if (project.platform == 'fabric') {
             modImplementation(fabricApi.module("fabric-networking-api-v1", project.fabric_api_version))
             modImplementation(fabricApi.module("fabric-resource-loader-v0", project.fabric_api_version))
         }
+    }
+    if (project.hasProperty('forgematica_version') && project.hasProperty('mafglib_version')) {
+        modImplementation "maven.modrinth:forgematica:${project.forgematica_version}"
+        modImplementation "maven.modrinth:mafglib:${project.mafglib_version}"
     }
 
     implementation("com.google.code.gson:gson:${project.gson_version}")
