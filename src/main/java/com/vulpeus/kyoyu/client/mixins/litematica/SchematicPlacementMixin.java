@@ -35,7 +35,6 @@ import java.util.stream.Collectors;
 @Mixin(SchematicPlacement.class)
 public class SchematicPlacementMixin implements ISchematicPlacement {
 
-    @Shadow private BlockPos origin;
     @Unique
     private UUID kyoyu_id;
 
