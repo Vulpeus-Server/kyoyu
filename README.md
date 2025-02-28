@@ -98,4 +98,4 @@ Just keep in mind that not everything may be implemented 😄
 🇾 [yamlang](https://github.com/Fallen-Breath/yamlang) by Fallen-Breath <br>
 🇬 [Gson](https://github.com/google/gson) by google<br>
 
-<font size="-1">Last README Update `2025/02/28 09:49` UTC+9
+<small>Last README Update `2025/02/28 09:50` UTC+9
