@@ -128,9 +128,11 @@ public class SchematicPlacementMixin implements ISchematicPlacement {
             String subRegionName = subRegion.getName();
 
             BlockPos regionPos = blockPosMirror(
-                    subRegion.getPos().rotate(originRotation),
+                    subRegion.getPos(),
                     originMirror
-            ).offset(originPos);
+            )
+                    .rotate(originRotation)
+                    .offset(originPos);
 
             self.moveSubRegionTo(subRegionName, regionPos, null);
             self.setSubRegionMirror(subRegionName, subRegion.getMirror(), null);
