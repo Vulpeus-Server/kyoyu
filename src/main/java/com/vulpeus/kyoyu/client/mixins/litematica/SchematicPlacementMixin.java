@@ -20,6 +20,8 @@ import fi.dy.masa.malilib.util.JsonUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.block.Mirror;
+import net.minecraft.world.level.block.Rotation;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -91,6 +93,17 @@ public class SchematicPlacementMixin implements ISchematicPlacement {
         );
     }
 
+    @Unique
+    private BlockPos blockPosMirror(BlockPos pos, Mirror mirror) {
+        switch (mirror) {
+            case LEFT_RIGHT:
+                return new BlockPos(pos.getX(), pos.getY(), -pos.getZ());
+            case FRONT_BACK:
+                return new BlockPos(-pos.getX(), pos.getY(), pos.getZ());
+        }
+        return pos;
+    }
+
     @Override
     public void kyoyu$updateFromKyoyuPlacement(KyoyuPlacement kyoyuPlacement) {
         SchematicPlacement self = (SchematicPlacement) (Object) this;
@@ -99,19 +112,27 @@ public class SchematicPlacementMixin implements ISchematicPlacement {
             self.toggleLocked();
         }
 
-        self.setOrigin(kyoyuPlacement.getRegion().getPos(), null);
-        self.setMirror(kyoyuPlacement.getRegion().getMirror(), null);
-        self.setRotation(kyoyuPlacement.getRegion().getRotation(), null);
+        BlockPos originPos = kyoyuPlacement.getRegion().getPos();
+        Mirror originMirror = kyoyuPlacement.getRegion().getMirror();
+        Rotation originRotation = kyoyuPlacement.getRegion().getRotation();
+
+        self.setOrigin(originPos, null);
+        self.setMirror(originMirror, null);
+        self.setRotation(originRotation, null);
         if (self.ignoreEntities() != kyoyuPlacement.getRegion().ignoreEntities()) {
             self.toggleIgnoreEntities(null);
         }
         self.setEnabled(kyoyuPlacement.getRegion().isEnable());
 
-        BlockPos origin = kyoyuPlacement.getRegion().getPos();
         for (KyoyuRegion subRegion: kyoyuPlacement.getSubRegions()) {
             String subRegionName = subRegion.getName();
 
-            self.moveSubRegionTo(subRegionName, subRegion.getPos().offset(origin.getX(), origin.getY(), origin.getZ()), null);
+            BlockPos regionPos = blockPosMirror(
+                    subRegion.getPos().rotate(originRotation),
+                    originMirror
+            ).offset(originPos);
+
+            self.moveSubRegionTo(subRegionName, regionPos, null);
             self.setSubRegionMirror(subRegionName, subRegion.getMirror(), null);
             self.setSubRegionRotation(subRegionName, subRegion.getRotation(), null);
 
