@@ -59,7 +59,7 @@ Just keep in mind that not everything may be implemented 😄
 | Version         | Client |       |        |       |｜| Server |        |        |       |
 |----------------:|:------:|:-----:|:------:|:-----:|--|:------:|:------:|:------:|:-----:|
 |                 | **Fabric** <br><font size="-1"><small>Litematica</small></font> | **Forge** <br><font size="-1"><small>Litematica</small></font> | **Forge** <br><font size="-1"><small><a href="https://modrinth.com/mod/forgematica"  style="color: white;" target="_blank">Forgematica</a></small></font> | **NeoForge** <br><font size="-1"><small><a href="https://modrinth.com/mod/forgematica"  style="color: white;" target="_blank">Forgematica</a></small></font> |｜| **Fabric** | **Forge** | **NeoForge** | **Paper** |
-|   1.14 - 1.14.4 | ✅    | 🚫    | 🚫    | 🚫    |｜| ✅    | ⚠️    | 🚫    | 🚫    |
+|   1.14 - 1.14.4 | ✅    | 🚫    | 🚫    | 🚫    |｜| ✅    | ✅    | 🚫    | 🚫    |
 |   1.15 - 1.15.2 | ✅    | 🚫    | 🚫    | 🚫    |｜| ✅    | ✅    | 🚫    | 🚫    |
 |   1.16 - 1.16.5 | ✅    | ✅    | 🚫    | 🚫    |｜| ✅    | ✅    | 🚫    | 🚫    |
 |   1.17 - 1.17.1 | ✅    | 🚫    | ✅    | 🚫    |｜| ✅    | ✅    | 🚫    | 🚫    |
