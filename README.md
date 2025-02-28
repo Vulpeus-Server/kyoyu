@@ -56,24 +56,23 @@ Just keep in mind that not everything may be implemented 😄
 
 ## Versions
 
-| Version         | Client     |           |｜| Server     |           |              |           |
-|----------------:|------------|-----------|--|------------|-----------|--------------|-----------|
-|                 | **Fabric** | **Forge** |｜| **Fabric** | **Forge** | **NeoForge** | **Paper** |
-|   1.14 - 1.14.4 | ✅        | 🚫        |｜| ✅        | ⚠️        | 🚫          | 🚫       |
-|   1.15 - 1.15.2 | ✅        | 🚫        |｜| ✅        | ✅        | 🚫          | 🚫       |
-|   1.16 - 1.16.5 | ✅        | ⚠️<a><sup>[2]</sup></a>|｜| ✅        | ✅        | 🚫          | 🚫       |
-|   1.17 - 1.17.1 | ✅        | 🚫        |｜| ✅        | ✅        | 🚫          | 🚫       |
-|   1.18 - 1.18.2 | ✅        | 🚫        |｜| ✅        | ✅        | 🚫          | 🚫       |
-|   1.19 - 1.19.2 | ✅        | 🚫        |｜| ✅        | ✅        | 🚫          | ⚠️<a><sup>[3]</sup></a>|
-| 1.19.3 - 1.19.4 | ✅        | 🚫        |｜| ✅        | ✅        | 🚫          | ⚠️<a><sup>[3]</sup></a>|
-|   1.20 - 1.20.1 | ✅        | 🚫        |｜| ✅        | ✅        | 🚫          | ⚠️<a><sup>[3]</sup></a>|
-|          1.20.2 | ✅        | 🚫        |｜| ✅        | ✅        | 🚫          | ⚠️<a><sup>[3]</sup></a>|
-| 1.20.3 - 1.20.4 | ✅        | 🚫        |｜| ✅        | ✅        | 🚫          | ⚠️<a><sup>[3]</sup></a>|
-| 1.20.5 - 1.20.6 | ✅        | 🚫        |｜| ✅        | ⚠️        | ⚠️          | ⚠️<a><sup>[3]</sup></a>|
-|   1.21 - 1.21.1 | ✅        | 🚫        |｜| ✅        | ⚠️        | ⚠️          | ⚠️<a><sup>[3]</sup></a>|
-| 1.21.2 - 1.21.3 | ✅        | 🚫        |｜| ✅        | ⚠️        | ⚠️          | ⚠️<a><sup>[3]</sup></a>|
-|          1.21.4 | ✅        | 🚫        |｜| ✅        | ⚠️        | ⚠️          | 🚫       |
-||<a href="https://fabricmc.net/" target="_blank"><img src="https://raw.githubusercontent.com/FabricMC/fabric/refs/heads/1.21.4/src/main/resources/assets/fabric/icon.png" width="18px" alt="Fabric"></a>|<a href="https://files.minecraftforge.net/net/minecraftforge/forge/" target="_blank"><img src="https://raw.githubusercontent.com/MinecraftForge/MinecraftForge/refs/heads/1.21.x/icon.ico" width="18px" alt="Forge"></a>||<a href="https://fabricmc.net/" target="_blank"><img src="https://raw.githubusercontent.com/FabricMC/fabric/refs/heads/1.21.4/src/main/resources/assets/fabric/icon.png" width="18px" alt="Fabric"></a>|<a href="https://files.minecraftforge.net/net/minecraftforge/forge/" target="_blank"><img src="https://raw.githubusercontent.com/MinecraftForge/MinecraftForge/refs/heads/1.21.x/icon.ico" width="18px" alt="Forge"></a>|<a href="https://neoforged.net/" target="_blank"><img src="https://raw.githubusercontent.com/neoforged/NeoForge/ac7a3bc021d604509763dd8d310aefc8fc4a4039/.idea/icon.svg" width="18px" alt="NeoForge"></a>|<a href="https://papermc.io/software/paper"  target="_blank"><img src="https://forums.papermc.io/data/assets/logo/paperlogo512.png" width="18px" alt="Paper"></a>|
+| Version         | Client |       |        |       |｜| Server |        |        |       |
+|----------------:|--------|-------|--------|-------|--|--------|--------|--------|-------|
+|                 | **Fabric** <br><font size="-1">Litematica</font> | **Forge** <br><font size="-1">Litematica</font> | **Forge** <br><font size="-1"><a href="https://modrinth.com/mod/forgematica"  style="color: white;" target="_blank">Forgematica</a></font> | **NeoForge** <br><font size="-1"><a href="https://modrinth.com/mod/forgematica"  style="color: white;" target="_blank">Forgematica</a></font> |｜| **Fabric** | **Forge** | **NeoForge** | **Paper** |
+|   1.14 - 1.14.4 | ✅    | 🚫    | 🚫    | 🚫    |｜| ✅    | ⚠️    | 🚫    | 🚫    |
+|   1.15 - 1.15.2 | ✅    | 🚫    | 🚫    | 🚫    |｜| ✅    | ✅    | 🚫    | 🚫    |
+|   1.16 - 1.16.5 | ✅    | ✅    | 🚫    | 🚫    |｜| ✅    | ✅    | 🚫    | 🚫    |
+|   1.17 - 1.17.1 | ✅    | 🚫    | ✅    | 🚫    |｜| ✅    | ✅    | 🚫    | 🚫    |
+|   1.18 - 1.18.2 | ✅    | 🚫    | ✅    | 🚫    |｜| ✅    | ✅    | 🚫    | 🚫    |
+|   1.19 - 1.19.2 | ✅    | 🚫    | ✅    | 🚫    |｜| ✅    | ✅    | 🚫    | ⚠️<a><sup>[3]</sup></a>|
+| 1.19.3 - 1.19.4 | ✅    | 🚫    | ✅    | 🚫    |｜| ✅    | ✅    | 🚫    | ⚠️<a><sup>[3]</sup></a>|
+|   1.20 - 1.20.1 | ✅    | 🚫    | ✅    | 🚫    |｜| ✅    | ✅    | 🚫    | ⚠️<a><sup>[3]</sup></a>|
+|          1.20.2 | ✅    | 🚫    | 🚫    | 🚫    |｜| ✅    | ✅    | 🚫    | ⚠️<a><sup>[3]</sup></a>|
+| 1.20.3 - 1.20.4 | ✅    | 🚫    | 🚫    | ✅    |｜| ✅    | ✅    | 🚫    | ⚠️<a><sup>[3]</sup></a>|
+| 1.20.5 - 1.20.6 | ✅    | 🚫    | 🚫    | ✅    |｜| ✅    | ⚠️    | ⚠️    | ⚠️<a><sup>[3]</sup></a>|
+|   1.21 - 1.21.1 | ✅    | 🚫    | 🚫    | ✅    |｜| ✅    | ⚠️    | ⚠️    | ⚠️<a><sup>[3]</sup></a>|
+| 1.21.2 - 1.21.3 | ✅    | 🚫    | 🚫    | ✅    |｜| ✅    | ⚠️    | ⚠️    | ⚠️<a><sup>[3]</sup></a>|
+|          1.21.4 | ✅    | 🚫    | 🚫    | ✅    |｜| ✅    | ⚠️    | ⚠️    | ⚠️<a><sup>[3]</sup></a>|
 
 <a>[2]</a>: This is only compatible with <a href="https://modrinth.com/mod/litematica/versions?g=1.16.5&l=forge" target="_blank">builds published by Litematica</a><br>
 <a>[3]</a>: It launches, but cannot share the schematic.
@@ -99,4 +98,4 @@ Just keep in mind that not everything may be implemented 😄
 🇾 [yamlang](https://github.com/Fallen-Breath/yamlang) by Fallen-Breath <br>
 🇬 [Gson](https://github.com/google/gson) by google<br>
 
-<small>Last README Update `2025/02/08 08:33` UTC+9
+<font size="-1">Last README Update `2025/02/28 09:38` UTC+9
