@@ -57,8 +57,8 @@ Just keep in mind that not everything may be implemented 😄
 ## Versions
 
 | Version         | Client |       |        |       |｜| Server |        |        |       |
-|----------------:|--------|-------|--------|-------|--|--------|--------|--------|-------|
-|                 | **Fabric** <br><font size="-1">Litematica</font> | **Forge** <br><font size="-1">Litematica</font> | **Forge** <br><font size="-1"><a href="https://modrinth.com/mod/forgematica"  style="color: white;" target="_blank">Forgematica</a></font> | **NeoForge** <br><font size="-1"><a href="https://modrinth.com/mod/forgematica"  style="color: white;" target="_blank">Forgematica</a></font> |｜| **Fabric** | **Forge** | **NeoForge** | **Paper** |
+|----------------:|:------:|:-----:|:------:|:-----:|--|:------:|:------:|:------:|:-----:|
+|                 | **Fabric** <br><font size="-1"><small>Litematica</small></font> | **Forge** <br><font size="-1"><small>Litematica</small></font> | **Forge** <br><font size="-1"><small><a href="https://modrinth.com/mod/forgematica"  style="color: white;" target="_blank">Forgematica</a></small></font> | **NeoForge** <br><font size="-1"><small><a href="https://modrinth.com/mod/forgematica"  style="color: white;" target="_blank">Forgematica</a></small></font> |｜| **Fabric** | **Forge** | **NeoForge** | **Paper** |
 |   1.14 - 1.14.4 | ✅    | 🚫    | 🚫    | 🚫    |｜| ✅    | ⚠️    | 🚫    | 🚫    |
 |   1.15 - 1.15.2 | ✅    | 🚫    | 🚫    | 🚫    |｜| ✅    | ✅    | 🚫    | 🚫    |
 |   1.16 - 1.16.5 | ✅    | ✅    | 🚫    | 🚫    |｜| ✅    | ✅    | 🚫    | 🚫    |
@@ -98,4 +98,4 @@ Just keep in mind that not everything may be implemented 😄
 🇾 [yamlang](https://github.com/Fallen-Breath/yamlang) by Fallen-Breath <br>
 🇬 [Gson](https://github.com/google/gson) by google<br>
 
-<font size="-1">Last README Update `2025/02/28 09:38` UTC+9
+<font size="-1">Last README Update `2025/02/28 09:49` UTC+9
