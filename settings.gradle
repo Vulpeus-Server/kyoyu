@@ -33,11 +33,11 @@ stonecutter {
         mc("1.19.4", "fabric", "forge", "paper")
         mc("1.20.1", "fabric", "forge", "paper")
         mc("1.20.2", "fabric", "forge", "paper")
-        mc("1.20.4", "fabric", "forge", "paper")
-        mc("1.20.6", "fabric", "forge", "neoforge", "paper")
-        mc("1.21.1", "fabric", "forge", "neoforge", "paper")
-        mc("1.21.3", "fabric", "forge", "neoforge", "paper")
-        mc("1.21.4", "fabric", "forge", "neoforge", "paper")
+        mc("1.20.4", "fabric", "neoforge", "paper")
+        mc("1.20.6", "fabric", "neoforge", "paper")
+        mc("1.21.1", "fabric", "neoforge", "paper")
+        mc("1.21.3", "fabric", "neoforge", "paper")
+        mc("1.21.4", "fabric", "neoforge", "paper")
     }
     create(rootProject)
 }

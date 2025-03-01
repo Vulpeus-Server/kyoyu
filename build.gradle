@@ -60,11 +60,7 @@ JavaVersion JAVA_COMPATIBILITY
 JavaVersion MIXIN_COMPATIBILITY
 if (mcVersion >= 12005) {
     JAVA_COMPATIBILITY = JavaVersion.VERSION_21
-    if (project.platform == 'forge' && mcVersion <= 12006) {
-        MIXIN_COMPATIBILITY = JavaVersion.VERSION_17
-    } else {
-        MIXIN_COMPATIBILITY = JavaVersion.VERSION_21
-    }
+    MIXIN_COMPATIBILITY = JavaVersion.VERSION_21
 } else if (mcVersion >= 11800) {
     JAVA_COMPATIBILITY = JavaVersion.VERSION_17
     MIXIN_COMPATIBILITY = JavaVersion.VERSION_17
