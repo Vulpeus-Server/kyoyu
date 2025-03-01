@@ -56,23 +56,23 @@ Just keep in mind that not everything may be implemented 😄
 
 ## Versions
 
-| Version         | Client |       |        |       |｜| Server |        |        |       |
-|----------------:|:------:|:-----:|:------:|:-----:|--|:------:|:------:|:------:|:-----:|
-|                 | **Fabric** <br><font size="-1"><small>Litematica</small></font> | **Forge** <br><font size="-1"><small>Litematica</small></font> | **Forge** <br><font size="-1"><small><a href="https://modrinth.com/mod/forgematica"  style="color: white;" target="_blank">Forgematica</a></small></font> | **NeoForge** <br><font size="-1"><small><a href="https://modrinth.com/mod/forgematica"  style="color: white;" target="_blank">Forgematica</a></small></font> |｜| **Fabric** | **Forge** | **NeoForge** | **Paper** |
-|   1.14 - 1.14.4 | ✅    | 🚫    | 🚫    | 🚫    |｜| ✅    | ✅    | 🚫    | 🚫    |
-|   1.15 - 1.15.2 | ✅    | 🚫    | 🚫    | 🚫    |｜| ✅    | ✅    | 🚫    | 🚫    |
-|   1.16 - 1.16.5 | ✅    | ✅    | 🚫    | 🚫    |｜| ✅    | ✅    | 🚫    | 🚫    |
-|   1.17 - 1.17.1 | ✅    | 🚫    | ✅    | 🚫    |｜| ✅    | ✅    | 🚫    | 🚫    |
-|   1.18 - 1.18.2 | ✅    | 🚫    | ✅    | 🚫    |｜| ✅    | ✅    | 🚫    | 🚫    |
-|   1.19 - 1.19.2 | ✅    | 🚫    | ✅    | 🚫    |｜| ✅    | ✅    | 🚫    | ⚠️<a><sup>[3]</sup></a>|
-| 1.19.3 - 1.19.4 | ✅    | 🚫    | ✅    | 🚫    |｜| ✅    | ✅    | 🚫    | ⚠️<a><sup>[3]</sup></a>|
-|   1.20 - 1.20.1 | ✅    | 🚫    | ✅    | 🚫    |｜| ✅    | ✅    | 🚫    | ⚠️<a><sup>[3]</sup></a>|
-|          1.20.2 | ✅    | 🚫    | 🚫    | 🚫    |｜| ✅    | ✅    | 🚫    | ⚠️<a><sup>[3]</sup></a>|
-| 1.20.3 - 1.20.4 | ✅    | 🚫    | 🚫    | ✅    |｜| ✅    | ✅    | 🚫    | ⚠️<a><sup>[3]</sup></a>|
-| 1.20.5 - 1.20.6 | ✅    | 🚫    | 🚫    | ✅    |｜| ✅    | ⚠️    | ⚠️    | ⚠️<a><sup>[3]</sup></a>|
-|   1.21 - 1.21.1 | ✅    | 🚫    | 🚫    | ✅    |｜| ✅    | ⚠️    | ⚠️    | ⚠️<a><sup>[3]</sup></a>|
-| 1.21.2 - 1.21.3 | ✅    | 🚫    | 🚫    | ✅    |｜| ✅    | ⚠️    | ⚠️    | ⚠️<a><sup>[3]</sup></a>|
-|          1.21.4 | ✅    | 🚫    | 🚫    | ✅    |｜| ✅    | ⚠️    | ⚠️    | ⚠️<a><sup>[3]</sup></a>|
+| Version         | Client |        |       |｜| Server |        |        |       |
+|----------------:|:------:|:------:|:-----:|--|:------:|:------:|:------:|:-----:|
+|                 | **Fabric** <br><font size="-1"><small>Litematica</small></font> | **Forge** <br><font size="-1"><small><a href="https://modrinth.com/mod/forgematica"  style="color: white;" target="_blank">Forgematica</a></small></font> | **NeoForge** <br><font size="-1"><small><a href="https://modrinth.com/mod/forgematica"  style="color: white;" target="_blank">Forgematica</a></small></font> |｜| **Fabric** | **Forge** | **NeoForge** | **Paper** |
+|   1.14 - 1.14.4 | ✅    | 🚫    | 🚫    |｜| ✅    | ✅    | 🚫    | 🚫    |
+|   1.15 - 1.15.2 | ✅    | 🚫    | 🚫    |｜| ✅    | ✅    | 🚫    | 🚫    |
+|   1.16 - 1.16.5 | ✅    | ✅    | 🚫    |｜| ✅    | ✅    | 🚫    | 🚫    |
+|   1.17 - 1.17.1 | ✅    | ✅    | 🚫    |｜| ✅    | ✅    | 🚫    | 🚫    |
+|   1.18 - 1.18.2 | ✅    | ✅    | 🚫    |｜| ✅    | ✅    | 🚫    | 🚫    |
+|   1.19 - 1.19.2 | ✅    | ✅    | 🚫    |｜| ✅    | ✅    | 🚫    | 🚫    |
+| 1.19.3 - 1.19.4 | ✅    | ✅    | 🚫    |｜| ✅    | ✅    | 🚫    | ⚠️<a><sup>[3]</sup></a>|
+|   1.20 - 1.20.1 | ✅    | ✅    | 🚫    |｜| ✅    | ✅    | 🚫    | ⚠️<a><sup>[3]</sup></a>|
+|          1.20.2 | ✅    | 🚫    | 🚫    |｜| ✅    | ✅    | 🚫    | ⚠️<a><sup>[3]</sup></a>|
+| 1.20.3 - 1.20.4 | ✅    | 🚫    | ✅    |｜| ✅    | 🚫    | ✅    | ⚠️<a><sup>[3]</sup></a>|
+| 1.20.5 - 1.20.6 | ✅    | 🚫    | ✅    |｜| ✅    | 🚫    | ✅    | ⚠️<a><sup>[3]</sup></a>|
+|   1.21 - 1.21.1 | ✅    | 🚫    | ✅    |｜| ✅    | 🚫    | ✅    | ⚠️<a><sup>[3]</sup></a>|
+| 1.21.2 - 1.21.3 | ✅    | 🚫    | ✅    |｜| ✅    | 🚫    | ✅    | ⚠️<a><sup>[3]</sup></a>|
+|          1.21.4 | ✅    | 🚫    | ✅    |｜| ✅    | 🚫    | ✅    | ⚠️<a><sup>[3]</sup></a>|
 
 <a>[2]</a>: This is only compatible with <a href="https://modrinth.com/mod/litematica/versions?g=1.16.5&l=forge" target="_blank">builds published by Litematica</a><br>
 <a>[3]</a>: It launches, but cannot share the schematic.
