@@ -14,7 +14,7 @@
 ***[Discord server is now open!](https://discord.gg/RcqXRsVcSr)***
 
 This mod shares .litematic files with other players.<br>
-Litematica support. Inspired by Syncmatica.
+Litematica and Forgematica support. Inspired by Syncmatica.
 
 This project is still a work in progress, so feel free to send your feature requests or report any issues on [GitHub](https://github.com/Vulpeus-Server/kyoyu/issues)! <br>
 Just keep in mind that not everything may be implemented 😄
