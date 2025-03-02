@@ -47,27 +47,27 @@
     },
     {
       "version": "1.20.4",
-      "platforms": "fabric\nforge\npaper",
+      "platforms": "fabric\npaper\nneoforge",
       "game_versions": "1.20.3\n1.20.4"
     },
     {
       "version": "1.20.6",
-      "platforms": "fabric\nforge\npaper\nneoforge",
+      "platforms": "fabric\npaper\nneoforge",
       "game_versions": "1.20.5\n1.20.6"
     },
     {
       "version": "1.21.1",
-      "platforms": "fabric\nforge\npaper\nneoforge",
+      "platforms": "fabric\npaper\nneoforge",
       "game_versions": "1.21\n1.21.1"
     },
     {
       "version": "1.21.3",
-      "platforms": "fabric\nforge\npaper\nneoforge",
+      "platforms": "fabric\npaper\nneoforge",
       "game_versions": "1.21.2\n1.21.3"
     },
     {
       "version": "1.21.4",
-      "platforms": "fabric\nforge\npaper\nneoforge",
+      "platforms": "fabric\npaper\nneoforge",
       "game_versions": "1.21.4"
     }
   ]

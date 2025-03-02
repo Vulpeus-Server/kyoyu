@@ -27,11 +27,9 @@ Just keep in mind that not everything may be implemented 😄
 
 ### Client Side
 
-1. Install `Fabric` or (`Forge`)<a><sup>[1]</sup></a> to the instance.
+1. Install `Fabric`, `Forge`, or `NeoForge` to the instance.
 2. Add the Kyoyu Mod and its dependency mods to the Mods folder.
 3. Launch!
-
-<a>[1]</a>: 1.16.5 Only
 
 <b><font color=#F9AA00>It is possible to join a server without Kyoyu installed using a client with Kyoyu, but you will not be able to use Kyoyu's features!</font></b>
 
@@ -52,37 +50,38 @@ Just keep in mind that not everything may be implemented 😄
 | Loader        | Client                          | Server     |
 |---------------|---------------------------------|------------|
 | **Fabric**    | Malilib, Litematica, Fabric API | Fabric API |
-| **Forge**     | Malilib, Litematica             |            |
+| **Forge**     | MaFgLib, Forgematica            |            |
+| **NeoForge**  | MaFgLib, Forgematica            |            |
 
 ## Versions
 
-| Version         | Client     |           |｜| Server     |           |              |           |
-|----------------:|------------|-----------|--|------------|-----------|--------------|-----------|
-|                 | **Fabric** | **Forge** |｜| **Fabric** | **Forge** | **NeoForge** | **Paper** |
-|   1.14 - 1.14.4 | ✅        | 🚫        |｜| ✅        | ⚠️        | 🚫          | 🚫       |
-|   1.15 - 1.15.2 | ✅        | 🚫        |｜| ✅        | ✅        | 🚫          | 🚫       |
-|   1.16 - 1.16.5 | ✅        | ⚠️<a><sup>[2]</sup></a>|｜| ✅        | ✅        | 🚫          | 🚫       |
-|   1.17 - 1.17.1 | ✅        | 🚫        |｜| ✅        | ✅        | 🚫          | 🚫       |
-|   1.18 - 1.18.2 | ✅        | 🚫        |｜| ✅        | ✅        | 🚫          | 🚫       |
-|   1.19 - 1.19.2 | ✅        | 🚫        |｜| ✅        | ✅        | 🚫          | ⚠️<a><sup>[3]</sup></a>|
-| 1.19.3 - 1.19.4 | ✅        | 🚫        |｜| ✅        | ✅        | 🚫          | ⚠️<a><sup>[3]</sup></a>|
-|   1.20 - 1.20.1 | ✅        | 🚫        |｜| ✅        | ✅        | 🚫          | ⚠️<a><sup>[3]</sup></a>|
-|          1.20.2 | ✅        | 🚫        |｜| ✅        | ✅        | 🚫          | ⚠️<a><sup>[3]</sup></a>|
-| 1.20.3 - 1.20.4 | ✅        | 🚫        |｜| ✅        | ✅        | 🚫          | ⚠️<a><sup>[3]</sup></a>|
-| 1.20.5 - 1.20.6 | ✅        | 🚫        |｜| ✅        | ⚠️        | ⚠️          | ⚠️<a><sup>[3]</sup></a>|
-|   1.21 - 1.21.1 | ✅        | 🚫        |｜| ✅        | ⚠️        | ⚠️          | ⚠️<a><sup>[3]</sup></a>|
-| 1.21.2 - 1.21.3 | ✅        | 🚫        |｜| ✅        | ⚠️        | ⚠️          | ⚠️<a><sup>[3]</sup></a>|
-|          1.21.4 | ✅        | 🚫        |｜| ✅        | ⚠️        | ⚠️          | 🚫       |
-||<a href="https://fabricmc.net/" target="_blank"><img src="https://raw.githubusercontent.com/FabricMC/fabric/refs/heads/1.21.4/src/main/resources/assets/fabric/icon.png" width="18px" alt="Fabric"></a>|<a href="https://files.minecraftforge.net/net/minecraftforge/forge/" target="_blank"><img src="https://raw.githubusercontent.com/MinecraftForge/MinecraftForge/refs/heads/1.21.x/icon.ico" width="18px" alt="Forge"></a>||<a href="https://fabricmc.net/" target="_blank"><img src="https://raw.githubusercontent.com/FabricMC/fabric/refs/heads/1.21.4/src/main/resources/assets/fabric/icon.png" width="18px" alt="Fabric"></a>|<a href="https://files.minecraftforge.net/net/minecraftforge/forge/" target="_blank"><img src="https://raw.githubusercontent.com/MinecraftForge/MinecraftForge/refs/heads/1.21.x/icon.ico" width="18px" alt="Forge"></a>|<a href="https://neoforged.net/" target="_blank"><img src="https://raw.githubusercontent.com/neoforged/NeoForge/ac7a3bc021d604509763dd8d310aefc8fc4a4039/.idea/icon.svg" width="18px" alt="NeoForge"></a>|<a href="https://papermc.io/software/paper"  target="_blank"><img src="https://forums.papermc.io/data/assets/logo/paperlogo512.png" width="18px" alt="Paper"></a>|
+| Version         | Client |        |       |｜| Server |        |        |       |
+|----------------:|:------:|:------:|:-----:|--|:------:|:------:|:------:|:-----:|
+|                 | **Fabric** <br><font size="-1"><small>Litematica</small></font> | **Forge** <br><font size="-1"><small><a href="https://modrinth.com/mod/forgematica"  style="color: white;" target="_blank">Forgematica</a></small></font> | **NeoForge** <br><font size="-1"><small><a href="https://modrinth.com/mod/forgematica"  style="color: white;" target="_blank">Forgematica</a></small></font> |｜| **Fabric** | **Forge** | **NeoForge** | **Paper** |
+|   1.14 - 1.14.4 | ✅    | 🚫    | 🚫    |｜| ✅    | ✅    | 🚫    | 🚫    |
+|   1.15 - 1.15.2 | ✅    | 🚫    | 🚫    |｜| ✅    | ✅    | 🚫    | 🚫    |
+|   1.16 - 1.16.5 | ✅    | ✅    | 🚫    |｜| ✅    | ✅    | 🚫    | 🚫    |
+|   1.17 - 1.17.1 | ✅    | ✅    | 🚫    |｜| ✅    | ✅    | 🚫    | 🚫    |
+|   1.18 - 1.18.2 | ✅    | ✅    | 🚫    |｜| ✅    | ✅    | 🚫    | 🚫    |
+|   1.19 - 1.19.2 | ✅    | ✅    | 🚫    |｜| ✅    | ✅    | 🚫    | 🚫    |
+| 1.19.3 - 1.19.4 | ✅    | ✅    | 🚫    |｜| ✅    | ✅    | 🚫    | ⚠️<a><sup>[3]</sup></a>|
+|   1.20 - 1.20.1 | ✅    | ✅    | 🚫    |｜| ✅    | ✅    | 🚫    | ⚠️<a><sup>[3]</sup></a>|
+|          1.20.2 | ✅    | 🚫    | 🚫    |｜| ✅    | ✅    | 🚫    | ⚠️<a><sup>[3]</sup></a>|
+| 1.20.3 - 1.20.4 | ✅    | 🚫    | ⚠️<a><sup>[1]</sup></a>    |｜| ✅    | 🚫    | ⚠️<a><sup>[1]</sup></a>| ⚠️<a><sup>[3]</sup></a>|
+| 1.20.5 - 1.20.6 | ✅    | 🚫    | ⚠️<a><sup>[2]</sup></a>    |｜| ✅    | 🚫    | ⚠️<a><sup>[1]</sup></a>    | ⚠️<a><sup>[3]</sup></a>|
+|   1.21 - 1.21.1 | ✅    | 🚫    | ⚠️<a><sup>[2]</sup></a>    |｜| ✅    | 🚫    | ⚠️<a><sup>[1]</sup></a>    | ⚠️<a><sup>[3]</sup></a>|
+| 1.21.2 - 1.21.3 | ✅    | 🚫    | ⚠️<a><sup>[2]</sup></a>    |｜| ✅    | 🚫    | ⚠️<a><sup>[1]</sup></a>    | ⚠️<a><sup>[3]</sup></a>|
+|          1.21.4 | ✅    | 🚫    | ⚠️<a><sup>[2]</sup></a>    |｜| ✅    | 🚫    | ⚠️<a><sup>[1]</sup></a>    | ⚠️<a><sup>[3]</sup></a>|
 
-<a>[2]</a>: This is only compatible with <a href="https://modrinth.com/mod/litematica/versions?g=1.16.5&l=forge" target="_blank">builds published by Litematica</a><br>
-<a>[3]</a>: It launches, but cannot share the schematic.
+<a>[1]</a>: Doesn't work<br>
+<a>[2]</a>: Cannot join the server<br>
+<a>[3]</a>: It launches, but cannot share the schematic<br>
 
 ## Roadmap (WIP)
 
-- [ ] [legacy litematica (Ornithe)](https://github.com/maruohon/litematica/tree/ornithe/1.12.2) support?
-- [ ] [Forgematica](https://modrinth.com/mod/forgematica) support?
-- [ ] [Paper](https://papermc.io/) plugin support? (retry)
+- [ ] [legacy litematica (Ornithe)](https://github.com/maruohon/litematica/tree/ornithe/1.12.2) support
+- [x] [Forgematica](https://modrinth.com/mod/forgematica) support
+- [ ] [Paper](https://papermc.io/) plugin support (retry)
 - [ ] Client only depend (malilib, litematica)
 - [ ] GUI improvements
 - [x] Merged jars
@@ -99,4 +98,4 @@ Just keep in mind that not everything may be implemented 😄
 🇾 [yamlang](https://github.com/Fallen-Breath/yamlang) by Fallen-Breath <br>
 🇬 [Gson](https://github.com/google/gson) by google<br>
 
-<small>Last README Update `2025/02/08 08:33` UTC+9
+<small>Last README Update `2025/03/02 14:48` UTC+9

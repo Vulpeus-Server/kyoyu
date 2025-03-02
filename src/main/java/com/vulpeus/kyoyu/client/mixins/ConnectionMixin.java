@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(Connection.class)
 public class ConnectionMixin {
-    @Inject(method = "channelInactive", at = @At("HEAD"))
+    @Inject(method = "channelInactive", at = @At("HEAD"), remap = false)
     private void onLeave(ChannelHandlerContext channelHandlerContext, CallbackInfo ci) {
         if (KyoyuClient.getInstance() == null) return;
         Kyoyu.LOGGER.info("Leave from Server");

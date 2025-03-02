@@ -23,7 +23,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.Rotation;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -37,7 +36,6 @@ import java.util.stream.Collectors;
 @Mixin(SchematicPlacement.class)
 public class SchematicPlacementMixin implements ISchematicPlacement {
 
-    @Shadow private BlockPos origin;
     @Unique
     private UUID kyoyu_id;
 
