@@ -77,9 +77,9 @@ Just keep in mind that not everything may be implemented 😄
 
 ## Roadmap (WIP)
 
-- [ ] [legacy litematica (Ornithe)](https://github.com/maruohon/litematica/tree/ornithe/1.12.2) support?
-- [ ] [Forgematica](https://modrinth.com/mod/forgematica) support?
-- [ ] [Paper](https://papermc.io/) plugin support? (retry)
+- [ ] [legacy litematica (Ornithe)](https://github.com/maruohon/litematica/tree/ornithe/1.12.2) support
+- [x] [Forgematica](https://modrinth.com/mod/forgematica) support
+- [ ] [Paper](https://papermc.io/) plugin support (retry)
 - [ ] Client only depend (malilib, litematica)
 - [ ] GUI improvements
 - [x] Merged jars
@@ -96,4 +96,4 @@ Just keep in mind that not everything may be implemented 😄
 🇾 [yamlang](https://github.com/Fallen-Breath/yamlang) by Fallen-Breath <br>
 🇬 [Gson](https://github.com/google/gson) by google<br>
 
-<small>Last README Update `2025/03/01 14:57` UTC+9
+<small>Last README Update `2025/03/02 13:39` UTC+9
