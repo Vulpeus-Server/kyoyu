@@ -40,7 +40,11 @@ public class KyoyuMod
                 //? if PAPER
                 /* false */
         );
+
+        //? if FABRIC
         KyoyuPacketPayload.register();
+        //? if NEOFORGE
+        /* modBus.register(KyoyuPacketPayload.class); */
 
         Kyoyu.loadConfig();
     }

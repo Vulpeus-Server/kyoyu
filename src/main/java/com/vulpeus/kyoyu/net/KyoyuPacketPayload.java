@@ -73,12 +73,21 @@ public class KyoyuPacketPayload
         output.writeByteArray(content);
     }
 
-    public static void register() {
-        //? if FABRIC && >=1.20.6 {
+    //? if FABRIC && >=1.20.6 {
+        public static void register() {
             net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry.playC2S().register(TYPE, CODEC);
             net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry.playS2C().register(TYPE, CODEC);
-        //?}
-    }
+        }
+    //?} elif NEOFORGE && >=1.20.6 {
+    /*
+        @net.neoforged.bus.api.SubscribeEvent
+        public static void register(net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent event) {
+            event.registrar("1").optional().playBidirectional(TYPE, CODEC, null);
+        }
+    */
+    //?} else {
+        public static void register(Object ...arg) {}
+    //?}
 
     public void sendC2S() {
         //? !PAPER {
