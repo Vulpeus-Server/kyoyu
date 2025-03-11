@@ -23,14 +23,14 @@ repositories {
         url 'https://www.cursemaven.com'
     }
     maven {
-        url = "https://api.modrinth.com/maven"
+        url 'https://api.modrinth.com/maven'
     }
     maven {
         url 'https://maven.neoforged.net/releases'
     }
     maven {
-        name = 'papermc'
-        url = 'https://repo.papermc.io/repository/maven-public/'
+        name 'papermc'
+        url 'https://repo.papermc.io/repository/maven-public/'
     }
 }
 
