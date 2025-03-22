@@ -8,6 +8,7 @@
     "ServerboundCustomPayloadPacketIMixin",
     //? >=1.20.2 <=1.20.4
     "ServerboundCustomPayloadPacketMixin",
+    "CustomPacketPayload1Mixin",
     "PlayerListMixin",
     "ServerGamePacketListenerImplMixin"
   ],

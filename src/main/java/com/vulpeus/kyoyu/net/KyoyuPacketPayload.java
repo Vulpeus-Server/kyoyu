@@ -51,7 +51,7 @@ public class KyoyuPacketPayload
     public static final ResourceLocation identifier = CompatibleUtils.identifier(Kyoyu.MOD_ID, "kyoyu");
 
     //? if >=1.20.6 {
-        private static final StreamCodec<RegistryFriendlyByteBuf, KyoyuPacketPayload> CODEC = StreamCodec.composite(
+        public static final StreamCodec<RegistryFriendlyByteBuf, KyoyuPacketPayload> CODEC = StreamCodec.composite(
                 ByteBufCodecs.BYTE_ARRAY, KyoyuPacketPayload::content, KyoyuPacketPayload::new
         );
         private static final Type<KyoyuPacketPayload> TYPE = new Type<>(identifier);
@@ -72,22 +72,6 @@ public class KyoyuPacketPayload
     public void write(FriendlyByteBuf output) {
         output.writeByteArray(content);
     }
-
-    //? if FABRIC && >=1.20.6 {
-        public static void register() {
-            net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry.playC2S().register(TYPE, CODEC);
-            net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry.playS2C().register(TYPE, CODEC);
-        }
-    //?} elif NEOFORGE && >=1.20.6 {
-    /*
-        @net.neoforged.bus.api.SubscribeEvent
-        public static void register(net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent event) {
-            event.registrar("1").optional().playBidirectional(TYPE, CODEC, null);
-        }
-    */
-    //?} else {
-        public static void register(Object ...arg) {}
-    //?}
 
     public void sendC2S() {
         //? !PAPER {

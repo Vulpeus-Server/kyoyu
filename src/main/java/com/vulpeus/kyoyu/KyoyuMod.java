@@ -1,7 +1,5 @@
 package com.vulpeus.kyoyu;
 
-import com.vulpeus.kyoyu.net.KyoyuPacketPayload;
-
 //? if FORGE
 /* import net.minecraftforge.fml.common.Mod; */
 
@@ -40,11 +38,6 @@ public class KyoyuMod
                 //? if PAPER
                 /* false */
         );
-
-        //? if FABRIC
-        KyoyuPacketPayload.register();
-        //? if NEOFORGE
-        /* modBus.register(KyoyuPacketPayload.class); */
 
         Kyoyu.loadConfig();
     }
