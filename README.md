@@ -13,7 +13,7 @@
 
 ***[Discord server is now open!](https://discord.gg/RcqXRsVcSr)***
 
-This mod shares .litematic files with other players.<br>
+This mod shares Schematics with other players.<br>
 Litematica and Forgematica support. Inspired by Syncmatica.
 
 This project is still a work in progress, so feel free to send your feature requests or report any issues on [GitHub](https://github.com/Vulpeus-Server/kyoyu/issues)! <br>
@@ -98,4 +98,4 @@ Just keep in mind that not everything may be implemented 😄
 🇾 [yamlang](https://github.com/Fallen-Breath/yamlang) by Fallen-Breath <br>
 🇬 [Gson](https://github.com/google/gson) by google<br>
 
-<small>Last README Update `2025/03/02 14:48` UTC+9
+<small>Last README Update `2025/04/02 00:43` UTC+9
