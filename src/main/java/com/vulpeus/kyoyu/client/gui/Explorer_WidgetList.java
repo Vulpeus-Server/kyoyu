@@ -15,6 +15,7 @@ import net.minecraft.client.gui.GuiGraphics;
 //?}
 
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.List;
 
 public class Explorer_WidgetList extends WidgetListBase<KyoyuPlacement, Explorer_WidgetListEntry> {
@@ -27,6 +28,42 @@ public class Explorer_WidgetList extends WidgetListBase<KyoyuPlacement, Explorer
         this.kyoyuPlacement = kyoyuPlacement;
         Kyoyu.LOGGER.info(getAllEntries());
         setSize(width, height);
+    }
+
+    public enum SortKey {
+        NAME,
+        OWNER,
+        UPDATER,
+        TIMESTAMP
+    }
+
+    private SortKey currentSortKey = SortKey.NAME;
+    private boolean ascending = true;
+
+    public void sortList(SortKey key) {
+        if (this.currentSortKey == key) {
+            this.ascending = !this.ascending;
+        } else {
+            this.currentSortKey = key;
+            this.ascending = true;
+        }
+
+        Comparator<KyoyuPlacement> comparator = null;
+        if (key == SortKey.NAME)
+            comparator = Comparator.comparing(KyoyuPlacement::getName);
+        if (key == SortKey.OWNER)
+            comparator = Comparator.comparing(KyoyuPlacement::getOwnerName);
+        if (key == SortKey.UPDATER)
+            comparator = Comparator.comparing(KyoyuPlacement::getUpdaterName);
+        if (key == SortKey.TIMESTAMP)
+            comparator = Comparator.comparing(KyoyuPlacement::getTimestamp);
+
+        if (!ascending) {
+            comparator = comparator.reversed();
+        }
+
+        kyoyuPlacement.sort(comparator);
+        this.refreshEntries();
     }
 
     @Override

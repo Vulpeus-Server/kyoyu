@@ -11,6 +11,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.security.MessageDigest;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
@@ -24,6 +25,7 @@ public class KyoyuPlacement {
     private String updaterName;
     private final String filename;
     private transient File file = null;
+    private final Date timestamp;
 
     public KyoyuPlacement(UUID uuid, KyoyuRegion region, List<KyoyuRegion> subRegions, String ownerName, String updaterName, File file) {
         this.uuid = uuid;
@@ -43,6 +45,7 @@ public class KyoyuPlacement {
             Kyoyu.LOGGER.error(e);
         }
         this.filename = filename;
+        this.timestamp = new Date();
     }
 
     public UUID getUuid() {
@@ -61,6 +64,10 @@ public class KyoyuPlacement {
         return region;
     }
 
+    public String getOwnerName() {
+        return ownerName;
+    }
+
     public String getUpdaterName() {
         return updaterName;
     }
@@ -73,6 +80,10 @@ public class KyoyuPlacement {
 
     public File getFile() {
         return file;
+    }
+
+    public Date getTimestamp() {
+        return timestamp;
     }
 
     public boolean existFile() {

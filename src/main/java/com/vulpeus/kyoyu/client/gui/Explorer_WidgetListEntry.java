@@ -93,7 +93,10 @@ public class Explorer_WidgetListEntry extends WidgetListEntryBase<KyoyuPlacement
         listener = new ButtonListener(ButtonListener.Type.MATERIAL_LIST, this);
         addButton(button, listener);
     }
-
+    @FunctionalInterface
+    interface CompatibleDrawString {
+        void apply(int x, int y, int color, String text);
+    }
     @Override
     //? if >=1.20 {
     public void render(int mouseX, int mouseY, boolean selected, GuiGraphics drawContext) {
@@ -117,16 +120,30 @@ public class Explorer_WidgetListEntry extends WidgetListEntryBase<KyoyuPlacement
             RenderUtils.drawRect(x, y, width, height, 0x50FFFFFF);
         }
 
-        String schematicName = kyoyuPlacement.getName();
+        int x = this.x;
+        int y = this.y + 7;
+
+        CompatibleDrawString drawStringCompatible = (x_, y_, color_, text_) ->
+                //? if >=1.16 {
+                    drawString(x_, y_, color_, text_, drawContext);
+                //?} else {
+                    /* drawString(x_, y_, color_, text_); */
+                //?}
+
+        x += 20;
+        drawStringCompatible.apply(x, y, 0xFFFFFFFF, kyoyuPlacement.getName());
+        x += 200;
+        drawStringCompatible.apply(x, y, 0xF2F2F2FF, kyoyuPlacement.getOwnerName());
+        x += 80;
+        drawStringCompatible.apply(x, y, 0xF2F2F2FF, kyoyuPlacement.getUpdaterName());
+        x += 80;
+        drawStringCompatible.apply(x, y, 0xF2F2F2FF, kyoyuPlacement.getTimestamp().toString());
+        x += 180;
 
         //? if >=1.16 {
-            drawString(x + 20, y + 7, 0xFFFFFFFF, schematicName, drawContext);
             drawSubWidgets(mouseX, mouseY, drawContext);
         //?} else {
-            /*
-            drawString(x + 20, y + 7, 0xFFFFFFFF, schematicName);
-            drawSubWidgets(mouseX, mouseY);
-            */
+            /* drawSubWidgets(mouseX, mouseY); */
         //?}
     }
 

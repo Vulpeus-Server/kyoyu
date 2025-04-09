@@ -85,8 +85,8 @@ public class SchematicPlacementMixin implements ISchematicPlacement {
                                 x.isEnabled()
                         )
                 ).collect(Collectors.toList()),
-                Minecraft.getInstance().name(),
-                Minecraft.getInstance().name(),
+                Minecraft.getInstance().player.getName().getString(),
+                Minecraft.getInstance().player.getName().getString(),
                 file
         );
     }
