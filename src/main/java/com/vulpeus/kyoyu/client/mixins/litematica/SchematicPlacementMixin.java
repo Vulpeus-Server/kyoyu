@@ -114,13 +114,20 @@ public class SchematicPlacementMixin implements ISchematicPlacement {
         Mirror originMirror = kyoyuPlacement.getRegion().getMirror();
         Rotation originRotation = kyoyuPlacement.getRegion().getRotation();
 
-        self.setOrigin(originPos, null);
-        self.setMirror(originMirror, null);
-        self.setRotation(originRotation, null);
-        if (self.ignoreEntities() != kyoyuPlacement.getRegion().ignoreEntities()) {
+        if (!self.getOrigin().equals(originPos))
+            self.setOrigin(originPos, null);
+
+        if (!self.getMirror().equals(originMirror))
+            self.setMirror(originMirror, null);
+
+        if (!self.getRotation().equals(originRotation))
+            self.setRotation(originRotation, null);
+
+        if (self.ignoreEntities() != kyoyuPlacement.getRegion().ignoreEntities())
             self.toggleIgnoreEntities(null);
-        }
-        self.setEnabled(kyoyuPlacement.getRegion().isEnable());
+
+        if (self.isEnabled() != kyoyuPlacement.getRegion().isEnable())
+            self.setEnabled(kyoyuPlacement.getRegion().isEnable());
 
         for (KyoyuRegion subRegion: kyoyuPlacement.getSubRegions()) {
             String subRegionName = subRegion.getName();
@@ -132,17 +139,23 @@ public class SchematicPlacementMixin implements ISchematicPlacement {
                     .rotate(originRotation)
                     .offset(originPos);
 
-            self.moveSubRegionTo(subRegionName, regionPos, null);
-            self.setSubRegionMirror(subRegionName, subRegion.getMirror(), null);
-            self.setSubRegionRotation(subRegionName, subRegion.getRotation(), null);
-
             SubRegionPlacement subRegionPlacement = self.getRelativeSubRegionPlacement(subRegionName);
-            if (subRegionPlacement != null && subRegionPlacement.ignoreEntities() != subRegion.ignoreEntities()) {
+            assert subRegionPlacement != null;
+            if (!subRegionPlacement.getPos().equals(regionPos))
+                self.moveSubRegionTo(subRegionName, regionPos, null);
+
+            if (!subRegionPlacement.getMirror().equals(subRegion.getMirror()))
+                self.setSubRegionMirror(subRegionName, subRegion.getMirror(), null);
+
+            if (!subRegionPlacement.getRotation().equals(subRegion.getRotation()))
+                self.setSubRegionRotation(subRegionName, subRegion.getRotation(), null);
+
+            if (subRegionPlacement.ignoreEntities() != subRegion.ignoreEntities())
                 self.toggleSubRegionIgnoreEntities(subRegionName, null);
-            }
-            if (subRegionPlacement != null && subRegionPlacement.isEnabled() != subRegion.isEnable()) {
+
+            if (subRegionPlacement.isEnabled() != subRegion.isEnable())
                 self.toggleSubRegionEnabled(subRegionName, null);
-            }
+
         }
         self.toggleLocked();
         this.ignore_update = false;
