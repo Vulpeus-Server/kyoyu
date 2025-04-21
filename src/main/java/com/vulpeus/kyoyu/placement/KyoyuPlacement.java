@@ -27,6 +27,8 @@ public class KyoyuPlacement {
     private final String filename;
     private transient File file = null;
     private final Date timestamp;
+    private final int color;
+    private final boolean pinned;
 
     public KyoyuPlacement(UUID uuid, KyoyuRegion region, List<KyoyuRegion> subRegions, String ownerName, String updaterName, File file) {
         this.uuid = uuid;
@@ -47,6 +49,8 @@ public class KyoyuPlacement {
         }
         this.filename = filename;
         this.timestamp = new Date();
+        this.color = 0x50FFFFFF;
+        this.pinned = false;
     }
 
     public UUID getUuid() {
@@ -90,6 +94,14 @@ public class KyoyuPlacement {
     public String getTimestampAsString() {
         SimpleDateFormat sdt = new SimpleDateFormat("yyyy/MM/dd HH:mm");
         return sdt.format(this.getTimestamp());
+    }
+
+    public int getColor() {
+        return color;
+    }
+
+    public boolean isPinned() {
+        return pinned;
     }
 
     public boolean existFile() {
