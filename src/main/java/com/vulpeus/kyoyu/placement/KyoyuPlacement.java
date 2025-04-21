@@ -11,6 +11,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.security.MessageDigest;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -84,6 +85,11 @@ public class KyoyuPlacement {
 
     public Date getTimestamp() {
         return timestamp;
+    }
+
+    public String getTimestampAsString() {
+        SimpleDateFormat sdt = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+        return sdt.format(this.getTimestamp());
     }
 
     public boolean existFile() {

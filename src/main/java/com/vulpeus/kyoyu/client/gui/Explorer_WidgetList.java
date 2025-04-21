@@ -17,24 +17,45 @@ import net.minecraft.client.gui.GuiGraphics;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
 
 public class Explorer_WidgetList extends WidgetListBase<KyoyuPlacement, Explorer_WidgetListEntry> {
 
     private final List<KyoyuPlacement> kyoyuPlacement;
+    private final Map<SortKey, Integer> columnWidth;
 
-    public Explorer_WidgetList(int x, int y, int width, int height, ISelectionListener<KyoyuPlacement> selectionListener, List<KyoyuPlacement> kyoyuPlacement) {
+    public Explorer_WidgetList(int x, int y, int width, int height, ISelectionListener<KyoyuPlacement> selectionListener, List<KyoyuPlacement> kyoyuPlacement, Map<SortKey, Integer> columnWidth) {
         super(x, y, width, height, selectionListener);
         this.browserEntryHeight = 22;
         this.kyoyuPlacement = kyoyuPlacement;
+        this.columnWidth = columnWidth;
         Kyoyu.LOGGER.info(getAllEntries());
         setSize(width, height);
     }
 
     public enum SortKey {
-        NAME,
-        OWNER,
-        UPDATER,
-        TIMESTAMP
+        NAME("Name", KyoyuPlacement::getName),
+        OWNER("Created by", KyoyuPlacement::getOwnerName),
+        UPDATER("Updated by", KyoyuPlacement::getUpdaterName),
+        TIMESTAMP("Timestamp", KyoyuPlacement::getTimestampAsString);
+
+        private final String columnName;
+        private final Function<KyoyuPlacement, String> comparator;
+        public static final SortKey[] ALL = {NAME, OWNER, UPDATER, TIMESTAMP};
+
+        SortKey(String columnName, Function<KyoyuPlacement, String> comparator) {
+            this.columnName = columnName;
+            this.comparator = comparator;
+        }
+
+        public String columnName() {
+            return this.columnName;
+        }
+
+        public Function<KyoyuPlacement, String> comparator() {
+            return this.comparator;
+        }
     }
 
     private SortKey currentSortKey = SortKey.NAME;
@@ -48,15 +69,7 @@ public class Explorer_WidgetList extends WidgetListBase<KyoyuPlacement, Explorer
             this.ascending = true;
         }
 
-        Comparator<KyoyuPlacement> comparator = null;
-        if (key == SortKey.NAME)
-            comparator = Comparator.comparing(KyoyuPlacement::getName);
-        if (key == SortKey.OWNER)
-            comparator = Comparator.comparing(KyoyuPlacement::getOwnerName);
-        if (key == SortKey.UPDATER)
-            comparator = Comparator.comparing(KyoyuPlacement::getUpdaterName);
-        if (key == SortKey.TIMESTAMP)
-            comparator = Comparator.comparing(KyoyuPlacement::getTimestamp);
+        Comparator<KyoyuPlacement> comparator = Comparator.comparing(key.comparator());
 
         if (!ascending) {
             comparator = comparator.reversed();
@@ -77,7 +90,7 @@ public class Explorer_WidgetList extends WidgetListBase<KyoyuPlacement, Explorer
 
     @Override
     protected Explorer_WidgetListEntry createListEntryWidget(int x, int y, int listIndex, boolean isOdd, KyoyuPlacement kyoyuPlacement) {
-        return new Explorer_WidgetListEntry(x, y, browserEntryWidth, getBrowserEntryHeightFor(kyoyuPlacement), kyoyuPlacement, listIndex, isOdd);
+        return new Explorer_WidgetListEntry(x, y, browserEntryWidth, getBrowserEntryHeightFor(kyoyuPlacement), kyoyuPlacement, listIndex, columnWidth);
     }
 
     @Override

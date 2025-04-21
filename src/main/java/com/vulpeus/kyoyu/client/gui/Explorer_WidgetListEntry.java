@@ -32,17 +32,18 @@ import net.minecraft.client.gui.GuiGraphics;
 /* import com.mojang.blaze3d.vertex.PoseStack; */
 //?}
 
+import java.util.Map;
 import java.util.Set;
 
 public class Explorer_WidgetListEntry extends WidgetListEntryBase<KyoyuPlacement> {
 
     private final KyoyuPlacement kyoyuPlacement;
-    private final boolean isOdd;
+    private final Map<Explorer_WidgetList.SortKey, Integer> columnWidth;
 
-    public Explorer_WidgetListEntry(int x, int y, int width, int height, KyoyuPlacement entry, int listIndex, boolean isOdd) {
+    public Explorer_WidgetListEntry(int x, int y, int width, int height, KyoyuPlacement entry, int listIndex, Map<Explorer_WidgetList.SortKey, Integer> columnWidth) {
         super(x, y, width, height, entry, listIndex);
         this.kyoyuPlacement = entry;
-        this.isOdd = isOdd;
+        this.columnWidth = columnWidth;
         
         KyoyuClient kyoyuClient = KyoyuClient.getInstance();
 
@@ -112,15 +113,15 @@ public class Explorer_WidgetListEntry extends WidgetListEntryBase<KyoyuPlacement
         // Draw a lighter background for the hovered and the selected entry
         if (selected || isMouseOver(mouseX, mouseY)) {
             RenderUtils.drawRect(x, y, width, height, 0x70FFFFFF);
-        } else if (isOdd) {
-            RenderUtils.drawRect(x, y, width, height, 0x20FFFFFF);
+//        } else if (this.isOdd) {
+//            RenderUtils.drawRect(x, y, width, height, 0x20FFFFFF);
         }
         // Draw a slightly lighter background for even entries
         else {
             RenderUtils.drawRect(x, y, width, height, 0x50FFFFFF);
         }
 
-        int x = this.x;
+        int x = this.x + 20;
         int y = this.y + 7;
 
         CompatibleDrawString drawStringCompatible = (x_, y_, color_, text_) ->
@@ -130,15 +131,10 @@ public class Explorer_WidgetListEntry extends WidgetListEntryBase<KyoyuPlacement
                     /* drawString(x_, y_, color_, text_); */
                 //?}
 
-        x += 20;
-        drawStringCompatible.apply(x, y, 0xFFFFFFFF, kyoyuPlacement.getName());
-        x += 200;
-        drawStringCompatible.apply(x, y, 0xF2F2F2FF, kyoyuPlacement.getOwnerName());
-        x += 80;
-        drawStringCompatible.apply(x, y, 0xF2F2F2FF, kyoyuPlacement.getUpdaterName());
-        x += 80;
-        drawStringCompatible.apply(x, y, 0xF2F2F2FF, kyoyuPlacement.getTimestamp().toString());
-        x += 180;
+        for (Explorer_WidgetList.SortKey key: Explorer_WidgetList.SortKey.ALL) {
+            drawStringCompatible.apply(x, y, 0xFFFFFFFF, key.comparator().apply(kyoyuPlacement));
+            x += this.columnWidth.get(key) + 5;
+        }
 
         //? if >=1.16 {
             drawSubWidgets(mouseX, mouseY, drawContext);
