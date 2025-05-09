@@ -43,3 +43,7 @@ bin/
 ## preprocessor
 **/src/main/generated
 build.properties
+
+## Rust
+target/
+
