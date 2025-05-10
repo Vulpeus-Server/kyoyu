@@ -4,7 +4,7 @@ use kyoyu_server::MAGIC;
 use serde::{Deserialize, Serialize};
 use tokio::{io::{AsyncRead, AsyncReadExt, AsyncWrite, AsyncWriteExt}, sync::Mutex};
 
-use crate::packet::{C2SPackets, ClientPacketHandler, S2CPackets, ServerPacketHandler};
+use crate::{client::ClientConnectionState, packet::{C2SPackets, PacketHandler, S2CPackets}, server::ServerConnectionState};
 
 #[derive(Debug)]
 /// クライアントとサーバー間のコネクションを抽象化する構造体
@@ -65,23 +65,7 @@ impl<R: AsyncRead + Unpin, W, T> Connection<R, W, T> {
 
         rmp_serde::from_slice::<'_, P>(&buf).map_err(|_| ())
     }
-
-    pub async fn process_server(&mut self) {
-        while let Ok(packet) = self.read_next::<C2SPackets>().await {
-            if packet.handle_server().await {
-                break;
-            }
-        }
-    }
-    pub async fn process_client(&mut self) {
-        while let Ok(packet) = self.read_next::<S2CPackets>().await {
-            if packet.handle_client().await {
-                break;
-            }
-        }
-    }
 }
-
 impl<R: AsyncRead + Unpin, W: AsyncWrite + Unpin, T> Connection<R, W, T> {
     /// magic のチェック
     pub async fn handshake(&mut self) -> bool {
@@ -89,6 +73,25 @@ impl<R: AsyncRead + Unpin, W: AsyncWrite + Unpin, T> Connection<R, W, T> {
         self.writer.flush().await.unwrap();
         let magic = self.reader.read_u64().await.unwrap();
         dbg!(magic == MAGIC)
+    }
+}
+
+impl<R: AsyncRead + Unpin, W> Connection<R, W, ServerConnectionState> {
+    pub async fn process_server(&mut self) {
+        while let Ok(packet) = self.read_next::<C2SPackets>().await {
+            if packet.handle(Arc::clone(&self.state)).await {
+                break;
+            }
+        }
+    }
+}
+impl<R: AsyncRead + Unpin, W> Connection<R, W, ClientConnectionState> {
+    pub async fn process_client(&mut self) {
+        while let Ok(packet) = self.read_next::<S2CPackets>().await {
+            if packet.handle(Arc::clone(&self.state)).await {
+                break;
+            }
+        }
     }
 }
 

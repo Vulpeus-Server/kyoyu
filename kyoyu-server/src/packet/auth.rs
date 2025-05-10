@@ -1,8 +1,11 @@
+use std::sync::Arc;
+
 use serde::{Deserialize, Serialize};
+use tokio::sync::Mutex;
 
-use crate::{config::KyoyuConfig, player::KyoyuPlayer};
+use crate::{client::ClientConnectionState, config::KyoyuConfig, player::KyoyuPlayer, server::ServerConnectionState};
 
-use super::{ClientPacketHandler, ServerPacketHandler};
+use super::PacketHandler;
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
 /// 認証構造体。バージョン、設定、UUID を含む。
@@ -22,8 +25,8 @@ impl AuthenticationC2S {
     }
 }
 
-impl ServerPacketHandler for AuthenticationC2S {
-    async fn handle_server(&self) -> bool {
+impl PacketHandler<ServerConnectionState> for AuthenticationC2S {
+    async fn handle(&self, _state: Arc<Mutex<ServerConnectionState>>) -> bool {
         let player = KyoyuPlayer::new(self.uuid);
         eprintln!("on Auth: {:?}", player);
         false
@@ -45,8 +48,8 @@ impl AuthenticationS2C {
     }
 }
 
-impl ClientPacketHandler for AuthenticationS2C {
-    async fn handle_client(&self) -> bool {
+impl PacketHandler<ClientConnectionState> for AuthenticationS2C {
+    async fn handle(&self, _state: Arc<Mutex<ClientConnectionState>>) -> bool {
         false
     }
 }

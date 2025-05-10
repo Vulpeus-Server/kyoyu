@@ -1,12 +1,14 @@
 pub mod auth;
 
-use serde::{Deserialize, Serialize};
+use std::sync::Arc;
 
-pub trait ServerPacketHandler {
-    async fn handle_server(&self) -> bool;
-}
-pub trait ClientPacketHandler {
-    async fn handle_client(&self) -> bool;
+use serde::{Deserialize, Serialize};
+use tokio::sync::Mutex;
+
+use crate::{client::ClientConnectionState, server::ServerConnectionState};
+
+pub trait PacketHandler<T> {
+    async fn handle(&self, state: Arc<Mutex<T>>) -> bool;
 }
 
 #[derive(Debug, Deserialize, Serialize)]
@@ -21,19 +23,20 @@ pub enum S2CPackets {
     Authentication(auth::AuthenticationS2C),
 }
 
-impl ServerPacketHandler for C2SPackets {
-    async fn handle_server(&self) -> bool {
+impl PacketHandler<ServerConnectionState> for C2SPackets {
+    async fn handle(&self, state: Arc<Mutex<ServerConnectionState>>) -> bool {
         println!("{:?}", self);
         match self {
-            C2SPackets::Authentication(p) => p.handle_server().await,
+            C2SPackets::Authentication(p) => p.handle(state).await,
         }
     }
 }
 
-impl ClientPacketHandler for S2CPackets {
-    async fn handle_client(&self) -> bool {
+impl PacketHandler<ClientConnectionState> for S2CPackets {
+    async fn handle(&self, state: Arc<Mutex<ClientConnectionState>>) -> bool {
         match self {
-            S2CPackets::Authentication(p) => p.handle_client().await,
+            S2CPackets::Authentication(p) => p.handle(state).await,
         }
     }
 }
+
