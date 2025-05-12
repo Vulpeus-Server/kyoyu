@@ -46,11 +46,31 @@ impl KyoyuClient {
         }
     }
 
+    /// 参加
+    pub fn connection_set(
+        &mut self,
+        connection: Connection<OwnedReadHalf, OwnedWriteHalf, ClientConnectionState>,
+    ) {
+        self.connection = Some(connection);
+    }
+
+    /// 退出
+    pub fn connection_unset(&mut self) {
+        self.connection = None;
+    }
+
+    /// クライアント設定への参照を返す
+    pub fn config(&self) -> &KyoyuConfig {
+        &self.config
+    }
+
     /// サーバーに接続し、接続処理を開始する
     ///
     /// この関数では、TCP接続、ハンドシェイク、認証パケット送信、
     /// およびクライアント用のパケット処理ループを開始する。
     pub async fn spawn(self) {
+        let config = self.config().clone();
+
         let tcp_stream = match TcpStream::connect(self.address.clone()).await {
             Ok(s) => s,
             Err(e) => {
@@ -67,14 +87,13 @@ impl KyoyuClient {
             client: Arc::clone(&client),
             connection: None,
         }));
-        let connection = Connection::new(reader, writer, &state);
+        let connection = Connection::new(reader, writer, &state, &config);
 
         // ハンドシェイク
         if !connection.handshake().await {
             return;
         }
 
-        client.lock().await.connection = Some(connection.clone());
         state.lock().await.connection = Some(connection.clone());
 
         // 認証パケットを作成・送信する
@@ -92,5 +111,8 @@ impl KyoyuClient {
 
         eprintln!("connection spawn");
         connection.process_client().await;
+
+        let locked_state = state.lock().await;
+        locked_state.client.lock().await.connection_unset();
     }
 }

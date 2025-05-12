@@ -1,14 +1,16 @@
-use std::sync::Arc;
+use std::{sync::Arc, time::Duration};
 
 use kyoyu_server::MAGIC;
 use serde::{Deserialize, Serialize};
 use tokio::{
     io::{AsyncRead, AsyncReadExt, AsyncWrite, AsyncWriteExt},
     sync::Mutex,
+    time::Instant,
 };
 
 use crate::{
     client::ClientConnectionState,
+    config::KyoyuConfig,
     packet::{C2SPackets, PacketHandler, S2CPackets},
     server::ServerConnectionState,
 };
@@ -62,6 +64,8 @@ pub struct Connection<R, W, T> {
     reader: Arc<Mutex<PacketReader<R>>>,
     writer: Arc<Mutex<PacketWriter<W>>>,
     state: Arc<Mutex<T>>,
+    duration: Arc<Mutex<Duration>>,
+    last_time: Arc<Mutex<Instant>>,
 }
 
 impl<R, W, T> Connection<R, W, T> {
@@ -73,11 +77,18 @@ impl<R, W, T> Connection<R, W, T> {
     ///
     /// # 戻り値
     /// 新しい Connection 構造体
-    pub fn new(reader: R, writer: W, state: &Arc<Mutex<T>>) -> Self {
+    pub fn new(reader: R, writer: W, state: &Arc<Mutex<T>>, config: &KyoyuConfig) -> Self {
+        let secs = if let Some(e) = config.packet_rate_limit() {
+            1.0 / e
+        } else {
+            0.0
+        };
         Self {
             reader: Arc::new(Mutex::new(PacketReader(reader))),
             writer: Arc::new(Mutex::new(PacketWriter(writer))),
             state: Arc::clone(state),
+            duration: Arc::new(Mutex::new(Duration::from_secs_f32(secs))),
+            last_time: Arc::new(Mutex::new(Instant::now())),
         }
     }
 
@@ -129,6 +140,14 @@ impl<R, W: AsyncWrite + Unpin, T> Connection<R, W, T> {
     /// # 引数
     /// * `packet` - シリアライズ可能なパケット
     pub async fn send<P: Serialize>(&self, packet: &P) -> Result<(), Box<dyn std::error::Error>> {
+        // レート制限処理
+        {
+            let mut last_time = self.last_time.lock().await;
+
+            tokio::time::sleep_until(*last_time + *self.duration.lock().await).await;
+
+            *last_time = Instant::now();
+        }
         self.writer.lock().await.write(packet).await
     }
 }
@@ -165,6 +184,8 @@ impl<R, W, T> Clone for Connection<R, W, T> {
             reader: self.reader(),
             writer: self.writer(),
             state: self.state(),
+            duration: Arc::clone(&self.duration),
+            last_time: Arc::clone(&self.last_time),
         }
     }
 }

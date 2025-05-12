@@ -2,10 +2,11 @@ use std::{fs, path::Path};
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Debug, Clone, Deserialize, Serialize)]
+#[derive(Debug, Default, Clone, Deserialize, Serialize)]
 /// 設定ファイルから読み込まれるサーバー設定構造体
 pub struct KyoyuConfig {
     bind_address: Option<String>,
+    packet_rate_limit: Option<f32>,
 }
 
 impl KyoyuConfig {
@@ -30,12 +31,9 @@ impl KyoyuConfig {
             .clone()
             .unwrap_or("0.0.0.0:4512".to_string())
     }
-}
 
-impl Default for KyoyuConfig {
-    fn default() -> Self {
-        Self {
-            bind_address: Some("0.0.0.0:4512".to_string()),
-        }
+    /// パケットレート制限
+    pub fn packet_rate_limit(&self) -> Option<f32> {
+        self.packet_rate_limit
     }
 }

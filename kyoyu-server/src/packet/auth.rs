@@ -31,7 +31,6 @@ impl AuthenticationC2S {
 impl PacketHandler<ServerConnectionState> for AuthenticationC2S {
     async fn handle(&self, state: Arc<Mutex<ServerConnectionState>>) -> bool {
         let player = Arc::new(KyoyuPlayer::new(self.uuid));
-        eprintln!("on Auth: {:?}", player);
 
         let conn = {
             let mut locked_state = state.lock().await;
@@ -53,7 +52,7 @@ impl PacketHandler<ServerConnectionState> for AuthenticationC2S {
             .server
             .lock()
             .await
-            .player_join(&player, conn.clone());
+            .connections_insert(&player, conn.clone());
         false
     }
 }
@@ -74,7 +73,15 @@ impl AuthenticationS2C {
 }
 
 impl PacketHandler<ClientConnectionState> for AuthenticationS2C {
-    async fn handle(&self, _state: Arc<Mutex<ClientConnectionState>>) -> bool {
+    async fn handle(&self, state: Arc<Mutex<ClientConnectionState>>) -> bool {
+        {
+            let locked_state = state.lock().await;
+            locked_state
+                .client
+                .lock()
+                .await
+                .connection_set(locked_state.connection.clone().unwrap());
+        }
         eprintln!("connected!");
         false
     }

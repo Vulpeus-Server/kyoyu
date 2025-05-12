@@ -44,7 +44,7 @@ impl KyoyuServer {
     }
 
     /// プレイヤーの参加
-    pub fn player_join(
+    pub fn connections_insert(
         &mut self,
         player: &Arc<KyoyuPlayer>,
         connection: Connection<OwnedReadHalf, OwnedWriteHalf, ServerConnectionState>,
@@ -52,7 +52,11 @@ impl KyoyuServer {
         self.connections.insert(Arc::clone(player), connection);
     }
 
-    #[allow(dead_code)]
+    /// プレイヤーの退出
+    pub fn connections_remove(&mut self, player: &Arc<KyoyuPlayer>) {
+        self.connections.remove(player);
+    }
+
     /// サーバー設定への参照を返す
     pub fn config(&self) -> &KyoyuConfig {
         &self.config
@@ -60,6 +64,8 @@ impl KyoyuServer {
 
     /// サーバーを起動し、クライアント接続を非同期に処理する
     pub async fn spawn(self) {
+        let config = self.config().clone();
+
         let listener = TcpListener::bind(self.address.clone()).await.unwrap();
         let server = Arc::new(Mutex::new(self));
         loop {
@@ -72,7 +78,7 @@ impl KyoyuServer {
                 player: None,
                 connection: None,
             }));
-            let connection = Connection::new(reader, writer, &state);
+            let connection = Connection::new(reader, writer, &state, &config);
 
             // ハンドシェイク
             if !connection.handshake().await {
@@ -86,7 +92,7 @@ impl KyoyuServer {
 
                 let locked_state = state.lock().await;
                 if let Some(player) = &locked_state.player {
-                    locked_state.server.lock().await.connections.remove(player);
+                    locked_state.server.lock().await.connections_remove(player);
                     eprintln!("connection dropped {:?}", player);
                 }
             });
