@@ -3,7 +3,10 @@ use std::sync::Arc;
 use serde::{Deserialize, Serialize};
 use tokio::sync::Mutex;
 
-use crate::{client::ClientConnectionState, config::KyoyuConfig, player::KyoyuPlayer, server::ServerConnectionState};
+use crate::{
+    client::ClientConnectionState, config::KyoyuConfig, packet::S2CPackets, player::KyoyuPlayer,
+    server::ServerConnectionState,
+};
 
 use super::PacketHandler;
 
@@ -26,9 +29,31 @@ impl AuthenticationC2S {
 }
 
 impl PacketHandler<ServerConnectionState> for AuthenticationC2S {
-    async fn handle(&self, _state: Arc<Mutex<ServerConnectionState>>) -> bool {
-        let player = KyoyuPlayer::new(self.uuid);
+    async fn handle(&self, state: Arc<Mutex<ServerConnectionState>>) -> bool {
+        let player = Arc::new(KyoyuPlayer::new(self.uuid));
         eprintln!("on Auth: {:?}", player);
+
+        let conn = {
+            let mut locked_state = state.lock().await;
+
+            locked_state.player = Some(Arc::clone(&player));
+            if let Some(conn) = &locked_state.connection {
+                conn.clone()
+            } else {
+                return false;
+            }
+        };
+
+        let packet = S2CPackets::Authentication(AuthenticationS2C::new(self.config.clone()));
+        let _ = conn.send(&packet).await;
+
+        state
+            .lock()
+            .await
+            .server
+            .lock()
+            .await
+            .player_join(&player, conn.clone());
         false
     }
 }
@@ -50,6 +75,7 @@ impl AuthenticationS2C {
 
 impl PacketHandler<ClientConnectionState> for AuthenticationS2C {
     async fn handle(&self, _state: Arc<Mutex<ClientConnectionState>>) -> bool {
+        eprintln!("connected!");
         false
     }
 }

@@ -26,7 +26,13 @@ struct Args {
 async fn main() {
     let args = Args::parse();
 
-    let config = KyoyuConfig::from_file("config.json").unwrap();
+    let config = match KyoyuConfig::from_file("config.json") {
+        Ok(cfg) => cfg,
+        Err(e) => {
+            eprintln!("failed to load config: {e}");
+            std::process::exit(1);
+        }
+    };
 
     tokio::spawn(async {
         setup_sighandler()
@@ -37,11 +43,11 @@ async fn main() {
     if args.client {
         let client = KyoyuClient::new(config).await;
         println!("starting client");
-        let _ = client.spawn().await;
+        client.spawn().await;
     } else {
-        let server = KyoyuServer::new(config).await.unwrap();
+        let server = KyoyuServer::new(config).await;
         println!("starting server");
-        let _ = server.spawn().await;
+        server.spawn().await;
     }
 }
 
@@ -77,4 +83,3 @@ async fn setup_sighandler() -> std::io::Result<()> {
 
     Ok(())
 }
-

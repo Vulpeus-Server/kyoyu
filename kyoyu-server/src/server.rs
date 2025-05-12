@@ -1,4 +1,4 @@
-use std::sync::Arc;
+use std::{collections::HashMap, sync::Arc};
 
 use tokio::{
     net::{
@@ -14,14 +14,16 @@ use crate::{config::KyoyuConfig, connection::Connection, player::KyoyuPlayer};
 pub struct ServerConnectionState {
     pub server: Arc<Mutex<KyoyuServer>>,
     pub player: Option<Arc<KyoyuPlayer>>,
+    pub connection: Option<Connection<OwnedReadHalf, OwnedWriteHalf, Self>>,
 }
 
 #[derive(Debug)]
 /// Kyoyu サーバー本体。設定と TCP リスナーを保持する。
 pub struct KyoyuServer {
     config: KyoyuConfig,
-    listener: TcpListener,
-    connections: Vec<Arc<Mutex<Connection<OwnedReadHalf, OwnedWriteHalf, ServerConnectionState>>>>,
+    address: String,
+    connections:
+        HashMap<Arc<KyoyuPlayer>, Connection<OwnedReadHalf, OwnedWriteHalf, ServerConnectionState>>,
 }
 
 impl KyoyuServer {
@@ -32,17 +34,22 @@ impl KyoyuServer {
     ///
     /// # 戻り値
     /// `Result<KyoyuServer, std::io::Error>`
-    pub async fn new(config: KyoyuConfig) -> Result<Self, std::io::Error> {
-        let address = config
-            .bind_address()
-            .clone()
-            .unwrap_or("0.0.0.0:4512".to_string());
-        let listener = TcpListener::bind(address).await?;
-        Ok(Self {
+    pub async fn new(config: KyoyuConfig) -> Self {
+        let address = config.bind_address();
+        Self {
             config,
-            listener,
-            connections: Vec::new(),
-        })
+            address,
+            connections: HashMap::new(),
+        }
+    }
+
+    /// プレイヤーの参加
+    pub fn player_join(
+        &mut self,
+        player: &Arc<KyoyuPlayer>,
+        connection: Connection<OwnedReadHalf, OwnedWriteHalf, ServerConnectionState>,
+    ) {
+        self.connections.insert(Arc::clone(player), connection);
     }
 
     #[allow(dead_code)]
@@ -51,29 +58,37 @@ impl KyoyuServer {
         &self.config
     }
 
-    #[allow(dead_code)]
-    /// TCP リスナーへの参照を返す
-    pub fn listener(&self) -> &TcpListener {
-        &self.listener
-    }
-
     /// サーバーを起動し、クライアント接続を非同期に処理する
-    pub async fn spawn(self) -> Result<(), std::io::Error> {
+    pub async fn spawn(self) {
+        let listener = TcpListener::bind(self.address.clone()).await.unwrap();
         let server = Arc::new(Mutex::new(self));
         loop {
-            let (tcp_stream, _) = server.lock().await.listener.accept().await?;
+            let (tcp_stream, _) = listener.accept().await.unwrap();
             let (reader, writer) = tcp_stream.into_split();
+
+            // 接続状態を初期化する
             let state = Arc::new(Mutex::new(ServerConnectionState {
                 server: Arc::clone(&server),
                 player: None,
+                connection: None,
             }));
-            let connection = Arc::new(Mutex::new(Connection::new(reader, writer, &state)));
-            if !connection.lock().await.handshake().await {
+            let connection = Connection::new(reader, writer, &state);
+
+            // ハンドシェイク
+            if !connection.handshake().await {
                 continue;
             }
-            server.lock().await.connections.push(Arc::clone(&connection));
+            state.lock().await.connection = Some(connection.clone());
+
             tokio::spawn(async move {
-                connection.lock().await.process_server().await;
+                eprintln!("connection spawn");
+                connection.process_server().await;
+
+                let locked_state = state.lock().await;
+                if let Some(player) = &locked_state.player {
+                    locked_state.server.lock().await.connections.remove(player);
+                    eprintln!("connection dropped {:?}", player);
+                }
             });
         }
     }

@@ -1,11 +1,24 @@
 use std::sync::Arc;
 
-use crate::{config::KyoyuConfig, connection::Connection, packet::{auth::AuthenticationC2S, C2SPackets}};
-use tokio::{net::{tcp::{OwnedReadHalf, OwnedWriteHalf}, TcpStream}, sync::Mutex};
+use crate::{
+    config::KyoyuConfig,
+    connection::Connection,
+    packet::{C2SPackets, auth::AuthenticationC2S},
+};
+use tokio::{
+    net::{
+        TcpStream,
+        tcp::{OwnedReadHalf, OwnedWriteHalf},
+    },
+    sync::Mutex,
+};
 
 #[derive(Debug)]
+/// クライアントの接続状態を表す構造体
+/// `KyoyuClient` とコネクション情報を保持する。
 pub struct ClientConnectionState {
     pub client: Arc<Mutex<KyoyuClient>>,
+    pub connection: Option<Connection<OwnedReadHalf, OwnedWriteHalf, Self>>,
 }
 
 #[derive(Debug)]
@@ -13,7 +26,7 @@ pub struct ClientConnectionState {
 pub struct KyoyuClient {
     config: KyoyuConfig,
     address: String,
-    connection: Option<Arc<Mutex<Connection<OwnedReadHalf, OwnedWriteHalf, ClientConnectionState>>>>,
+    connection: Option<Connection<OwnedReadHalf, OwnedWriteHalf, ClientConnectionState>>,
 }
 
 impl KyoyuClient {
@@ -24,37 +37,60 @@ impl KyoyuClient {
     ///
     /// # 戻り値
     /// `Self` 型の新しいクライアント
+    /// この関数ではアドレスの解決と構造体の初期化のみを行う。
     pub async fn new(config: KyoyuConfig) -> Self {
-        let address = config
-            .bind_address()
-            .clone()
-            .unwrap_or("0.0.0.0:4512".to_string());
         Self {
+            address: config.bind_address(),
             config,
-            address,
             connection: None,
         }
     }
 
     /// サーバーに接続し、接続処理を開始する
+    ///
+    /// この関数では、TCP接続、ハンドシェイク、認証パケット送信、
+    /// およびクライアント用のパケット処理ループを開始する。
     pub async fn spawn(self) {
+        let tcp_stream = match TcpStream::connect(self.address.clone()).await {
+            Ok(s) => s,
+            Err(e) => {
+                eprintln!("failed to connect to server: {e}");
+                return;
+            }
+        };
         let client = Arc::new(Mutex::new(self));
-        let stream = TcpStream::connect(client.lock().await.address.clone())
-            .await
-            .expect("failed to connect to server");
-        let (reader, writer) = stream.into_split();
+
+        let (reader, writer) = tcp_stream.into_split();
+
+        // 接続状態を初期化する
         let state = Arc::new(Mutex::new(ClientConnectionState {
             client: Arc::clone(&client),
+            connection: None,
         }));
-        let connection = Arc::new(Mutex::new(Connection::new(reader, writer, &state)));
-        client.lock().await.connection = Some(Arc::clone(&connection));
-        if !connection.lock().await.handshake().await {
+        let connection = Connection::new(reader, writer, &state);
+
+        // ハンドシェイク
+        if !connection.handshake().await {
             return;
         }
+
+        client.lock().await.connection = Some(connection.clone());
+        state.lock().await.connection = Some(connection.clone());
+
+        // 認証パケットを作成・送信する
+        let auth_packet = {
+            let locked = client.lock().await;
+            AuthenticationC2S::new(locked.config.clone())
+        };
+        if let Err(e) = connection
+            .send(&C2SPackets::Authentication(auth_packet))
+            .await
         {
-            let auth_packet = AuthenticationC2S::new(client.lock().await.config.clone());
-            connection.lock().await.send(&C2SPackets::Authentication(auth_packet)).await.unwrap();
+            eprintln!("failed to send authentication packet: {e}");
+            return;
         }
-        connection.lock().await.process_client().await;
+
+        eprintln!("connection spawn");
+        connection.process_client().await;
     }
 }

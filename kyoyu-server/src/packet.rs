@@ -7,6 +7,9 @@ use tokio::sync::Mutex;
 
 use crate::{client::ClientConnectionState, server::ServerConnectionState};
 
+/// 任意のパケットが共通して持つ、状態を用いた非同期処理用トレイト。
+///
+/// `T` は共有状態の型。
 pub trait PacketHandler<T> {
     async fn handle(&self, state: Arc<Mutex<T>>) -> bool;
 }
@@ -34,9 +37,9 @@ impl PacketHandler<ServerConnectionState> for C2SPackets {
 
 impl PacketHandler<ClientConnectionState> for S2CPackets {
     async fn handle(&self, state: Arc<Mutex<ClientConnectionState>>) -> bool {
+        println!("{:?}", self);
         match self {
             S2CPackets::Authentication(p) => p.handle(state).await,
         }
     }
 }
-
